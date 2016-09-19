@@ -1,4 +1,5 @@
 # A repository for files on infinite de Bruijn sequences and other creatures
+<<<<<<< HEAD
 
 This repository contains some preliminary results on de Bruijn sequences that we are working on.
 
@@ -19,3 +20,5 @@ In essence, we are trying to establish the following results
 	* Cycles are traversed linearly: If we project out all vertexes that are not on the cycle, we get that each vertex is a rotation by one of the previous one.
 
 
+=======
+>>>>>>> a5d34fec95e0da7053b5b55d3a3367618a1a5b84

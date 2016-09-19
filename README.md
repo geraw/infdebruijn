@@ -4,7 +4,7 @@ This repository contains some preliminary results on de Bruijn sequences that we
 
 In essence, we are trying to establish the following results
 
-* Onion property of prefer-max de Bruijn sequences: The nth sequence is a suffix of the (n+1)th sequence.
+* Onion property of prefer-max de Bruijn sequences: The nth sequence is a suffix of the $(n+1)$th sequence.
 
 * Thus, the revere of the prefer-max sequence is an infinite de Bruijn sequence.
 

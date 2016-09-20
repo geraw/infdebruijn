@@ -2,6 +2,8 @@
 
 This repository contains some preliminary results on de Bruijn sequences that we are working on.
 
+
+## Outline of the proposed results
 In essence, we are trying to establish the following results
 
 * Onion property of prefer-max de Bruijn sequences: The nth sequence is a suffix of the (n+1)th sequence.
@@ -17,3 +19,9 @@ In essence, we are trying to establish the following results
 * This gives us properties that we call "jigsaw":
 	* Cycles begin in increasing order: The (k+1)th cycle begin after the kth cycle (when ordered as described above).
 	* Cycles are traversed linearly: If we project out all vertexes that are not on the cycle, we get that each vertex is a rotation by one of the previous one.
+
+## Applets
+Some of our constructions can be visualized using the foilowing links:
+
+* [A demonstration showing how we propose to scan cycle representatives forwatrds and backwords](https://www.wolframcloud.com/objects/user-2002534f-d771-4ce5-afa8-f29d048208eb/Next word generator))\
+*

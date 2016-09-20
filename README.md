@@ -21,7 +21,7 @@ In essence, we are trying to establish the following results
 	* Cycles are traversed linearly: If we project out all vertexes that are not on the cycle, we get that each remaining vertex is a rotation by one of the previous one.
 
 ## Applets
-Some of our constructions can be visualized using the foilowing links:
+Some of our constructions can be visualized using the following links:
 
 * [A demonstration showing how we propose to scan cycle representatives forwatrds and backwords](https://www.wolframcloud.com/objects/user-2002534f-d771-4ce5-afa8-f29d048208eb/Next word generator)
 * [Word enumeration with highlgted "window"] (https://www.wolframcloud.com/objects/user-2002534f-d771-4ce5-afa8-f29d048208eb/Highlighter) 

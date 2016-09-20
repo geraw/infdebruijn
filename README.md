@@ -24,4 +24,4 @@ In essence, we are trying to establish the following results
 Some of our constructions can be visualized using the foilowing links:
 
 * [A demonstration showing how we propose to scan cycle representatives forwatrds and backwords](https://www.wolframcloud.com/objects/user-2002534f-d771-4ce5-afa8-f29d048208eb/Next word generator)
-* [Word enumeration with highlgted "window"] (https://www.wolframcloud.com/objects/user-2002534f-d771-4ce5-afa8-f29d048208eb/Highlighter)
+* [Word enumeration with highlgted "window"] (https://www.wolframcloud.com/objects/user-2002534f-d771-4ce5-afa8-f29d048208eb/Highlighter) 

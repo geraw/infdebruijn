@@ -25,4 +25,4 @@ Some of our constructions can be visualized using the following links:
 
 * [A demonstration showing how we propose to scan cycle representatives forwatrds and backwords](https://www.wolframcloud.com/objects/user-2002534f-d771-4ce5-afa8-f29d048208eb/Next word generator)
 * [Word enumeration with highlgted "window"] (https://www.wolframcloud.com/objects/user-2002534f-d771-4ce5-afa8-f29d048208eb/Highlighter) 
-* [A demonstration  showing the cycle joining procedure by highlighting the last cycle added] (https://www.wolframcloud.com/objects/user-8ab1f53b-d5b2-4abb-8e34-b382eec62148/Cycle%20join)
+* [A demonstration  showing the cycle joining procedure by highlighting the last cycle added] (https://www.wolframcloud.com/objects/user-8ab1f53b-d5b2-4abb-8e34-b382eec62148/Cycle%20join)   

@@ -107,6 +107,12 @@ For a a word $w$ whose length is smaller or equal than $n$, let  $b(w)$ be the t
 	For any $w\in L_n$, $f(b(w))=b(f(w))=w$.
 \end{observation}
 
+\begin{observation}
+	\label{tail-is-preserved}
+	For any $w=0^lw_{m-l}\cdots w_{m-1} w_m \in L_n$ where $w_{m-l} \neq 0$ and for each $0 \leq i < l$ we have  $b(w)_{|b(w)|-i}=w_{m-i}$. If, in addition, $m \neq n$ we also have $b(w)_{|b(w)|-l} = w_{m-l}$.
+\end{observation}
+
+
 \begin{proposition}
 	If we start with $w(0)=0$ and generate a sequence of words by $w({i+1})=f(w(i))$, we get an enumeration of all the words in $L$ whose length in smaller or equal to $n$.
 \end{proposition}
@@ -115,8 +121,15 @@ For a a word $w$ whose length is smaller or equal than $n$, let  $b(w)$ be the t
 \end{proof}
 
 \begin{definition}
-	Let $f^*(w)$ be the first word in ${f(w),f(f(w)),\dots}$ whose length divides $n$ and let $b^*(w)$ be the first word in ${b(w),b(b(w)),\dots}$ whose length divides $n$. 
+	Let $f^*(w)$ be the first word in ${f(w),f(f(w)),\dots}$ whose length divides $n$ and, similarly, let $b^*(w)$ be the first word in ${b(w),b(b(w)),\dots}$ whose length divides $n$. 
 \end{definition}
+
+\begin{observation} \label{tail-is-preserved-by-bstart}
+	Observation~\ref{tail-is-preserved} is true also when we replace $b$ with $b^*$. 
+\end{observation}
+\begin{proof}
+We only apply $b$ again if the length is not $n$, so after the first application of $b$, that may change the first letter in the tail $w_{m-1}\cdots w_m$ when the length of $w$ is $n$, the tail remains as it is.
+\end{proof}
 
 
 \begin{definition}
@@ -125,14 +138,16 @@ For a a word $w$ whose length is smaller or equal than $n$, let  $b(w)$ be the t
 
 
 \begin{definition}
-	For a word $w=\sigma_1\cdots\sigma_{n-1}\sigma_n$ let  $\rr{w}{}= \sigma_{n}\sigma_1\cdots\sigma_{n-1}$ be the rotation of $w$ to the right. Then, the nested invocation $\rr{w}{m}$ is the $m$ letter rotation to the right and its inverse $\rl{w}{m}$ is the $m$ letter rotation to the left.
+	For a word $w=w_1\cdots w_{n-1}w_n$ let  $\rr{w}{}= w_{n}w_1\cdots w_{n-1}$ be the rotation of $w$ to the right. Then, the nested invocation $\rr{w}{m}$ is the $m$ letter rotation to the right and its inverse $\rl{w}{m}$ is the $m$ letter rotation to the left.
 \end{definition}
 
 \begin{proposition}\label{simple-pos}
 	For a given $w \in L_n$, let $l$ be the number of trailing zeros (from the left) in $w$ and let $\bar{w}=b_1(w)$. Then For all $0 \leq i \leq |w|-l-1$ the word $\rr{\bar{w}}{i}$ comes $i+n-|w|$ letters before $w$ as a sub-word of $w^\infty$.
 \end{proposition}
 \begin{proof}
-	Let $v=b(w)$. Looking at the definition of $b$, it is easy to see that the last $l-1$ letters of $w$ are not changed by the transformation, i.e., $v_{|v|-l-2}\cdots v_{|v|}=w_{|w|-l-2} \cdots w_{|w|}$. Furthermore, if the length of $w$ is not $n$, the previous letter does not change either, $v_{|v|-l-1}=w_{|v|-l-1}$, because $b$ expands the word by a prefix that is not all zeros before it decreases the first letter. Since $b^*$ consists of repeated applications of $b$ until the length of the resulting word divides $n$, we get that only the first application of $b$ may change the first letter of the tail of length $l$ of $w$ and that the rest of the applications of $b$ keep this tail fixed. Thus the word that precedes $w$ in the sequence shares the tail of length $l-1$ with $w$, i.e., all the windows of the required form appear just before $w$. 
+	If the length of $w$ is $n$ then $\bar{w}=w$ and, by Observation~\ref{tail-is-preserved-by-bstart}, the word that precedes $w$ ends with the last $l-1$ letters of $w$. In particular, the word $\rr{\bar{w}}{i}$ comes $i$ letters before $w$ as claimed.
+	
+	
 \end{proof}
 
 \begin{proposition}\label{advanced-pos}

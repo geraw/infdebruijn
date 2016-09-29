@@ -129,8 +129,8 @@ For a a word $w$ whose length is smaller or equal than $n$, let  $b(w)$ be the t
 \end{proof}
 	
 \begin{proposition}
-	\label{tail-is-preserved}
-	For any $w=0^l \sigma \hat{w}\in L_n$ where $\sigma$ is a non-zero letter and $\hat{w}$ is a word that ends with a non-zero letter there is a non-empty word $u$ such that $b(w)=u\hat{w}$.
+	\label{hat-w-at-the-tail}
+	For any $w=0^l \sigma \hat{w}\in L_n$ where $\sigma$ is a non-zero letter and $\hat{w}$ is a non-empty word there is a non-empty word $u$ such that $b(w)=u\hat{w}$.
 \end{proposition}
 \begin{proof}
 	If $|w|\neq n$ the proof follows by Proposition~\ref{w-at-the-tail}. If $|w|=n$ then $b_1(w)=w$, $b_2(b_1(w))=\sigma\hat{w}$, and $b_3(b_2(b_1(w)))=(\sigma-1)\hat{w}$ and the claim follows as well.
@@ -138,14 +138,11 @@ For a a word $w$ whose length is smaller or equal than $n$, let  $b(w)$ be the t
 	
 	
 \begin{proposition}
-	\label{tail-is-preserved}
-	For any $w=0^l \sigma \hat{w}\in L_n$ where $\sigma$ is a non-zero letter and $\hat{w}$ is a word that ends wit a non-zero letter is a non-empty word $u$ such that $b^*(w)=u\hat{w}$.
+	\label{tail-is-preserved*}
+	For any $w=0^l \sigma \hat{w}\in L_n$ where $\sigma$ is a non-zero letter and $\hat{w}$ is a non-empty word there is a non-empty word $u$ such that $b^*(w)=u\hat{w}$.
 \end{proposition}
 \begin{proof}
-Let $w{(1)}=b(w), w{(2)}=b(w{(1)}),\dots,w{(m)}=b(w{(m-1)})$ such that $m$ is the first index such that $|w{(m)}|$ divides $n$, i.e., let $w{(1)},\dots,w{(m)}$ be the intermediate words in the computation of $b^*(w)$. 
-	
-	
-We only apply $b$ again if the length is not $n$, so the tail remains as it is after the first application of $b$, that may change the first letter in the tail $w_{m-1}\cdots w_m$ when the length of $w$ is $n$.
+By definition, $b^*$ consists of repeated applications of $b$ until a word whose length devides $n$ is obtained. In particular, only the first of these applications of $b$ act on a parameter whose length may be $n$. By Proposition~\ref{hat-w-at-the-tail}, this first application produces a word that ends with $\hat{w}$ and by Proposition~\ref{w-at-the-tail} each of the remaining applications only add prefixes. 
 \end{proof}
 
 
@@ -159,12 +156,10 @@ We only apply $b$ again if the length is not $n$, so the tail remains as it is a
 \end{definition}
 
 \begin{proposition}\label{simple-pos}
-	For a given $w \in L_n$, let $l$ be the number of trailing zeros (from the left) in $w$ and let $\bar{w}=b_1(w)$. Then For all $0 \leq i \leq |w|-l-1$ the word $\rr{\bar{w}}{i}$ comes $i+n-|w|$ letters before $w$ as a sub-word of $w^\infty$.
+	For a given $w \in L_n$, let $l$ be the number of trailing zeros (from the left) in $w$ and let $\bar{w}=b_1(w)$. Then, for all $0 \leq i \leq |w|-l-1$, the word $\rr{\bar{w}}{i}$ comes $i+n-|w|$ letters before $w$ as a sub-word of $w^\infty$.
 \end{proposition}
 \begin{proof}
-	If the length of $w$ is $n$ then $\bar{w}=w$ and, by Observation~\ref{tail-is-preserved-by-bstart}, the word that precedes $w$ ends with the last $l-1$ letters of $w$. In particular, the word $\rr{\bar{w}}{i}$ comes $i$ letters before $w$ as claimed.
-	
-	
+	By Proposition~\ref{tail-is-preserved*} the words that come before $w$ ends with the last $|w|-l$ letters of $w$. In particular, the $n$ letter word that starts $i+n-|w|$ before $w$ is $\rr{\bar{w}}{i}$.
 \end{proof}
 
 \begin{proposition}\label{advanced-pos}

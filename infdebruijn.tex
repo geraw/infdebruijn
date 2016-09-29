@@ -107,10 +107,6 @@ For a a word $w$ whose length is smaller or equal than $n$, let  $b(w)$ be the t
 	For any $w\in L_n$, $f(b(w))=b(f(w))=w$.
 \end{observation}
 
-\begin{observation}
-	\label{tail-is-preserved}
-	For any $w=0^lw_{m-l}\cdots w_{m-1} w_m \in L_n$ where $w_{m-l} \neq 0$ and for each $0 \leq i < l$ we have  $b(w)_{|b(w)|-i}=w_{m-i}$. If, in addition, $m \neq n$ we also have $b(w)_{|b(w)|-l} = w_{m-l}$.
-\end{observation}
 
 
 \begin{proposition}
@@ -124,11 +120,32 @@ For a a word $w$ whose length is smaller or equal than $n$, let  $b(w)$ be the t
 	Let $f^*(w)$ be the first word in ${f(w),f(f(w)),\dots}$ whose length divides $n$ and, similarly, let $b^*(w)$ be the first word in ${b(w),b(b(w)),\dots}$ whose length divides $n$. 
 \end{definition}
 
-\begin{observation} \label{tail-is-preserved-by-bstart}
-	Observation~\ref{tail-is-preserved} is true also when $b$ is replaced with $b^*$. 
-\end{observation}
+\begin{proposition}
+	\label{w-at-the-tail}
+	If $w \in L_n$ and $|w| \neq n$ then  $b(w)=uw$ for some non-empty word $u$. 
+\end{proposition}
 \begin{proof}
-We only apply $b$ again if the length is not $n$, so after the first application of $b$, that may change the first letter in the tail $w_{m-1}\cdots w_m$ when the length of $w$ is $n$, the tail remains as it is.
+	The first transformation $b_1$ extends $w$ to the left producing the word $b_1(w)=uw^m$ where $u$ is a tail of $w$. Since $w \in L_n$ and because it contains a letter $\sigma$ that is not zero, we have, by maximality of $w$ among its rotations in right-to-left lexicographical order,  that its last letter is not zero. The last letter of $u$ is the last letter of $w$ so it is also not zero. This gives us that the next transformation $b_2$, that deletes trailing zeros, leaves at least the last copy of $w$ and the last letter of the before-last (full or partial) copy at the tail of $b_1(w)$. Thus, $b_2(b_1(w))=uw$ where $u$ is a non-empty word whose first letter is not zero. Then, the last transformation $b_3$ only decreases the first letter of $u$ by  one which gives us that $b(w)=b_3(b_2(b_1(w)))=vw$ for some non-empty word $v$.	
+\end{proof}
+	
+\begin{proposition}
+	\label{tail-is-preserved}
+	For any $w=0^l \sigma \hat{w}\in L_n$ where $\sigma$ is a non-zero letter and $\hat{w}$ is a word that ends with a non-zero letter there is a non-empty word $u$ such that $b(w)=u\hat{w}$.
+\end{proposition}
+\begin{proof}
+	If $|w|\neq n$ the proof follows by Proposition~\ref{w-at-the-tail}. If $|w|=n$ then $b_1(w)=w$, $b_2(b_1(w))=\sigma\hat{w}$, and $b_3(b_2(b_1(w)))=(\sigma-1)\hat{w}$ and the claim follows as well.
+\end{proof}
+	
+	
+\begin{proposition}
+	\label{tail-is-preserved}
+	For any $w=0^l \sigma \hat{w}\in L_n$ where $\sigma$ is a non-zero letter and $\hat{w}$ is a word that ends wit a non-zero letter is a non-empty word $u$ such that $b^*(w)=u\hat{w}$.
+\end{proposition}
+\begin{proof}
+Let $w{(1)}=b(w), w{(2)}=b(w{(1)}),\dots,w{(m)}=b(w{(m-1)})$ such that $m$ is the first index such that $|w{(m)}|$ divides $n$, i.e., let $w{(1)},\dots,w{(m)}$ be the intermediate words in the computation of $b^*(w)$. 
+	
+	
+We only apply $b$ again if the length is not $n$, so the tail remains as it is after the first application of $b$, that may change the first letter in the tail $w_{m-1}\cdots w_m$ when the length of $w$ is $n$.
 \end{proof}
 
 

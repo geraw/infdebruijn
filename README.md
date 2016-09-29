@@ -16,7 +16,7 @@ In essence, we are trying to establish the following results
 
 * We can characterise this sequence as the result of a "cycle joining" process.
 
-* This gives us properties that we call "jigsaw":
+* This gives us properties that we call "sow tooth":
 	* Cycles begin in increasing order: The (k+1)th cycle begin after the kth cycle (when ordered as described above).
 	* Cycles are traversed linearly: If we project out all vertexes that are not on the cycle, we get that each remaining vertex is a rotation by one of the previous one.
 

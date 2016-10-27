@@ -148,22 +148,13 @@ In this section we point at the position of an arbitrary word $w$ as a sub-word 
 	
 \begin{proposition}
 	\label{hat-w-at-the-tail}
-	For any $w=0^l \sigma \hat{w}\in L_n$ where $\sigma$ is a non-zero letter and $\hat{w}$ is a non-empty word there is a non-empty word $u$ such that $b(w)=u\hat{w}$.
+	For any $w=0^l \sigma \hat{w}\in L_n$ where $\sigma$ is a non-zero letter there is a non-empty word $u$ such that $b(w)=u\hat{w}$.
 \end{proposition}
 \begin{proof}
 	If $|w|\neq n$ the proof follows by Proposition~\ref{w-at-the-tail}. If $|w|=n$ then $b_1(w)=w$, $b_2(b_1(w))=\sigma\hat{w}$, and $b_3(b_2(b_1(w)))=(\sigma-1)\hat{w}$ and the claim follows as well.
 \end{proof}
 	
 	
-\begin{proposition}
-	\label{tail-is-preserved*}
-	For any $w=0^l \sigma \hat{w}\in L_n$ where $\sigma$ is a non-zero letter and $\hat{w}$ is a non-empty word there is a non-empty word $u$ such that $b^*(w)=u\hat{w}$.
-\end{proposition}
-\begin{proof}
-By definition, $b^*$ consists of repeated applications of $b$ until a word whose length devides $n$ is obtained. In particular, only the first of these applications of $b$ act on a parameter whose length may be $n$. By Proposition~\ref{hat-w-at-the-tail}, this first application produces a word that ends with $\hat{w}$ and by Proposition~\ref{w-at-the-tail} each of the remaining applications only add prefixes. 
-\end{proof}
-
-
 \begin{proposition}\label{simple-pos}
 	Let $w$ be an arbitrary word in $\N^n$ and let and let $\bar{w}=f_3(w)$. Let $l$ be the (possibly zero) number of trailing zeros (from the left) in $w$.  Then, for all $0 \leq i \leq |w|-l-1$, the word $\rr{\bar{w}}{i}$ comes $i+n-|w|$ letters before $w$ as a sub-word of $w^\infty$.
 \end{proposition}

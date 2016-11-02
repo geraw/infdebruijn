@@ -217,10 +217,73 @@ By definition, $b^*$ consists of repeated applications of $b$ until a word whose
 \end{definition}
 
 \begin{proposition}
-	For a word $w=w(i)$ be the $i$th word in the above enumeration. Let $l$ be the number of leading zeros in $w$ and let $\hat{w}=\rl{b_1(b^*(w)}{l}$. Then, inserting the cycle $\T{\rl{b_1(w)}{s}}_{s=0}^{n-1}$ after the word $\hat{w}_{1..(n-l)}0^l$ in $\T{u(j)}_{j=0}^{i-1}$ yields the sequence $\T{u(j)}_{j=0}^{i}$.
+	For a word $w=w(i)$ be the $i$th word in the above enumeration. Let $l$ be the number of leading zeros in $w$ and let $\hat{w}=\rl{b_1(b^*(w))}{l}$. Then, inserting the cycle $\T{\rl{b_1(w)}{s}}_{s=0}^{n-1}$ after the word $\hat{w}_{1..(n-l)}0^l$ in $\T{u(j)}_{j=0}^{i-1}$ yields the sequence $\T{u(j)}_{j=0}^{i}$.
 \end{proposition}		
 	
+
+
+\section{Where can I find $w$ as a sub-word of $w^\infty$? (second try...)}
 		
+\begin{definition}
+For a word $w$, $max(w)$ is the maximal digit in $w$.
+\end{definition}
+
+\begin{definition}
+A word $u\in \mathbb{N}$ corresponds to $w\in L_n$ if $u$ is a rotation of $w^{\frac{n}{|w|}}$. Note that each $u\in \mathbb{N}$ corresponds to exactly one word $w\in L_n$.
+\end{definition}
+
+\begin{proposition}
+\label{newforward}
+If $w\in L_n$ and $|w|<n$, then $f^*(w)=f(w)=0^{|w|}u$ for some word $u$.
+\end{proposition}
+\begin{proof}
+Write $\frac{n}{|w|}=c>1$. Thus, $f_1(w)=x$, $f_2(x)=0^{(c-1)|w|}x$ and $f_3(0^{(c-1)|w|}x)=0^{c-1|w|}x=f(w)$. Since $|x|=|w|$, $|f(w)|=n$ and hence, $f^*(w)=f(w)$. In addition, $(c-1)|w|\geq|w|$. 
+\end{proof}
+
+\begin{proposition}
+\label{1-back}
+If $|w|<n$ and $w=w'k$ where $0<k=max(w)$, then $b(w)=uw$ and $max(u)\leq max(w)$. 
+\end{proposition}
+\begin{proof}
+Write $w=w'k$. Thus, $b_1(w)=xk(w'k)^r$, $r>0$. $b_2(xk(w'k)^r)=y(w'k)^r$. $b_3(y(w'k)^r)=uw'k=uw$. It is easy to see that $\max{u}\leq k$.
+\end{proof}
+
+\begin{proposition}
+\label{*-back}
+If $w\in L_n$, $|w|^m=n$, $m>1$ and $w= 0^l\sigma\hat{w}$ such that $\sigma\neq 0$, then $b^*(w)=u\hat{w}w^{m-1}$ for some $u$. Note that in particular, $|b^*(w)|=n$.
+\end{proposition}
+
+\begin{proof}
+Since $w\in L_n$ and $w\neq 0$, $b_1(w)=w^m=(0^l\sigma w'k)^m$. 
+$$b(w)=b_3(b_2((0^l\sigma\hat{w})^m))=b_3((xk)(w'k)^{m-1})=y(w'k)^{m-1}=y\sigma-1\hat{w}w^{m-1}.$$
+Now, if $|y\sigma-1\hat{w}w^{m-1}=n$, then $y\sigma-1\hat{w}w^{m-1}=b^*(w)$ and we are done. Otherwise, 
+$$b^*(w^{m-1})=b^r(y\sigma-1\hat{w}w^{m-1}).$$
+Hence, the words $b(y\sigma-a\hat{w}w^{m-1}),b^2(y\sigma-\hat{w}w^{m-1}),\dots,b^{r-1}(y\sigma-1\hat{w}w^{m-1})$ are of length less than $n$. We apply Proposition \ref{1-back} on these words and we get that for each $l\leq r-1$,  $b^l(y\sigma-1\hat{w}w^{m-1})=u_1u_2\dots u_ly\sigma-1\hat{w}w^{m-1}$.
+\end{proof}
+
+
+\begin{proposition}
+Assume that $u\in \mathbb{N}^n$ corresponds to $w\in L_n$ such that $|w|<n$. then, $u$ is a subword of $w^\infty$. 
+\end{proposition}
+
+\begin{proof}
+If $u=0^n$, then $u$ is a prefix of $w^\infty$ and we are done. Otherwise, $w=0^l\sigma\hat{w}$ where $\sigma\neq 0$ and take $m$ such that $|w|^m=n$. Note that $m>1$. By Propositions \ref{newforward} and  \ref{*-back}, $b^*(w)wf^*(w)=x\hat{w}w^{m-1}w0^|w|y$ is a subword of $w^\infty$. Hence, 
+$$\hat{w}(0^l\sigma\hat{w})^m0^l \text{ is a subword of } w^\infty.$$
+$u$ is a rotation of $w^m$ thus $u$ is a subword of $\hat{w}(0^l\sigma\hat{w})^m0^l$ which implies that $u$ is a subword of $w^\infty$.
+\end{proof}
+
+
+\begin{proposition}
+Assume that $u=yx\in\mathbb{N}^n$ corresponds to $w=xy\in L_n$ where $|w|=n$. If $x\neq 0^r$, then $u$ is a subword of $w^\infty$. 
+\end{proposition}
+
+\begin{proof}
+We show that $u=yx$ is a subword of $b^*(w)w$. Write $x=0^l\sigma z$ where $\sigma\neq 0$. Thus, since $|w|=n$, $b(w)=\sigma-1zy$. If $b(w)=b^*(w)$, then 
+$$b^*(w)w=v(\sigma-1)zyx$$
+and we get that $u$ is a subowrd of $b^*(w)b(w)$. Otherwise, $|(\sigma-1)zy|$ does not divides $n$, and in particular, $|\sigma-1zy|<n$. By applying Proposition \ref{1-back} several times, we get that $b*(w)=v(\sigma-1)zy$ for some $v$, and $u=yx$ is a subword of $b^*(w)w=v(\sigma-1)zyxy$.
+\end{proof}
+
+
 \end{document}
 	
 	

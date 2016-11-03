@@ -213,5 +213,111 @@ For a word $w=w(i)$ be the $i$th word in the above enumeration. Let $l$ be the n
 
 
 
+
+
+\section{Where can I find $w$ as a sub-word of $w^\infty$? (second try...)}
+		
+\begin{definition}
+For a word $w$, $max(w)$ is the maximal digit in $w$.
+\end{definition}
+
+\begin{definition}
+A word $u\in \mathbb{N}$ corresponds to $w\in L_n$ if $u$ is a rotation of $w^{\frac{n}{|w|}}$. Note that each $u\in \mathbb{N}$ corresponds to exactly one word $w\in L_n$.
+\end{definition}
+
+\begin{proposition}
+\label{newforward}
+If $w\in L_n$ and $|w|<n$, then $f^*(w)=f(w)=0^{|w|}u$ for some word $u$.
+\end{proposition}
+\begin{proof}
+Write $\frac{n}{|w|}=c>1$. Thus, $f_1(w)=x$, $f_2(x)=0^{(c-1)|w|}x$ and $f_3(0^{(c-1)|w|}x)=0^{c-1|w|}x=f(w)$. Since $|x|=|w|$, $|f(w)|=n$ and hence, $f^*(w)=f(w)$. In addition, $(c-1)|w|\geq|w|$. 
+\end{proof}
+
+\begin{proposition}
+\label{1-back}
+If $|w|<n$ and $w=w'k$ where $0<k=max(w)$, then $b(w)=uw$ and $max(u)\leq max(w)$. 
+\end{proposition}
+\begin{proof}
+Write $w=w'k$. Thus, $b_1(w)=xk(w'k)^r$, $r>0$. $b_2(xk(w'k)^r)=y(w'k)^r$. $b_3(y(w'k)^r)=uw'k=uw$. It is easy to see that $\max{u}\leq k$.
+\end{proof}
+
+\begin{proposition}
+\label{*-back}
+If $w\in L_n$, $|w|^m=n$, $m>1$ and $w= 0^l\sigma\hat{w}$ such that $\sigma\neq 0$, then $b^*(w)=u\hat{w}w^{m-1}$ for some $u$. Note that in particular, $|b^*(w)|=n$.
+\end{proposition}
+
+\begin{proof}
+Since $w\in L_n$ and $w\neq 0$, $b_1(w)=w^m=(0^l\sigma w'k)^m$. 
+$$b(w)=b_3(b_2((0^l\sigma\hat{w})^m))=b_3((xk)(w'k)^{m-1})=y(w'k)^{m-1}=y\sigma-1\hat{w}w^{m-1}.$$
+Now, if $|y\sigma-1\hat{w}w^{m-1}=n$, then $y\sigma-1\hat{w}w^{m-1}=b^*(w)$ and we are done. Otherwise, 
+$$b^*(w^{m-1})=b^r(y\sigma-1\hat{w}w^{m-1}).$$
+Hence, the words $b(y\sigma-a\hat{w}w^{m-1}),b^2(y\sigma-\hat{w}w^{m-1}),\dots,b^{r-1}(y\sigma-1\hat{w}w^{m-1})$ are of length less than $n$. We apply Proposition \ref{1-back} on these words and we get that for each $l\leq r-1$,  $b^l(y\sigma-1\hat{w}w^{m-1})=u_1u_2\dots u_ly\sigma-1\hat{w}w^{m-1}$.
+\end{proof}
+
+
+\begin{proposition}
+Assume that $u\in \mathbb{N}^n$ corresponds to $w\in L_n$ such that $|w|<n$. then, $u$ is a subword of $w^\infty$. 
+\end{proposition}
+
+\begin{proof}
+If $u=0^n$, then $u$ is a prefix of $w^\infty$ and we are done. Otherwise, $w=0^l\sigma\hat{w}$ where $\sigma\neq 0$ and take $m$ such that $|w|^m=n$. Note that $m>1$. By Propositions \ref{newforward} and  \ref{*-back}, $b^*(w)wf^*(w)=x\hat{w}w^{m-1}w0^|w|y$ is a subword of $w^\infty$. Hence, 
+$$\hat{w}(0^l\sigma\hat{w})^m0^l \text{ is a subword of } w^\infty.$$
+$u$ is a rotation of $w^m$ thus $u$ is a subword of $\hat{w}(0^l\sigma\hat{w})^m0^l$ which implies that $u$ is a subword of $w^\infty$.
+\end{proof}
+
+
+\begin{proposition}
+Assume that $u=yx\in\mathbb{N}^n$ corresponds to $w=xy\in L_n$ where $|w|=n$. If $x\neq 0^r$, then $u$ is a subword of $w^\infty$. 
+\end{proposition}
+
+\begin{proof}
+We show that $u=yx$ is a subword of $b^*(w)w$. Write $x=0^l\sigma z$ where $\sigma\neq 0$. Thus, since $|w|=n$, $b(w)=\sigma-1zy$. If $b(w)=b^*(w)$, then 
+$$b^*(w)w=v(\sigma-1)zyx$$
+and we get that $u$ is a subowrd of $b^*(w)b(w)$. Otherwise, $|(\sigma-1)zy|$ does not divides $n$, and in particular, $|\sigma-1zy|<n$. By applying Proposition \ref{1-back} several times, we get that $b*(w)=v(\sigma-1)zy$ for some $v$, and $u=yx$ is a subword of $b^*(w)w=v(\sigma-1)zyxy$.
+\end{proof}
+
+\begin{lemma}
+Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigma$ is the first digit in such that $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Take $k\in \N$ such that $|z_1|\leq|(\sigma z_2)^k|$. Then, $z_1$ is a suffix of $(\sigma z_2)^k$.
+\end{lemma}
+
+\begin{proof}
+Assume for a contradiction that $z_1$ is not a suffix of $(\sigma z_1)^k$, and hence there are $\tau\neq \tau'$ in $\N$ and a word $y$, such that $\tau'y$ is a suffix of $\sigma z_2$, and 
+$$z_1=x\tau y(\sigma z_2)^r, \ (\sigma z_2)^k= x'\tau' y(\sigma z_2)^r.$$
+Clearly, $\tau<\tau'$ since otherwise, $\tau'<\tau$, and we get that 
+$w=0^lz_1\sigma z_2=0^lx\tau y (\sigma z_2)^{r+1}$. However, if we assume that $\tau'<\tau$, $w'=(\sigma z_2)^r0^lx\tau y$ is lexicographically larger than $w$, in contradiction to $w\in L_n$.
+\end{proof}
+
+\begin{corrolary}
+Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigma$ is the first digit in such that $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Take $m\in \N$ and a suffix of $\sigma z_2$, $x$ such that $|x(\sigma z_2)^{m+1}|=n$. Then, $z_1$ is a suffix of $x(\sigma z_2)^m$.
+\end{corrolary}
+\begin{proof}
+ This is a consequence of the previous Lemma and the fact that $|0^lz_1|=|x(\sigma z_2)|^m$.
+\end{proof}
+
+
+\begin{proposition}
+Assume that $u=v0^l\in\mathbb{N}^n$ corresponds to $w=0^lv\in L_n$ where $|w|=n$. Then, $u$ is a subword of $w^\infty$. 
+\end{proposition}
+
+\begin{proof}
+Write $w=0^lz_1\sigma z_2$ where $\sigma\in \N$ is the first digit in $w$ so that  $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Note that such digit exists since the last digit in $w$ satisfies this requirement.
+
+Now, since $|0^{l+|z_1|}(\sigma+1)z_2|=n$ and $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations, $0^{l+|z_1|}(\sigma+1)z_2=(w')^m$ where $w'\in L_n$. Note that $0^{l+|z_1|}$ is a prefix of $w'$. We consider three possibilities
+
+\begin{description}
+
+\item{Case 1.} 
+
+%$m=1$. Therefore, $|w'|=n$. In this case, $b(w')=\sigma z_2$. Since $l>0$, $|\sigma z_2|<n$. By applying Proposition \ref{1-back} several times, we get that $b^*{w'}=v'\sigma z_2$. 
+
+
+\end{description}
+ 
+\end{proof}
+
+
+
+
+
 \end{document}
 

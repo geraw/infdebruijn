@@ -296,6 +296,13 @@ Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigm
  This is a consequence of the previous Lemma and the fact that $|0^lz_1|=|x(\sigma z_2)|^m$.
 \end{proof}
 
+\begin{lemma}
+If $uv=vu$ and $u,v\neq\varepsilon$, then there is some word $w$, such that $u,v\in\{w\}^*$.
+\end{lemma}
+
+\begin{proof}
+By induction on $|u|+|v|$. If $|u|=|v|$, $u=v$ and we are done. Otherwise, assume w.l.o.g. that $|u|>|v|$ and write $u=vx$ (since $uv=vu$). Then, $ux=vxv=vvx=vu$. We see that $xv=vx$. By the induction hypothesis, $x=w^k$ and $v=w^l$. Hence, $u=w^{l+k}$ as required.
+\end{proof}
 
 \begin{lemma}
 Let $w=0^ly(x0^ly)^{r+1}$ be an $n$-length word such that $y\notin \{0\}^*$. Then, $w$ is not a key-word. 
@@ -304,7 +311,16 @@ Let $w=0^ly(x0^ly)^{r+1}$ be an $n$-length word such that $y\notin \{0\}^*$. The
 \begin{proof}
 Assume for a contradiction that $w$ is a key-word of length $n$, and take a maximal $t\in \N$ such that $x0^ly=x'(0^ly)^{t+1}$. First, we note that $x'\neq \varepsilon$. Indeed, if $x'=\varepsilon$, then $w=(0^ly)(0^ly)^{t(r+1)}$, a periodic word, and $w$ then is not an key-word.
 
-Now we claim that $|x'|<|y|$.
+Now we claim that $|x'|<|0^ly|$. For verifying this claim, assume that $|x|\geq |0^ly|$ and write $x=x'_1x'_2$, where $|x'_2|=|0^ly|$. By maximality of $t$, $x'_2\neq 0^ly$, and since $w\in L_n$, $x'_2<_{lex} ^ly$. Therefore, $(x0^ly)^rx_1'x_2'(0^ly)^{t+1}0^ly$, is a rotation of $w$ which is lexicographically larger then $w$, in contradiction to $w\in L_n$.
+
+To summary our conclusions, we have $w=0^ly(x0^ly)^rx'(0^ly)^{t+1}\in L_n$, and $|x'|<|0^ly|$. Write $0^ly=z_1z_2$ where $|x'|=|z_2|$. Therefore, $w=z_1z_2(z_2(z_1z_2)^{t+1})\dots(z_2(z_1z_2)^{t+1})$. We look at the rotation of $w$, $w'=(z_2(z_1z_2)^{t+1})\dots(z_2(z_1z_2)^{t+2})$. Since $w\in L_n$, $w$ is lexicographically larger than $w'$ and in particular,
+$(z_1z_2z_2(z_1z_2)^{t+1})\geq_{lex}(z_2(z_1z_2)^{t+2})$ which implies that
+$$z_1z_2z_2\geq_{lex}z_2z_1z_2.$$
+In addition, $z_2z_1z_2$ is a suffix of $w$ while $z_1z_2z_2$ is a subword of $w$. Hence, as $w\in L_n$ we have,
+$$z_2z_1z_2\geq z_1z_2z_2.$$
+As a result, $z_2z_1z_2=z_1z_2z_2$ thus $z_2z_1=z_1z_2$. By Lemma \ref{}, $z_1=z^{l_1}$ and $z_2=z^{l_2}$ for some non empty word $z$. Therefore, $w=z^m$ for some $z>0$ in contradiction to $w\in L_n$. 
+
+
 \end{proof}
 
 \begin{proposition}
@@ -325,11 +341,6 @@ $b_1(w')=w'^{k+1}=0^{l+|z_1|}(\sigma+1)z_2$. Hence, $b(w')=b_3(b_2(0^{l+|z_1|}(\
 By invoking Proposition \ref{1-back} several times, $b^*(\sigma z_2)= u(\sigma z_2)^m$ for some $u$. Hence, $v0^l=z_1\sigma z_2 0^l$ is a subword of 
 $$b^*(b^*(w'))b^*(w')b(w')=u(\sigma z_2)^{m+1}0^{l+|z_1|}x'.$$
 
-\item{Case 2.}
-
-Now, $b_1(\sigma z_2) = (\sigma z_2)^{m+1}$ and by Corollary \ref{z1-suffix}, $z_1$ is a suffix of $(\sigma z_2)^m$. Since the last digit in $(\sigma z_2)$ is not zero, by applying Proposition \ref{1-back} several times (possibly none), we get that $b^*{\sigma z_2}=x(\sigma z_2)^m$. As a result we have,
-$$b^*(b^*(w'))(b^*(w'))w'= x(\sigma z_2)^m (\sigma z_2) 0^{l+|z_1|}x'.$$
-Therefore, $v0^l=z_1\sigma z_2 0^l$ is a subword of  $b^*(b^*(w'))(b^*(w'))w'$ as required.
 
 \end{description}
 
@@ -349,7 +360,13 @@ $$b^*(w')w'=x''y(\sigma z_2)^{r+1}0^{l+|z_1}u.$$
  
 \end{proof}
 
+\begin{theorem}
+$w^\infty$ is an infinite De-Bruijn sequence.
+\end{theorem}
 
+\begin{proof}
+According to Propositions \ref{}, every $n$-sequence is a subword of $w^\infty$. By the ``onion theorem" and by the pigeonhole principle, every $n$-sequence appears only once at $w^\infty$.
+\end{proof}
 
 
 

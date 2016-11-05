@@ -277,6 +277,7 @@ and we get that $u$ is a subowrd of $b^*(w)b(w)$. Otherwise, $|(\sigma-1)zy|$ do
 \end{proof}
 
 \begin{lemma}
+\label{z1}
 Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigma$ is the first digit in such that $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Take $k\in \N$ such that $|z_1|\leq|(\sigma z_2)^k|$. Then, $z_1$ is a suffix of $(\sigma z_2)^k$.
 \end{lemma}
 
@@ -288,7 +289,8 @@ $w=0^lz_1\sigma z_2=0^lx\tau y (\sigma z_2)^{r+1}$. However, if we assume that $
 \end{proof}
 
 \begin{corrolary}
-Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigma$ is the first digit in such that $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Take $m\in \N$ and a suffix of $\sigma z_2$, $x$ such that $|x(\sigma z_2)^{m+1}|=n$. Then, $z_1$ is a suffix of $x(\sigma z_2)^m$.
+\label{z1-suffix}
+Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigma$ is the first digit in such that $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Then, there are words $x,y$ such that $z_2=xy$, $w=0^ly(\sigma xy)^{r+1}$ and $z_1=y(\sigma xy)^r$.
 \end{corrolary}
 \begin{proof}
  This is a consequence of the previous Lemma and the fact that $|0^lz_1|=|x(\sigma z_2)|^m$.
@@ -296,22 +298,44 @@ Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigm
 
 
 \begin{proposition}
-Assume that $u=v0^l\in\mathbb{N}^n$ corresponds to $w=0^lv\in L_n$ where $|w|=n$. Then, $u$ is a subword of $w^\infty$. 
+Assume that $v0^l\in\mathbb{N}^n$ corresponds to $w=0^lv\in L_n$ where $|w|=n$ and $l>0$. Then, $v0^l$ is a subword of $w^\infty$. 
 \end{proposition}
 
 \begin{proof}
-Write $w=0^lz_1\sigma z_2$ where $\sigma\in \N$ is the first digit in $w$ so that  $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Note that such digit exists since the last digit in $w$ satisfies this requirement.
+Write $w=0^lz_1\sigma z_2$ where $\sigma\in \N$ is the first digit in $w$ so that  $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Note that such a digit exists since the last digit in $w$ satisfies this requirement. Hence, $v=z_1\sigma z_2$.
 
-Now, since $|0^{l+|z_1|}(\sigma+1)z_2|=n$ and $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations, $0^{l+|z_1|}(\sigma+1)z_2=(w')^m$ where $w'\in L_n$. Note that $0^{l+|z_1|}$ is a prefix of $w'$. We consider three possibilities
+By Corollary \ref{z1-suffix}, $z_2=xy$ and $z_1=y(\sigma xy)^r$. Now, since $|0^{l+|z_1|}(\sigma+1)z_2|=n$ and $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations, $0^{l+|z_1|}(\sigma+1)z_2=(w')^{k+1}$ where $w'\in L_n$. Note that $0^{l+|z_1|}$ is a prefix of $w'$. We consider three possibilities
 
 \begin{description}
 
-\item{Case 1.} 
+\item{Case 1.}  $\sigma z_2\in L_n$. We show that in this case, $v0^l$ is a subword of $b^*(b^*(w'))(b^*(w'))w'$, which is a subword of $w^\infty$.
 
-%$m=1$. Therefore, $|w'|=n$. In this case, $b(w')=\sigma z_2$. Since $l>0$, $|\sigma z_2|<n$. By applying Proposition \ref{1-back} several times, we get that $b^*{w'}=v'\sigma z_2$. 
+$b_1(w')=w'^{k+1}=0^{l+|z_1|}(\sigma+1)z_2$. Hence, $b(w')=b_3(b_2(0^{l+|z_1|}(\sigma+1)z_1))=\sigma z_2$. Since $\sigma z_2\in L_n$, $b(w')=b^*(w')=\sigma z_2$ and in particular, $|(\sigma z_2)^{m+1}|=n$ for some $m\in \N$. Observe that $|z_1|\leq |\sigma z_2|^m$ and use Lemma \ref{z1} to conclude that $z_1$ is a suffix of $(\sigma z_2)^m$.  
 
+By invoking Proposition \ref{1-back} several times, $b^*(\sigma z_2)= u(\sigma z_2)^m$ for some $u$. Hence, $v0^l=z_1\sigma z_2 0^l$ is a subword of 
+$$b^*(b^*(w'))b^*(w')b(w')=u(\sigma z_2)^{m+1}0^{l+|z_1|}x'.$$
+
+\item{Case 2.}
+
+Now, $b_1(\sigma z_2) = (\sigma z_2)^{m+1}$ and by Corollary \ref{z1-suffix}, $z_1$ is a suffix of $(\sigma z_2)^m$. Since the last digit in $(\sigma z_2)$ is not zero, by applying Proposition \ref{1-back} several times (possibly none), we get that $b^*{\sigma z_2}=x(\sigma z_2)^m$. As a result we have,
+$$b^*(b^*(w'))(b^*(w'))w'= x(\sigma z_2)^m (\sigma z_2) 0^{l+|z_1|}x'.$$
+Therefore, $v0^l=z_1\sigma z_2 0^l$ is a subword of  $b^*(b^*(w'))(b^*(w'))w'$ as required.
 
 \end{description}
+
+Before we deal with the other cases, we note that $b_1(\sigma z_2)=b_1(\sigma xy)=x'y(\sigma xy)^{r+1}$ for some $x'$ that satisfies $|x'|=l>0$.
+
+\begin{description}
+\item{Case 2.} $\sigma z_2\notin L_n$  and $x'\neq 0^l$. We show that in this case, $v0^l$ is a subword of $b^*(w')w'$, which is a subword of $w^\infty$.
+
+Recall that $b(w')=\sigma z_2$ which is, by assumption, not a key-word. Since $x'\neq 0^l$, several invocations of Proposition \ref{1-back} imply that $b^*(\sigma z_2)=x''y(\sigma z_2)^{r+1}$. Since $v=z_1\sigma z_2=y(\sigma z_2)^{r+1}$, we get that $v0^l$ is a subword of 
+$$b^*(w')w'=x''y(\sigma z_2)^{r+1}0^{l+|z_1}u.$$
+
+
+\item{Case 3.} $\sigma z_2\notin L_n$  and $x'=0^l$. In this case, $b_1(\sigma z_2)$ = $0^ly(\sigma xy)^{r+1}$. Write $w''=(\sigma xy)^{r+1}0^ly$ (is it a key-word?). Then, $v0^l$ is a subword of $b^*(w'')w''$ (really?). 
+
+\end{description}
+
  
 \end{proof}
 

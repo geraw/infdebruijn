@@ -297,6 +297,16 @@ Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigm
 \end{proof}
 
 
+\begin{lemma}
+Let $w=0^ly(x0^ly)^{r+1}$ be an $n$-length word such that $y\notin \{0\}^*$. Then, $w$ is not a key-word. 
+\end{lemma}
+
+\begin{proof}
+Assume for a contradiction that $w$ is a key-word of length $n$, and take a maximal $t\in \N$ such that $x0^ly=x'(0^ly)^{t+1}$. First, we note that $x'\neq \varepsilon$. Indeed, if $x'=\varepsilon$, then $w=(0^ly)(0^ly)^{t(r+1)}$, a periodic word, and $w$ then is not an key-word.
+
+Now we claim that $|x'|<|y|$.
+\end{proof}
+
 \begin{proposition}
 Assume that $v0^l\in\mathbb{N}^n$ corresponds to $w=0^lv\in L_n$ where $|w|=n$ and $l>0$. Then, $v0^l$ is a subword of $w^\infty$. 
 \end{proposition}
@@ -332,7 +342,7 @@ Recall that $b(w')=\sigma z_2$ which is, by assumption, not a key-word. Since $x
 $$b^*(w')w'=x''y(\sigma z_2)^{r+1}0^{l+|z_1}u.$$
 
 
-\item{Case 3.} $\sigma z_2\notin L_n$  and $x'=0^l$. In this case, $b_1(\sigma z_2)$ = $0^ly(\sigma xy)^{r+1}$. Write $w''=(\sigma xy)^{r+1}0^ly$ (is it a key-word?). Then, $v0^l$ is a subword of $b^*(w'')w''$ (really?). 
+\item{Case 3.} $\sigma z_2\notin L_n$  and $x'=0^l$. In this case, $b_1(\sigma z_2)$ = $0^ly(\sigma xy)^{r+1}$. Note that $w=0^ly(x''0^ly)^{r+1}$ and use Lemma \ref{} to achieve a contradiction.
 
 \end{description}
 

@@ -222,36 +222,42 @@ For a word $w$, $max(w)$ is the maximal digit in $w$.
 \end{definition}
 
 \begin{definition}
-A word $u\in \mathbb{N}$ corresponds to $w\in L_n$ if $u$ is a rotation of $w^{\frac{n}{|w|}}$. Note that each $u\in \mathbb{N}$ corresponds to exactly one word $w\in L_n$.
+A word $u\in \mathbb{N}^n$ corresponds to $w\in L_n$ if $u$ is a rotation of $w^{\frac{n}{|w|}}$. Note that each $u\in \mathbb{N}^n$ corresponds to exactly one word $w\in L_n$.
 \end{definition}
 
 \begin{proposition}
 \label{newforward}
-If $w\in L_n$ and $|w|<n$, then $f^*(w)=f(w)=0^{|w|}u$ for some word $u$.
+If $w\in L_n$ and $|w|<n$, then $f^*(w)=f(w)=0^{n-|w|}x$ for some word $x$.
 \end{proposition}
 \begin{proof}
-Write $\frac{n}{|w|}=c>1$. Thus, $f_1(w)=x$, $f_2(x)=0^{(c-1)|w|}x$ and $f_3(0^{(c-1)|w|}x)=0^{c-1|w|}x=f(w)$. Since $|x|=|w|$, $|f(w)|=n$ and hence, $f^*(w)=f(w)$. In addition, $(c-1)|w|\geq|w|$. 
+Write $f_1(w)=x$, $f_2(x)=0^{n-|w|}x$. Since $w\in L_n$ and $|w|<n$, $n-|w|\geq \frac{n}{2}$. Moreover, the last digit in $x$ is not zero. Hecne, $f(w)=f_3(0^{n-|w|}x)=0^{n-|w|}x$. Since $|0^{n-|w|}x|=n$, we have $f(w)=f^*(w)=0^{n-|w|}x$.
 \end{proof}
 
 \begin{proposition}
 \label{1-back}
-If $|w|<n$ and $w=w'k$ where $0<k=max(w)$, then $b(w)=uw$ and $max(u)\leq max(w)$. 
+Take $|w|<n$ so that $w=w'k$ where $0<k=max(w)$, then $b(w)=uw$ and $max(u)\leq max(w)$. 
 \end{proposition}
 \begin{proof}
 Write $w=w'k$. Thus, $b_1(w)=xk(w'k)^r$, $r>0$. $b_2(xk(w'k)^r)=y(w'k)^r$. $b_3(y(w'k)^r)=uw'k=uw$. It is easy to see that $\max{u}\leq k$.
 \end{proof}
 
+%\begin{proposition}
+%Take $|w|<n$ so that $w=w'k$ where $0<k=max(w)$. Write $b_1(w)=xw^m$ where $x$ is a non-empty suffix of $w$ (possibly $x=w$). Then, $b(w)=uw^m$ and $max(u)\leq max(w)$. 
+%\end{proposition}
+
+%\begin{proof}
+%Note that $b(w)=b_3(b_2(xw^m))=yw^m$. This holds since the last digit in $x$ is $k>0$. Clearly, $max(y)\leq max(w)$. If $|yw^m|=n$, then $b^*(w)=b(w)$ and we are done with $u=y$. Otherwise, apply the previous Proposition several times.
+%\end{proof}
+
 \begin{proposition}
 \label{*-back}
-If $w\in L_n$, $|w|^m=n$, $m>1$ and $w= 0^l\sigma\hat{w}$ such that $\sigma\neq 0$, then $b^*(w)=u\hat{w}w^{m-1}$ for some $u$. Note that in particular, $|b^*(w)|=n$.
+If $w\in L_n$, $|w|^m=n$, $m>1$ and $w= 0^l\sigma\hat{w}$ such that $\sigma\neq 0$, then $b^*(w)=u\hat{w}w^{m-1}$ for some $u$.
 \end{proposition}
 
 \begin{proof}
-Since $w\in L_n$ and $w\neq 0$, $b_1(w)=w^m=(0^l\sigma w'k)^m$. 
-$$b(w)=b_3(b_2((0^l\sigma\hat{w})^m))=b_3((xk)(w'k)^{m-1})=y(w'k)^{m-1}=y\sigma-1\hat{w}w^{m-1}.$$
-Now, if $|y\sigma-1\hat{w}w^{m-1}=n$, then $y\sigma-1\hat{w}w^{m-1}=b^*(w)$ and we are done. Otherwise, 
-$$b^*(w^{m-1})=b^r(y\sigma-1\hat{w}w^{m-1}).$$
-Hence, the words $b(y\sigma-a\hat{w}w^{m-1}),b^2(y\sigma-\hat{w}w^{m-1}),\dots,b^{r-1}(y\sigma-1\hat{w}w^{m-1})$ are of length less than $n$. We apply Proposition \ref{1-back} on these words and we get that for each $l\leq r-1$,  $b^l(y\sigma-1\hat{w}w^{m-1})=u_1u_2\dots u_ly\sigma-1\hat{w}w^{m-1}$.
+Since $w\in L_n$ and $w\neq 0$, $b(w)$ is defined and 
+$$b(w)=(\sigma-1)\hat{w}w^{m-1}.$$
+If $b(w)\in L_n$ we are done, and otherwise $|b(w)|<n$ and several invocations of the previous proposition provide the required.
 \end{proof}
 
 
@@ -260,7 +266,7 @@ Assume that $u\in \mathbb{N}^n$ corresponds to $w\in L_n$ such that $|w|<n$. the
 \end{proposition}
 
 \begin{proof}
-If $u=0^n$, then $u$ is a prefix of $w^\infty$ and we are done. Otherwise, $w=0^l\sigma\hat{w}$ where $\sigma\neq 0$ and take $m$ such that $|w|^m=n$. Note that $m>1$. By Propositions \ref{newforward} and  \ref{*-back}, $b^*(w)wf^*(w)=x\hat{w}w^{m-1}w0^|w|y$ is a subword of $w^\infty$. Hence, 
+If $u=0^n$, then $u$ is a prefix of $w^\infty$ and we are done. Otherwise, $w=0^l\sigma\hat{w}$ where $\sigma\neq 0$. Take $m$ such that $|w|^m=n$. Note that $m>1$. By Propositions \ref{newforward} and  \ref{*-back}, $b^*(w)wf^*(w)=x\hat{w}w^{m-1}w0^{|w|}y$, which is also a subword of $w^\infty$. Hence, 
 $$\hat{w}(0^l\sigma\hat{w})^m0^l \text{ is a subword of } w^\infty.$$
 $u$ is a rotation of $w^m$ thus $u$ is a subword of $\hat{w}(0^l\sigma\hat{w})^m0^l$ which implies that $u$ is a subword of $w^\infty$.
 \end{proof}
@@ -271,18 +277,18 @@ Assume that $u=yx\in\mathbb{N}^n$ corresponds to $w=xy\in L_n$ where $|w|=n$. If
 \end{proposition}
 
 \begin{proof}
-We show that $u=yx$ is a subword of $b^*(w)w$. Write $x=0^l\sigma z$ where $\sigma\neq 0$. Thus, since $|w|=n$, $b(w)=\sigma-1zy$. If $b(w)=b^*(w)$, then 
-$$b^*(w)w=v(\sigma-1)zyx$$
-and we get that $u$ is a subowrd of $b^*(w)b(w)$. Otherwise, $|(\sigma-1)zy|$ does not divides $n$, and in particular, $|\sigma-1zy|<n$. By applying Proposition \ref{1-back} several times, we get that $b*(w)=v(\sigma-1)zy$ for some $v$, and $u=yx$ is a subword of $b^*(w)w=v(\sigma-1)zyxy$.
+We show that $u=yx$ is a subword of $b^*(w)w$. Write $x=0^l\sigma z$ where $\sigma\neq 0$. Thus, since $|w|=n$, $b(w)=(\sigma-1)zy$. If $b(w)=b^*(w)$, then 
+$$b^*(w)w=(\sigma-1)zyx$$
+and we get that $u$ is a subowrd of $b^*(w)b(w)$. Otherwise, $|(\sigma-1)zy|$ does not divides $n$, and in particular, $|(\sigma-1)zy|<n$. By applying Proposition \ref{1-back} several times, we get that $b^*(w)=v(\sigma-1)zy$ for some $v$, and $u=yx$ is a subword of $b^*(w)w=v(\sigma-1)zyxyx$.
 \end{proof}
 
 \begin{lemma}
 \label{z1}
-Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigma$ is the first digit in such that $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Take $k\in \N$ such that $|z_1|\leq|(\sigma z_2)^k|$. Then, $z_1$ is a suffix of $(\sigma z_2)^k$.
+Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigma$ is the first digit in $v$ such that $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Take $k\in \N$ and a suffix of $(\sigma z_2)$, $u$ such that $|u(\sigma z_2)^{k+1}|=|z_1(\sigma z_2)|$. Then, $u(\sigma z_2)^{k+1}= z_1(\sigma z_2)$.
 \end{lemma}
 
 \begin{proof}
-Assume for a contradiction that $z_1$ is not a suffix of $(\sigma z_1)^k$, and hence there are $\tau\neq \tau'$ in $\N$ and a word $y$, such that $\tau'y$ is a suffix of $\sigma z_2$, and 
+Assume for a contradiction that the claim is false, and hence $z_1\neq u(\sigma z_2)^k$. Therefore, there are $\tau\neq \tau'$ in $\N$ and a word $y$, such that $\tau'y$ is a suffix of $\sigma z_2$, and 
 $$z_1=x\tau y(\sigma z_2)^r, \ (\sigma z_2)^k= x'\tau' y(\sigma z_2)^r.$$
 Clearly, $\tau<\tau'$ since otherwise, $\tau'<\tau$, and we get that 
 $w=0^lz_1\sigma z_2=0^lx\tau y (\sigma z_2)^{r+1}$. However, if we assume that $\tau'<\tau$, $w'=(\sigma z_2)^r0^lx\tau y$ is lexicographically larger than $w$, in contradiction to $w\in L_n$.
@@ -297,6 +303,7 @@ Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigm
 \end{proof}
 
 \begin{lemma}
+\label{concatenation}
 If $uv=vu$ and $u,v\neq\varepsilon$, then there is some word $w$, such that $u,v\in\{w\}^*$.
 \end{lemma}
 
@@ -305,20 +312,24 @@ By induction on $|u|+|v|$. If $|u|=|v|$, $u=v$ and we are done. Otherwise, assum
 \end{proof}
 
 \begin{lemma}
-Let $w=0^ly(x0^ly)^{r+1}$ be an $n$-length word such that $y\notin \{0\}^*$. Then, $w$ is not a key-word. 
+\label{not-in-Ln}
+Let $w=0^ly(x0^ly)^{r+1}$ be an $n$-length word such that $y\notin \{0\}^*$. Then, $w\notin L_n$.
 \end{lemma}
 
 \begin{proof}
-Assume for a contradiction that $w$ is a key-word of length $n$, and take a maximal $t\in \N$ such that $x0^ly=x'(0^ly)^{t+1}$. First, we note that $x'\neq \varepsilon$. Indeed, if $x'=\varepsilon$, then $w=(0^ly)(0^ly)^{t(r+1)}$, a periodic word, and $w$ then is not an key-word.
+Assume for a contradiction that $w$ is a key-word of length $n$, and take a maximal $t\in \N$ such that $x0^ly=x'(0^ly)^{t+1}$. First, we note that $x'\neq \varepsilon$. Indeed, if $x'=\varepsilon$, then $w=(0^ly)(0^ly)^{(t+1)(r+1)}$, a periodic word, and then $w\notin L_n$.
 
-Now we claim that $|x'|<|0^ly|$. For verifying this claim, assume that $|x|\geq |0^ly|$ and write $x=x'_1x'_2$, where $|x'_2|=|0^ly|$. By maximality of $t$, $x'_2\neq 0^ly$, and since $w\in L_n$, $x'_2<_{lex} ^ly$. Therefore, $(x0^ly)^rx_1'x_2'(0^ly)^{t+1}0^ly$, is a rotation of $w$ which is lexicographically larger then $w$, in contradiction to $w\in L_n$.
+Now we claim that $|x'|<|0^ly|$. For verifying this claim, assume that $|x'|\geq |0^ly|$ and write $x'=x'_1x'_2$, where $|x'_2|=|0^ly|$. By maximality of $t$, $x'_2\neq 0^ly$, and since $w\in L_n$, $x'_2<_{lex} 0^ly$. Therefore, $$w'=(x0^ly)^rx_1'x_2'(0^ly)^{t+1}0^ly$$ is a rotation of $w$ which is lexicographically larger then $w$, in contradiction to $w\in L_n$.
 
-To summary our conclusions, we have $w=0^ly(x0^ly)^rx'(0^ly)^{t+1}\in L_n$, and $|x'|<|0^ly|$. Write $0^ly=z_1z_2$ where $|x'|=|z_2|$. Therefore, $w=z_1z_2(z_2(z_1z_2)^{t+1})\dots(z_2(z_1z_2)^{t+1})$. We look at the rotation of $w$, $w'=(z_2(z_1z_2)^{t+1})\dots(z_2(z_1z_2)^{t+2})$. Since $w\in L_n$, $w$ is lexicographically larger than $w'$ and in particular,
+To summary our conclusions, we have $w=0^ly(x'(0^ly)^{t+1})^{r+1}\in L_n$, and $|x'|<|0^ly|$. Write $0^ly=z_1z_2$ where $|x'|=|z_2|$. Therefore, $$w=z_1z_2(z_2(z_1z_2)^{t+1})\dots(z_2(z_1z_2)^{t+1}).$$ 
+
+We look now at ù rotation of $w$, $w'=(z_2(z_1z_2)^{t+1})\dots(z_2(z_1z_2)^{t+2})$. Since $w\in L_n$, $w$ is lexicographically larger than $w'$ and in particular,
 $(z_1z_2z_2(z_1z_2)^{t+1})\geq_{lex}(z_2(z_1z_2)^{t+2})$ which implies that
-$$z_1z_2z_2\geq_{lex}z_2z_1z_2.$$
-In addition, $z_2z_1z_2$ is a suffix of $w$ while $z_1z_2z_2$ is a subword of $w$. Hence, as $w\in L_n$ we have,
-$$z_2z_1z_2\geq z_1z_2z_2.$$
-As a result, $z_2z_1z_2=z_1z_2z_2$ thus $z_2z_1=z_1z_2$. By Lemma \ref{}, $z_1=z^{l_1}$ and $z_2=z^{l_2}$ for some non empty word $z$. Therefore, $w=z^m$ for some $z>0$ in contradiction to $w\in L_n$. 
+$z_1z_2z_2\geq_{lex}z_2z_1z_2$, and hence
+$$z_1z_2\geq_{lex}z_2z_1.$$
+In addition, $z_2z_1z_2$ is a suffix of $w$ while $z_1z_2z_2$ is a subword of $w$. Hence, as $w\in L_n$ we have, $z_2z_1z_2\geq_{lex} z_1z_2z_2$, and hence
+$$z_2z_1\geq_{lex}z_1z_2.$$
+As a result, $z_2z_1=z_1z_2$m and then by Lemma \ref{concatenation}, $z_1=z^{l_1}$ and $z_2=z^{l_2}$ for some non empty word $z$. Therefore, $w=z^m$ for some $z>0$ in contradiction to $w\in L_n$. 
 
 
 \end{proof}
@@ -350,10 +361,10 @@ Before we deal with the other cases, we note that $b_1(\sigma z_2)=b_1(\sigma xy
 \item{Case 2.} $\sigma z_2\notin L_n$  and $x'\neq 0^l$. We show that in this case, $v0^l$ is a subword of $b^*(w')w'$, which is a subword of $w^\infty$.
 
 Recall that $b(w')=\sigma z_2$ which is, by assumption, not a key-word. Since $x'\neq 0^l$, several invocations of Proposition \ref{1-back} imply that $b^*(\sigma z_2)=x''y(\sigma z_2)^{r+1}$. Since $v=z_1\sigma z_2=y(\sigma z_2)^{r+1}$, we get that $v0^l$ is a subword of 
-$$b^*(w')w'=x''y(\sigma z_2)^{r+1}0^{l+|z_1}u.$$
+$$b^*(w')w'=x''y(\sigma z_2)^{r+1}0^{l+|z_1|}u.$$
 
 
-\item{Case 3.} $\sigma z_2\notin L_n$  and $x'=0^l$. In this case, $b_1(\sigma z_2)$ = $0^ly(\sigma xy)^{r+1}$. Note that $w=0^ly(x''0^ly)^{r+1}$ and use Lemma \ref{} to achieve a contradiction.
+\item{Case 3.} $\sigma z_2\notin L_n$  and $x'=0^l$. In this case, $b_1(\sigma z_2)$ = $0^ly(\sigma xy)^{r+1}$. Note that $w=0^ly(x''0^ly)^{r+1}$ and use Lemma \ref{not-in-Ln} to obtain a contradiction.
 
 \end{description}
 

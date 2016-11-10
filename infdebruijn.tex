@@ -206,7 +206,10 @@ In this section we point at the position of an arbitrary word $w$ as a sub-word 
 \end{definition}
 
 \begin{proposition}
-	For a word $w=w(i)$ be the $i$th word in the above enumeration. Let $l$ be the number of leading zeros in $w$ and let $\hat{w}=\rl{b_1(b^*(w)}{l}$. Then, inserting the cycle $\T{\rl{b_1(w)}{s}}_{s=0}^{n-1}$ after the word $\hat{w}_{1..(n-l)}0^l$ in $\T{u(j)}_{j=0}^{i-1}$ yields the sequence $\T{u(j)}_{j=0}^{i}$.
+	Let $w=w(i)$ for some $i$ and let $l$ be the number of leading zeros in $w$.
+	Then, inserting the cycle $\T{R^{-l-n-1}(w),\dots,R^{-l}(w)}$ to $\T{u(j)}_{j=0}^{i-1}$
+	 after the word obtained from $R^{-l}(w)$ by decreasing its first letter by one
+	 yields the sequence $\T{u(j)}_{j=0}^{i}$.
 \end{proposition}		
 	
 		

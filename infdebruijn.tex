@@ -25,8 +25,8 @@
 \usetikzlibrary{automata,arrows,decorations.pathmorphing,decorations.markings,positioning}
 \usetikzlibrary{shapes}
 %\usepackage{balance}
-
-
+\usepackage{scrextend}
+\addtokomafont{labelinglabel}{\sffamily}
 
 
 % Theorem like env.
@@ -36,7 +36,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}     
+\newtheorem{definition}[theorem]{Definition}     
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{observation}[theorem]{Observation}
 \newtheorem{example}[theorem]{Example}
@@ -44,11 +44,16 @@
 \newtheorem{corrolary}[theorem]{Corrolary}
 
 
+
+%\newcommand{\RotateLeft}{rlft}
+\DeclareMathOperator{\RotateLeft}{RotLft}
+
+
+
 %------------------------------------------- preamble ---------------------------
 
 \newcommand{\R}{{\mathbb{R}}}
 \newcommand{\N}{{\mathbb{N}}}
-\newcommand{\C}{{\mathbb{C}}}
 \newcommand{\Z}{{\mathbb{Z}}}
 
 \newcommand{\REF}[2]{#1~\ref{#2}}
@@ -64,13 +69,9 @@
 \pagestyle{plain}
 
 
-\title{On Combinatorial Games and de Bruijn Sequences}
+\title{An Infinite de Bruijn Sequence}
 
-\author{Yotam Svoray and %Gera Weiss\\
-Department of Computer Science \\
-Ben Gurion University of the Negev\\
-Israel
-}
+\author{}
 
 
 
@@ -78,6 +79,102 @@ Israel
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+\maketitle
+
+
+
+
+\section{A cycle joining Construction}
+
+
+\begin{definition}
+	A word in $\N^*$ is called a \emph{key word} if it is bigger in right-to-left lexicographical order than all of its rotations.
+\end{definition}
+
+\begin{definition}[Cycle Construction]
+For $n\in \N$, let $k_1,k_2,\dots$ be an enumeration in right-to-left lexicographic order of all the key words of length $n$ and let $z(k_i)$ be the number of leading zeros in $k_i$. Define $C_0=\T{0^n}$ and, for $i>0$, let $C_i$ be the sequence obtained from $C_{i-1}$ by adding 
+	$$\T{\RotateLeft(k_i,z(k_i)+1),\RotateLeft(k_i,z(k_i)+2),\dots,\RotateLeft(k_i,z(k_i))}$$ 
+after the word $(\sigma-1)w$ where $\sigma w=\RotateLeft(k_i,z(k_i))$. \footnote{This is always possible because  $(\sigma-1)w$ is a rotation of a key word that is smaller than $k_i$ in left-to-right lexicographic order, i.e., it came earlier in the enumeration.}  
+\end{definition}
+
+
+\begin{proposition}
+For every $l>0$ there is some $i>0$ such that the first $l$ words in $C_i$ are also the first $l$ words in $C_j$ for any $j>i$.
+\end{proposition}
+
+\begin{definition}
+Let $C_\infty$ be the infinite sequence whose prefixes are all prefixes of an infinite number of elements in $\{C_0,C_1,\dots\}$.
+\end{definition}
+
+\begin{proposition}
+The sequence $C_\infty$ is a de Bruijn sequence of order $n$, i.e., it is a Hamiltonian path over the infinite de Bruijn graph of order $n$ whose vertexes are the words $\N^n$ and whose edges are $\{ \T{ \sigma w, w \sigma'} \colon \sigma, \sigma' \in \N, w \in \N^{n-1} \}$.
+\end{proposition}
+
+
+\begin{definition}[Last on Necklace]
+Let $last(w)$ be true if and only if $w=\RotateLeft(k_i,z(k_i))$ for some $i$. i.e., if $w$ is the last member of its necklace (set of rotations) in the sequence. 
+\end{definition}
+
+
+\begin{definition}
+Let $nxt\colon \N^n \to \N^n$ be defined by
+$$nxt(\sigma w)=\begin{cases} 
+w(\sigma+1) & \text{if }last((\sigma+1)w) \\
+w0          & \text{if }last(\sigma w) \\
+w\sigma     & \text{otherwise} 
+\end{cases}$$
+\end{definition}
+
+\begin{proposition}
+For every $w\in \N^n$, $nxt(w)$ is the word that follows $w$ in the sequence $C_\infty$.
+\end{proposition}
+
+
+\begin{definition}
+Let $prv\colon \N^n \to \N^n$ be defined by
+$$prv(w\sigma)=\begin{cases} 
+(\sigma-1)w & \text{if }last(\sigma w) \\
+\sigma'w   & \text{if $\sigma =0$  and $\sigma'$ is the maximal such that $last(\sigma' w)$} \\
+\sigma w     & \text{otherwise} 
+\end{cases}$$
+\end{definition}
+ 
+\begin{proposition}
+For every $w\in \N^n\setminus \{0^n\}$, $prv(w)$ is the word that precedes $w$ in the sequence $C_\infty$.
+\end{proposition}
+
+\begin{proposition}
+Both $prv$ and $nxt$ can be computed in $O(n^2)$ time and space.
+\end{proposition}   
+
+\begin{proposition}[Prefer Maximum]
+For every $\sigma \in \N$ and $w \in \N^{n-1}$, the word $\sigma w$ comes before the word $(\sigma+1) w$ in $C_\infty$.
+\end{proposition}
+\begin{proof}
+Let $k$ be a key word  of the form $0^z(k)\hat{w}$. We will prove the proposition for every rotation of $k$:
+
+
+\begin{description} 
+\item [First Case:] If $w=0^{z_1}\hat{w}0^{z_2}$ such that $z_1+z_2=z(k)$ and $z_1 \neq 0$ then we have that $w$ precedes  $w_1=0^{z_1-1}\hat{w}0^{z_2}1$ by the definition of $nxt$ and that $w_1$ precedes $1 0^{z_1-1}\hat{w}0^{z_2}$ by the order that we added the words in this necklace.
+\item [Second Case:] If $w=\sigma u 0^{z(k)}v$ such that $v\sigma u=\hat{w}$ we have that
+\begin{itemize}
+	\item $w$ precedes $v \sigma u 0^{z(k)}$ because the latter is last on its necklace.
+	\item $v \sigma u 0^{z(k)}$ precedes $\sigma u 0^{z(k)+|v|}$ because...
+	\item $\sigma u 0^{z(k)+|v|}$ precedes $0(\sigma+1) u 0^{z(k)+|v|-1}$ because...
+	\item $0(\sigma+1) u 0^{z(k)+|v|-1}$ precedes the word $u_2 (\sigma+1) u_1$ such that $u_1u_2=u0^{z(k)+|v|+1}$ and $last(u_2 (\sigma+1) u_1)$, by the order of the enumeration of the words in this necklace.
+	\item $u_2 (\sigma+1) u_1$ precedes $0(\sigma+1)u_1 0^{|u_2|-1}$ because...
+	\item $0(\sigma+1)u_1 0^{|u_2|-1}$ precedes $0 \tau_2 \dots \tau_l (\sigma+1)u_1$ where $u_2=\tau_1\dots\tau_l \sigma u_1=v\sigma u 0^{z(k)}$ because... 
+	\item $0 \tau_2 \dots \tau_l (\sigma+1)u_1$ precedes $\tau_2 \dots \tau_l (\sigma+1)u_1\tau_1$ because... 
+	\item $\tau_2 \dots \tau_l (\sigma+1)u_1\tau_1$ precedes $(\sigma+1)u_1\tau_1 \tau_2 \dots \tau_l=(\sigma+1) u 0^{z(k)}v$ because... 
+\end{itemize}
+\end{description}
+ 
+\end{proof}
+ 
+
+
+	
+\section{Forward and backwards transformations}
 
 \begin{definition}
 	For a parameter $n$, Let $L \subset \N^+$ be the set of non-periodic words over the alphabet $\Sigma=\N$ that are bigger in Arabic (right-to-left) lexicographical order than all of their rotations. Let $L_n$ be the set of all the words in $L$ whose length divides $n$.
@@ -87,9 +184,6 @@ Israel
 \begin{definition}
 	For a word $w=w_1\cdots w_{n-1}w_n$ let  $\rr{w}{}= w_{n}w_1\cdots w_{n-1}$ be the rotation of $w$ to the right. Then, the nested invocation $\rr{w}{m}$ is the $m$ letter rotation to the right and its inverse $\rl{w}{m}$ is the $m$ letter rotation to the left.
 \end{definition}
-
-	
-\section{Forward and backwards transformations}
 
 
 \begin{definition}\label{forward}
@@ -325,7 +419,7 @@ Now we claim that $|x'|<|0^ly|$. For verifying this claim, assume that $|x'|\geq
 
 To summary our conclusions, we have $w=0^ly(x'(0^ly)^{t+1})^{r+1}\in L_n$, and $|x'|<|0^ly|$. Write $0^ly=z_1z_2$ where $|x'|=|z_2|$. Therefore, $$w=z_1z_2(z_2(z_1z_2)^{t+1})\dots(z_2(z_1z_2)^{t+1}).$$ 
 
-We look now at � rotation of $w$, $w'=(z_2(z_1z_2)^{t+1})\dots(z_2(z_1z_2)^{t+2})$. Since $w\in L_n$, $w$ is lexicographically larger than $w'$ and in particular,
+We look now at a rotation of $w$, $w'=(z_2(z_1z_2)^{t+1})\dots(z_2(z_1z_2)^{t+2})$. Since $w\in L_n$, $w$ is lexicographically larger than $w'$ and in particular,
 $(z_1z_2z_2(z_1z_2)^{t+1})\geq_{lex}(z_2(z_1z_2)^{t+2})$ which implies that
 $z_1z_2z_2\geq_{lex}z_2z_1z_2$, and hence
 $$z_1z_2\geq_{lex}z_2z_1.$$

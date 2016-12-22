@@ -81,9 +81,6 @@
 \begin{document}
 \maketitle
 
-
-
-
 \section{A cycle joining Construction}
 
 
@@ -150,26 +147,6 @@ Both $prv$ and $nxt$ can be computed in $O(n^2)$ time and space.
 \begin{proposition}[Prefer Maximum]
 For every $\sigma \in \N$ and $w \in \N^{n-1}$, the word $\sigma w$ comes before the word $(\sigma+1) w$ in $C_\infty$.
 \end{proposition}
-\begin{proof}
-Let $k$ be a key word  of the form $0^z(k)\hat{w}$. We will prove the proposition for every rotation of $k$:
-
-
-\begin{description} 
-\item [First Case:] If $w=0^{z_1}\hat{w}0^{z_2}$ such that $z_1+z_2=z(k)$ and $z_1 \neq 0$ then we have that $w$ precedes  $w_1=0^{z_1-1}\hat{w}0^{z_2}1$ by the definition of $nxt$ and that $w_1$ precedes $1 0^{z_1-1}\hat{w}0^{z_2}$ by the order that we added the words in this necklace.
-\item [Second Case:] If $w=\sigma u 0^{z(k)}v$ such that $v\sigma u=\hat{w}$ we have that
-\begin{itemize}
-	\item $w$ precedes $v \sigma u 0^{z(k)}$ because the latter is last on its necklace.
-	\item $v \sigma u 0^{z(k)}$ precedes $\sigma u 0^{z(k)+|v|}$ because...
-	\item $\sigma u 0^{z(k)+|v|}$ precedes $0(\sigma+1) u 0^{z(k)+|v|-1}$ because...
-	\item $0(\sigma+1) u 0^{z(k)+|v|-1}$ precedes the word $u_2 (\sigma+1) u_1$ such that $u_1u_2=u0^{z(k)+|v|+1}$ and $last(u_2 (\sigma+1) u_1)$, by the order of the enumeration of the words in this necklace.
-	\item $u_2 (\sigma+1) u_1$ precedes $0(\sigma+1)u_1 0^{|u_2|-1}$ because...
-	\item $0(\sigma+1)u_1 0^{|u_2|-1}$ precedes $0 \tau_2 \dots \tau_l (\sigma+1)u_1$ where $u_2=\tau_1\dots\tau_l \sigma u_1=v\sigma u 0^{z(k)}$ because... 
-	\item $0 \tau_2 \dots \tau_l (\sigma+1)u_1$ precedes $\tau_2 \dots \tau_l (\sigma+1)u_1\tau_1$ because... 
-	\item $\tau_2 \dots \tau_l (\sigma+1)u_1\tau_1$ precedes $(\sigma+1)u_1\tau_1 \tau_2 \dots \tau_l=(\sigma+1) u 0^{z(k)}v$ because... 
-\end{itemize}
-\end{description}
- 
-\end{proof}
  
 
 
@@ -312,29 +289,30 @@ represents the mapping of a word $w$ to the letter that follows the (one and onl
 
 
 \section{Where can I find $w$ as a sub-word of $w^\infty$? (second try...)}
-		
+
+
 \begin{definition}
-For a word $w$, $max(w)$ is the maximal digit in $w$.
+	For a word $w$, $max(w)$ is the maximal digit in $w$.
 \end{definition}
 
 \begin{definition}
-A word $u\in \mathbb{N}^n$ corresponds to $w\in L_n$ if $u$ is a rotation of $w^{\frac{n}{|w|}}$. Note that each $u\in \mathbb{N}^n$ corresponds to exactly one word $w\in L_n$.
+	A word $u\in \mathbb{N}^n$ corresponds to $w\in L_n$ if $u$ is a rotation of $w^{\frac{n}{|w|}}$. Note that each $u\in \mathbb{N}^n$ corresponds to exactly one word $w\in L_n$.
 \end{definition}
 
 \begin{proposition}
-\label{newforward}
-If $w\in L_n$ and $|w|<n$, then $f^*(w)=f(w)=0^{n-|w|}x$ for some word $x$.
+	\label{newforward}
+	If $w\in L_n$ and $|w|<n$, then $f^*(w)=f(w)=0^{n-|w|}x$ for some word $x$.
 \end{proposition}
 \begin{proof}
-Write $f_1(w)=x$, $f_2(x)=0^{n-|w|}x$. Since $w\in L_n$ and $|w|<n$, $n-|w|\geq \frac{n}{2}$. Moreover, the last digit in $x$ is not zero. Hecne, $f(w)=f_3(0^{n-|w|}x)=0^{n-|w|}x$. Since $|0^{n-|w|}x|=n$, we have $f(w)=f^*(w)=0^{n-|w|}x$.
+	Write $f_1(w)=x$, $f_2(x)=0^{n-|w|}x$. Since $w\in L_n$ and $|w|<n$, $n-|w|\geq \frac{n}{2}$. Moreover, the last digit in $x$ is not zero. Hecne, $f(w)=f_3(0^{n-|w|}x)=0^{n-|w|}x$. Since $|0^{n-|w|}x|=n$, we have $f(w)=f^*(w)=0^{n-|w|}x$.
 \end{proof}
 
 \begin{proposition}
-\label{1-back}
-Take $|w|<n$ so that $w=w'k$ where $0<k=max(w)$, then $b(w)=uw$ and $max(u)\leq max(w)$. 
+	\label{1-back}
+	Take $|w|<n$ so that $w=w'k$ where $0<k=max(w)$, then $b(w)=uw$ and $max(u)\leq max(w)$. 
 \end{proposition}
 \begin{proof}
-Write $w=w'k$. Thus, $b_1(w)=xk(w'k)^r$, $r>0$. $b_2(xk(w'k)^r)=y(w'k)^r$. $b_3(y(w'k)^r)=uw'k=uw$. It is easy to see that $\max{u}\leq k$.
+	Write $w=w'k$. Thus, $b_1(w)=xk(w'k)^r$, $r>0$. $b_2(xk(w'k)^r)=y(w'k)^r$. $b_3(y(w'k)^r)=uw'k=uw$. It is easy to see that $\max{u}\leq k$.
 \end{proof}
 
 %\begin{proposition}
@@ -346,134 +324,327 @@ Write $w=w'k$. Thus, $b_1(w)=xk(w'k)^r$, $r>0$. $b_2(xk(w'k)^r)=y(w'k)^r$. $b_3(
 %\end{proof}
 
 \begin{proposition}
-\label{*-back}
-If $w\in L_n$, $|w|^m=n$, $m>1$ and $w= 0^l\sigma\hat{w}$ such that $\sigma\neq 0$, then $b^*(w)=u\hat{w}w^{m-1}$ for some $u$.
+	\label{*-back}
+	If $w\in L_n$, $|w|^m=n$, $m>1$ and $w= 0^l\sigma\hat{w}$ such that $\sigma\neq 0$, then $b^*(w)=u\hat{w}w^{m-1}$ for some $u$.
 \end{proposition}
 
 \begin{proof}
-Since $w\in L_n$ and $w\neq 0$, $b(w)$ is defined and 
-$$b(w)=(\sigma-1)\hat{w}w^{m-1}.$$
-If $b(w)\in L_n$ we are done, and otherwise $|b(w)|<n$ and several invocations of the previous proposition provide the required.
+	Since $w\in L_n$ and $w\neq 0$, $b(w)$ is defined and 
+	$$b(w)=(\sigma-1)\hat{w}w^{m-1}.$$
+	If $b(w)\in L_n$ we are done, and otherwise $|b(w)|<n$ and several invocations of the previous proposition provide the required.
 \end{proof}
 
 
 \begin{proposition}
-Assume that $u\in \mathbb{N}^n$ corresponds to $w\in L_n$ such that $|w|<n$. then, $u$ is a subword of $w^\infty$. 
+	Assume that $u\in \mathbb{N}^n$ corresponds to $w\in L_n$ such that $|w|<n$. then, $u$ is a subword of $w^\infty$. 
 \end{proposition}
 
 \begin{proof}
-If $u=0^n$, then $u$ is a prefix of $w^\infty$ and we are done. Otherwise, $w=0^l\sigma\hat{w}$ where $\sigma\neq 0$. Take $m$ such that $|w|^m=n$. Note that $m>1$. By Propositions \ref{newforward} and  \ref{*-back}, $b^*(w)wf^*(w)=x\hat{w}w^{m-1}w0^{|w|}y$, which is also a subword of $w^\infty$. Hence, 
-$$\hat{w}(0^l\sigma\hat{w})^m0^l \text{ is a subword of } w^\infty.$$
-$u$ is a rotation of $w^m$ thus $u$ is a subword of $\hat{w}(0^l\sigma\hat{w})^m0^l$ which implies that $u$ is a subword of $w^\infty$.
+	If $u=0^n$, then $u$ is a prefix of $w^\infty$ and we are done. Otherwise, $w=0^l\sigma\hat{w}$ where $\sigma\neq 0$. Take $m$ such that $|w|^m=n$. Note that $m>1$. By Propositions \ref{newforward} and  \ref{*-back}, $b^*(w)wf^*(w)=x\hat{w}w^{m-1}w0^{|w|}y$, which is also a subword of $w^\infty$. Hence, 
+	$$\hat{w}(0^l\sigma\hat{w})^m0^l \text{ is a subword of } w^\infty.$$
+	$u$ is a rotation of $w^m$ thus $u$ is a subword of $\hat{w}(0^l\sigma\hat{w})^m0^l$ which implies that $u$ is a subword of $w^\infty$.
 \end{proof}
 
 
 \begin{proposition}
-Assume that $u=yx\in\mathbb{N}^n$ corresponds to $w=xy\in L_n$ where $|w|=n$. If $x\neq 0^r$, then $u$ is a subword of $w^\infty$. 
+	Assume that $u=yx\in\mathbb{N}^n$ corresponds to $w=xy\in L_n$ where $|w|=n$. If $x\neq 0^r$, then $u$ is a subword of $w^\infty$. 
 \end{proposition}
 
 \begin{proof}
-We show that $u=yx$ is a subword of $b^*(w)w$. Write $x=0^l\sigma z$ where $\sigma\neq 0$. Thus, since $|w|=n$, $b(w)=(\sigma-1)zy$. If $b(w)=b^*(w)$, then 
-$$b^*(w)w=(\sigma-1)zyx$$
-and we get that $u$ is a subowrd of $b^*(w)b(w)$. Otherwise, $|(\sigma-1)zy|$ does not divides $n$, and in particular, $|(\sigma-1)zy|<n$. By applying Proposition \ref{1-back} several times, we get that $b^*(w)=v(\sigma-1)zy$ for some $v$, and $u=yx$ is a subword of $b^*(w)w=v(\sigma-1)zyxyx$.
+	We show that $u=yx$ is a subword of $b^*(w)w$. Write $x=0^l\sigma z$ where $\sigma\neq 0$. Thus, since $|w|=n$, $b(w)=(\sigma-1)zy$. If $b(w)=b^*(w)$, then 
+	$$b^*(w)w=(\sigma-1)zyx$$
+	and we get that $u$ is a subowrd of $b^*(w)b(w)$. Otherwise, $|(\sigma-1)zy|$ does not divides $n$, and in particular, $|(\sigma-1)zy|<n$. By applying Proposition \ref{1-back} several times, we get that $b^*(w)=v(\sigma-1)zy$ for some $v$, and $u=yx$ is a subword of $b^*(w)w=v(\sigma-1)zyxyx$.
 \end{proof}
 
 \begin{lemma}
-\label{z1}
-Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigma$ is the first digit in $v$ such that $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Take $k\in \N$ and a suffix of $(\sigma z_2)$, $u$ such that $|u(\sigma z_2)^{k+1}|=|z_1(\sigma z_2)|$. Then, $u(\sigma z_2)^{k+1}= z_1(\sigma z_2)$.
+	\label{z1}
+	Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigma$ is the first digit in $v$ such that $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Take $k\in \N$ and a suffix of $(\sigma z_2)$, $u$ such that $|u(\sigma z_2)^{k+1}|=|z_1(\sigma z_2)|$. Then, $u(\sigma z_2)^{k+1}= z_1(\sigma z_2)$.
 \end{lemma}
 
 \begin{proof}
-Assume for a contradiction that the claim is false, and hence $z_1\neq u(\sigma z_2)^k$. Therefore, there are $\tau\neq \tau'$ in $\N$ and a word $y$, such that $\tau'y$ is a suffix of $\sigma z_2$, and 
-$$z_1=x\tau y(\sigma z_2)^r, \ (\sigma z_2)^k= x'\tau' y(\sigma z_2)^r.$$
-Clearly, $\tau<\tau'$ since otherwise, $\tau'<\tau$, and we get that 
-$w=0^lz_1\sigma z_2=0^lx\tau y (\sigma z_2)^{r+1}$. However, if we assume that $\tau'<\tau$, $w'=(\sigma z_2)^r0^lx\tau y$ is lexicographically larger than $w$, in contradiction to $w\in L_n$.
+	Assume for a contradiction that the claim is false, and hence $z_1\neq u(\sigma z_2)^k$. Therefore, there are $\tau\neq \tau'$ in $\N$ and a word $y$, such that $\tau'y$ is a suffix of $\sigma z_2$, and 
+	$$z_1=x\tau y(\sigma z_2)^r, \ (\sigma z_2)^k= x'\tau' y(\sigma z_2)^r.$$
+	Clearly, $\tau<\tau'$ since otherwise, $\tau'<\tau$, and we get that 
+	$w=0^lz_1\sigma z_2=0^lx\tau y (\sigma z_2)^{r+1}$. However, if we assume that $\tau'<\tau$, $w'=(\sigma z_2)^r0^lx\tau y$ is lexicographically larger than $w$, in contradiction to $w\in L_n$.
 \end{proof}
 
 \begin{corrolary}
-\label{z1-suffix}
-Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigma$ is the first digit in such that $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Then, there are words $x,y$ such that $z_2=xy$, $w=0^ly(\sigma xy)^{r+1}$ and $z_1=y(\sigma xy)^r$.
+	\label{z1-suffix}
+	Assume that $w=0^lv\in L_n$ and $|w|=n$. Write $w=0^lz_1\sigma z_2$ where $\sigma$ is the first digit in such that $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Then, there are words $x,y$ such that $z_2=xy$, $w=0^ly(\sigma xy)^{r+1}$ and $z_1=y(\sigma xy)^r$.
 \end{corrolary}
 \begin{proof}
- This is a consequence of the previous Lemma and the fact that $|0^lz_1|=|x(\sigma z_2)|^m$.
+	This is a consequence of the previous Lemma and the fact that $|0^lz_1|=|x(\sigma z_2)|^m$.
 \end{proof}
 
 \begin{lemma}
-\label{concatenation}
-If $uv=vu$ and $u,v\neq\varepsilon$, then there is some word $w$, such that $u,v\in\{w\}^*$.
+	\label{concatenation}
+	If $uv=vu$ and $u,v\neq\varepsilon$, then there is some word $w$, such that $u,v\in\{w\}^*$.
 \end{lemma}
 
 \begin{proof}
-By induction on $|u|+|v|$. If $|u|=|v|$, $u=v$ and we are done. Otherwise, assume w.l.o.g. that $|u|>|v|$ and write $u=vx$ (since $uv=vu$). Then, $ux=vxv=vvx=vu$. We see that $xv=vx$. By the induction hypothesis, $x=w^k$ and $v=w^l$. Hence, $u=w^{l+k}$ as required.
+	By induction on $|u|+|v|$. If $|u|=|v|$, $u=v$ and we are done. Otherwise, assume w.l.o.g. that $|u|>|v|$ and write $u=vx$ (since $uv=vu$). Then, $ux=vxv=vvx=vu$. We see that $xv=vx$. By the induction hypothesis, $x=w^k$ and $v=w^l$. Hence, $u=w^{l+k}$ as required.
 \end{proof}
 
 \begin{lemma}
-\label{not-in-Ln}
-Let $w=0^ly(x0^ly)^{r+1}$ be an $n$-length word such that $y\notin \{0\}^*$. Then, $w\notin L_n$.
+	\label{not-in-Ln}
+	Let $w=0^ly(x0^ly)^{r+1}$ be an $n$-length word such that $y\notin \{0\}^*$. Then, $w\notin L_n$.
 \end{lemma}
 
 \begin{proof}
-Assume for a contradiction that $w$ is a key-word of length $n$, and take a maximal $t\in \N$ such that $x0^ly=x'(0^ly)^{t+1}$. First, we note that $x'\neq \varepsilon$. Indeed, if $x'=\varepsilon$, then $w=(0^ly)(0^ly)^{(t+1)(r+1)}$, a periodic word, and then $w\notin L_n$.
-
-Now we claim that $|x'|<|0^ly|$. For verifying this claim, assume that $|x'|\geq |0^ly|$ and write $x'=x'_1x'_2$, where $|x'_2|=|0^ly|$. By maximality of $t$, $x'_2\neq 0^ly$, and since $w\in L_n$, $x'_2<_{lex} 0^ly$. Therefore, $$w'=(x0^ly)^rx_1'x_2'(0^ly)^{t+1}0^ly$$ is a rotation of $w$ which is lexicographically larger then $w$, in contradiction to $w\in L_n$.
-
-To summary our conclusions, we have $w=0^ly(x'(0^ly)^{t+1})^{r+1}\in L_n$, and $|x'|<|0^ly|$. Write $0^ly=z_1z_2$ where $|x'|=|z_2|$. Therefore, $$w=z_1z_2(z_2(z_1z_2)^{t+1})\dots(z_2(z_1z_2)^{t+1}).$$ 
-
-We look now at a rotation of $w$, $w'=(z_2(z_1z_2)^{t+1})\dots(z_2(z_1z_2)^{t+2})$. Since $w\in L_n$, $w$ is lexicographically larger than $w'$ and in particular,
-$(z_1z_2z_2(z_1z_2)^{t+1})\geq_{lex}(z_2(z_1z_2)^{t+2})$ which implies that
-$z_1z_2z_2\geq_{lex}z_2z_1z_2$, and hence
-$$z_1z_2\geq_{lex}z_2z_1.$$
-In addition, $z_2z_1z_2$ is a suffix of $w$ while $z_1z_2z_2$ is a subword of $w$. Hence, as $w\in L_n$ we have, $z_2z_1z_2\geq_{lex} z_1z_2z_2$, and hence
-$$z_2z_1\geq_{lex}z_1z_2.$$
-As a result, $z_2z_1=z_1z_2$m and then by Lemma \ref{concatenation}, $z_1=z^{l_1}$ and $z_2=z^{l_2}$ for some non empty word $z$. Therefore, $w=z^m$ for some $z>0$ in contradiction to $w\in L_n$. 
-
-
+	Assume for a contradiction that $w$ is a key-word of length $n$, and take a maximal $t\in \N$ such that $x0^ly=x'(0^ly)^{t+1}$. First, we note that $x'\neq \varepsilon$. Indeed, if $x'=\varepsilon$, then $w=(0^ly)(0^ly)^{(t+1)(r+1)}$, a periodic word, and then $w\notin L_n$.
+	
+	Now we claim that $|x'|<|0^ly|$. For verifying this claim, assume that $|x'|\geq |0^ly|$ and write $x'=x'_1x'_2$, where $|x'_2|=|0^ly|$. By maximality of $t$, $x'_2\neq 0^ly$, and since $w\in L_n$, $x'_2<_{lex} 0^ly$. Therefore, $$w'=(x0^ly)^rx_1'x_2'(0^ly)^{t+1}0^ly$$ is a rotation of $w$ which is lexicographically larger then $w$, in contradiction to $w\in L_n$.
+	
+	To summary our conclusions, we have $w=0^ly(x'(0^ly)^{t+1})^{r+1}\in L_n$, and $|x'|<|0^ly|$. Write $0^ly=z_1z_2$ where $|x'|=|z_2|$. Therefore, $$w=z_1z_2(z_2(z_1z_2)^{t+1})\dots(z_2(z_1z_2)^{t+1}).$$ 
+	
+	We look now at a rotation of $w$, $w'=(z_2(z_1z_2)^{t+1})\dots(z_2(z_1z_2)^{t+2})$. Since $w\in L_n$, $w$ is lexicographically larger than $w'$ and in particular,
+	$(z_1z_2z_2(z_1z_2)^{t+1})\geq_{lex}(z_2(z_1z_2)^{t+2})$ which implies that
+	$z_1z_2z_2\geq_{lex}z_2z_1z_2$, and hence
+	$$z_1z_2\geq_{lex}z_2z_1.$$
+	In addition, $z_2z_1z_2$ is a suffix of $w$ while $z_1z_2z_2$ is a subword of $w$. Hence, as $w\in L_n$ we have, $z_2z_1z_2\geq_{lex} z_1z_2z_2$, and hence
+	$$z_2z_1\geq_{lex}z_1z_2.$$
+	As a result, $z_2z_1=z_1z_2$m and then by Lemma \ref{concatenation}, $z_1=z^{l_1}$ and $z_2=z^{l_2}$ for some non empty word $z$. Therefore, $w=z^m$ for some $z>0$ in contradiction to $w\in L_n$. 
+	
+	
 \end{proof}
 
 \begin{proposition}
-Assume that $v0^l\in\mathbb{N}^n$ corresponds to $w=0^lv\in L_n$ where $|w|=n$ and $l>0$. Then, $v0^l$ is a subword of $w^\infty$. 
+	Assume that $v0^l\in\mathbb{N}^n$ corresponds to $w=0^lv\in L_n$ where $|w|=n$ and $l>0$. Then, $v0^l$ is a subword of $w^\infty$. 
 \end{proposition}
 
 \begin{proof}
-Write $w=0^lz_1\sigma z_2$ where $\sigma\in \N$ is the first digit in $w$ so that  $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Note that such a digit exists since the last digit in $w$ satisfies this requirement. Hence, $v=z_1\sigma z_2$.
-
-By Corollary \ref{z1-suffix}, $z_2=xy$ and $z_1=y(\sigma xy)^r$. Now, since $|0^{l+|z_1|}(\sigma+1)z_2|=n$ and $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations, $0^{l+|z_1|}(\sigma+1)z_2=(w')^{k+1}$ where $w'\in L_n$. Note that $0^{l+|z_1|}$ is a prefix of $w'$. We consider three possibilities
-
-\begin{description}
-
-\item{Case 1.}  $\sigma z_2\in L_n$. We show that in this case, $v0^l$ is a subword of $b^*(b^*(w'))(b^*(w'))w'$, which is a subword of $w^\infty$.
-
-$b_1(w')=w'^{k+1}=0^{l+|z_1|}(\sigma+1)z_2$. Hence, $b(w')=b_3(b_2(0^{l+|z_1|}(\sigma+1)z_1))=\sigma z_2$. Since $\sigma z_2\in L_n$, $b(w')=b^*(w')=\sigma z_2$ and in particular, $|(\sigma z_2)^{m+1}|=n$ for some $m\in \N$. Observe that $|z_1|\leq |\sigma z_2|^m$ and use Lemma \ref{z1} to conclude that $z_1$ is a suffix of $(\sigma z_2)^m$.  
-
-By invoking Proposition \ref{1-back} several times, $b^*(\sigma z_2)= u(\sigma z_2)^m$ for some $u$. Hence, $v0^l=z_1\sigma z_2 0^l$ is a subword of 
-$$b^*(b^*(w'))b^*(w')b(w')=u(\sigma z_2)^{m+1}0^{l+|z_1|}x'.$$
-
-
-\end{description}
-
-Before we deal with the other cases, we note that $b_1(\sigma z_2)=b_1(\sigma xy)=x'y(\sigma xy)^{r+1}$ for some $x'$ that satisfies $|x'|=l>0$.
-
-\begin{description}
-\item{Case 2.} $\sigma z_2\notin L_n$  and $x'\neq 0^l$. We show that in this case, $v0^l$ is a subword of $b^*(w')w'$, which is a subword of $w^\infty$.
-
-Recall that $b(w')=\sigma z_2$ which is, by assumption, not a key-word. Since $x'\neq 0^l$, several invocations of Proposition \ref{1-back} imply that $b^*(\sigma z_2)=x''y(\sigma z_2)^{r+1}$. Since $v=z_1\sigma z_2=y(\sigma z_2)^{r+1}$, we get that $v0^l$ is a subword of 
-$$b^*(w')w'=x''y(\sigma z_2)^{r+1}0^{l+|z_1|}u.$$
-
-
-\item{Case 3.} $\sigma z_2\notin L_n$  and $x'=0^l$. In this case, $b_1(\sigma z_2)$ = $0^ly(\sigma xy)^{r+1}$. Note that $w=0^ly(x''0^ly)^{r+1}$ and use Lemma \ref{not-in-Ln} to obtain a contradiction.
-
-\end{description}
-
- 
+	Write $w=0^lz_1\sigma z_2$ where $\sigma\in \N$ is the first digit in $w$ so that  $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations. Note that such a digit exists since the last digit in $w$ satisfies this requirement. Hence, $v=z_1\sigma z_2$.
+	
+	By Corollary \ref{z1-suffix}, $z_2=xy$ and $z_1=y(\sigma xy)^r$. Now, since $|0^{l+|z_1|}(\sigma+1)z_2|=n$ and $0^{l+|z_1|}(\sigma+1)z_2$ is lexicographically maximal among its rotations, $0^{l+|z_1|}(\sigma+1)z_2=(w')^{k+1}$ where $w'\in L_n$. Note that $0^{l+|z_1|}$ is a prefix of $w'$. We consider three possibilities
+	
+	\begin{description}
+		
+		\item{Case 1.}  $\sigma z_2\in L_n$. We show that in this case, $v0^l$ is a subword of $b^*(b^*(w'))(b^*(w'))w'$, which is a subword of $w^\infty$.
+		
+		$b_1(w')=w'^{k+1}=0^{l+|z_1|}(\sigma+1)z_2$. Hence, $b(w')=b_3(b_2(0^{l+|z_1|}(\sigma+1)z_1))=\sigma z_2$. Since $\sigma z_2\in L_n$, $b(w')=b^*(w')=\sigma z_2$ and in particular, $|(\sigma z_2)^{m+1}|=n$ for some $m\in \N$. Observe that $|z_1|\leq |\sigma z_2|^m$ and use Lemma \ref{z1} to conclude that $z_1$ is a suffix of $(\sigma z_2)^m$.  
+		
+		By invoking Proposition \ref{1-back} several times, $b^*(\sigma z_2)= u(\sigma z_2)^m$ for some $u$. Hence, $v0^l=z_1\sigma z_2 0^l$ is a subword of 
+		$$b^*(b^*(w'))b^*(w')b(w')=u(\sigma z_2)^{m+1}0^{l+|z_1|}x'.$$
+		
+		
+	\end{description}
+	
+	Before we deal with the other cases, we note that $b_1(\sigma z_2)=b_1(\sigma xy)=x'y(\sigma xy)^{r+1}$ for some $x'$ that satisfies $|x'|=l>0$.
+	
+	\begin{description}
+		\item{Case 2.} $\sigma z_2\notin L_n$  and $x'\neq 0^l$. We show that in this case, $v0^l$ is a subword of $b^*(w')w'$, which is a subword of $w^\infty$.
+		
+		Recall that $b(w')=\sigma z_2$ which is, by assumption, not a key-word. Since $x'\neq 0^l$, several invocations of Proposition \ref{1-back} imply that $b^*(\sigma z_2)=x''y(\sigma z_2)^{r+1}$. Since $v=z_1\sigma z_2=y(\sigma z_2)^{r+1}$, we get that $v0^l$ is a subword of 
+		$$b^*(w')w'=x''y(\sigma z_2)^{r+1}0^{l+|z_1|}u.$$
+		
+		
+		\item{Case 3.} $\sigma z_2\notin L_n$  and $x'=0^l$. In this case, $b_1(\sigma z_2)$ = $0^ly(\sigma xy)^{r+1}$. Note that $w=0^ly(x''0^ly)^{r+1}$ and use Lemma \ref{not-in-Ln} to obtain a contradiction.
+		
+	\end{description}
+	
+	
 \end{proof}
 
 \begin{theorem}
-$w^\infty$ is an infinite De-Bruijn sequence.
+	$w^\infty$ is an infinite de Bruijn sequence.
 \end{theorem}
 
 \begin{proof}
-According to Propositions \ref{}, every $n$-sequence is a subword of $w^\infty$. By the ``onion theorem" and by the pigeonhole principle, every $n$-sequence appears only once at $w^\infty$.
+	According to Propositions \ref{}, every $n$-sequence is a subword of $w^\infty$. By the ``onion theorem" and by the pigeonhole principle, every $n$-sequence appears only once at $w^\infty$.
 \end{proof}
+
+
+\section{Constructing an Infinite de Bruijn Cycle}
+
+A key word is a word of length $n$ that is maximal in right-to-left (Arabic) lexicographic order among its cyclic rotations. Let $kw_0,kw_1,kw_2,\dots$ be an enumeration of all key-words, ordered in right-to-left (Arabic) lexicographic order. Let $C_m=\{R^i(kw_m): i=1,\dots,n\}$ be the cycle of $kw_m$. We order the elements of $C_m$ as follows:  if $kw_m=0^l(\sigma+1)w$, then $w0^l(\sigma+1)$ is the first word in $C_m$, and each word $w'$ is followed by $R(w')$. The last word in $C_m$ is $(\sigma+1)w0^l$.\\
+
+For each $m<n$ we define a de Bruijn sequence $D_m$, over the words $\bigcup_{i=0}^m C_i$ as follows: 
+\begin{itemize}
+	\item $D_0=0^n$.
+	\item If $kw_{m+1}=0^l(\sigma+1)w$, then $D_{m+1}$ is obtained by inserting the sequence $C_{m+1}$ after the word $\sigma w 0^l\in C_m$.
+\end{itemize}
+
+%\begin{lemma}
+%Every $D_m$ is a de Bruijn sequence over $\bigcup_{i=0}^m C_i$, and   $\forall m$ $\exists k$ so that if $k\leq r$, then $D_m$ is a prefix of $D_r$. 
+%\end{lemma}
+
+\begin{definition}
+	For $w,w\in \N^n$ and $m\in \N$, write $w<_m w'$ if $w$ appears before $w'$ in $D_m$. Write $<=\bigcup_{i=0}^\infty$.
+\end{definition}
+
+For a word $w$, $max(w)$ is the maximal number in $w$.
+
+\begin{lemma}
+	If $w<w'$, then $max(w)\leq max(w')$.
+\end{lemma}
+
+\begin{corrolary}
+	$<$ defines an infinite de Bruijn sequence.
+\end{corrolary}
+
+\begin{proof}
+	By the previous Lemma, each word is preceded by finitely many words thus $<$ defines an infinite sequence. Since each $D_m$ is a de Bruijn sequence and since $<_m\subseteq<_{m+1}$, the sequence defined by $<$ is a de Bruijn sequence. 
+\end{proof}
+
+Let $D$ be the infinite de Bruijn sequence defined by $<$. 
+
+\begin{theorem}
+	For a  word $\sigma w$ in $D$, let $nxt(\sigma w)$ be the successor of $\sigma w$ in $D$. Then,
+	$$nxt(\sigma w)=\left\{ \begin{array}{lr}
+	w(\sigma+1), & last((\sigma+1)w)\\
+	w0, & last(\sigma w)\\
+	w\sigma, & otherwise
+	\end{array}\right.$$
+\end{theorem}
+
+\begin{definition}
+	If $kw_m=0^l(\sigma+1)w$, we write $first(w0^l(\sigma+1))$, $key(0^l(\sigma+1)w)$ and $last((\sigma+1)w0^l)$. In addition, for a cycle $C_m$, $first(C_m)=w\in C_m$ so that $first(w)$,  $key(C_m)=kw_m$ and $last(C_m)=w\in C_m$ so that $last(w)$. 
+\end{definition}
+
+\begin{lemma}
+	For any $w'\in C_m$, $first(C_m)\leq w'\leq last(C_m)$.
+\end{lemma}
+\begin{proof}
+	This the way we ordered the cycles.
+\end{proof}
+
+
+
+\begin{definition}
+	We say that $C_{i_0}C_{i_1}\dots C_{i_k}$ is a sequence of cycles, if for every $j<k$, $nxt(last(C_{i_j}))=first(C_{i_{j+1}})$.
+\end{definition}
+
+\begin{lemma}
+	\label{sequence}
+	Let $C_{i_0}C_{i_1}\dots C_{i_k}$ be a sequence of cycles. Write, $key(C_{i_0})=0^l(\sigma)w$ where $\sigma\neq 0$. Then, for every $j\leq k$, $key(C_{i_j})=0^l(\sigma+j)w$.
+\end{lemma}
+
+\begin{proof}
+	Assume by induction that $key(C_{i_j})=0^l(\sigma+j)w$ for $j<k$. Hence, $last(C_{i_j})=(\sigma+j)w0^l$. Thus, $nxt((\sigma+j)w0^l)=w0^l(\sigma+j+1)$ or $nxt((\sigma+j)w0^l)=w0^{l+1}$. Since $\neg(first(w0^{l+1}))$, we have 
+	$$nxt((\sigma+j)w0^l)=w0^l(\sigma+j+1)=first(C_{i_{j+1}}).$$
+	We conclude that $key(C_{i_{j+1}})=0^l(\sigma+j+1)w$.
+\end{proof}
+
+\begin{lemma}[The parentheses property]
+	\label{parenthesis}
+	For any two cycles $C_k$ and $C_m$, one of the following occur
+	\begin{itemize}
+		\item $last(C_k)<first(C_m)$ or $last(C_m)<first(C_k)$.
+		
+		\item $first(C_k)<first(C_m)\leq last(C_m)<last(C_k)$ or \\
+		$first(C_m)<first(C_k)\leq last(C_k)<last(C_m)$.
+	\end{itemize}
+\end{lemma}
+\begin{proof}
+	This concluded by the way $D_{m+1}$ is obtained from $D_m$.
+\end{proof}
+
+\begin{definition}
+	We say that $C_m$ is embedded in $C_k$ if $first(C_k)<first(C_m)\leq last(C_m)<last(C_k)$.\\ 
+	In addition, $C_m$ is said to be immediately embedded in $C_k$ if there is no $C_l$ such that $C_m$ is embedded in $C_l$ and $C_l$ is embedded in $C_k$.\\ 
+	We define by inductively the statement: ``$C_m$ is $r$-embedded in $C_k$":
+	\begin{itemize}
+		\item $C_m$ is $1$-embedded in $C_k$ if it is immediately embedded in $C_k$.
+		\item $C_m$ is $r$-embedded in $C_k$ if there is a cycle $C_l$ such that $C_m$ is $r-1$-embedded in $C_l$ and $C_l$ is immediately embedded in $C_k$. 
+	\end{itemize} 
+\end{definition}
+
+\begin{lemma}
+	\label{embedding-properties}
+	Assume that $C_m$ is immediately embedded $C_k$. Write $key(C_m)=0^i(\sigma+1)0^jw$ where $w$ does not starts with $0$. Then,
+	\begin{itemize}
+		\item $key(C_k) =0^{i+1+j}w$.
+		\item If $u\in C_k$ and $last(C_m)<u$, then $u=0^{j_2}w0^{i+1+j_1}$ where $j_1+j_2=j$. 
+	\end{itemize}
+\end{lemma}
+
+
+\begin{proof}
+	To prove the first item, note that since $0^i(\sigma+1)0^jw$ is maximal among its rotations, the same holds for $0^{i+1+j}w$. Thus, we need to show that $0^{i+1+j}w\in C_k$. 
+	
+	Take a maximal sequence of cycles that begins in $C_m$ and let $C_{m+r}$ be the last cycle in this sequence. By lemma \ref{sequence}, $key(C_{m+r})=0^i(\sigma+1+r)0^jw$. By the parentheses property, $C_{m+r}$ is immediately embedded in $C_k$. And finally, by the maximality of the sequence of cycles, $nxt(last(C_{m+r}))\in C_k$.
+	
+	As a result, we have:
+	$$nxt(last(C_{m+r}))=nxt((\sigma+1+r)0^jw0^i)\in\{\ 0^jw0^i0, 0^jw0^i(\sigma+2+r)\}.$$ If $nxt((\sigma+1+r)0^jw0^i)= 0^jw0^i(\sigma+2+r)$, then $last((\sigma+2+r)0^jw0^i)$ which implies $first(0^jw0^i(\sigma+2+r))$. But $first(last(C_{m+r}))$ contradicts the maximality of our sequence of cycles. Hence, $nxt((\sigma+1+r)0^jw0^i)= 0^jw0^i0\in C_k$. Now, $0^{i+1+j}w$ is a rotation of $0^jw0^i0$ thus $0^{i+1+j}w\in C_k$ as required.
+	
+	For proving the second item, we note that $last(C_k)=w0^{i+1+j}$. As we have seen, the first element in $C_k$ that follows $C_m$ (and follows $C_{m+r}$) is $nxt(last(C_{m+r}))= 0^jw0^i0$. As a result, if $u\in C_k$ and $last(C_m)<u$, then 
+	$$0^jw0^i0\leq u \leq w0^{i+1+j}$$
+	which implies that $u=0^{j_2}w0^{i+1+j_1}$
+\end{proof}
+
+\begin{corrolary}
+	\label{embedding-deletes-zeroes}
+	Assume that $C_m$ is $r$-embedded in $C_k$. Write $key(C_m)=uv$ where $u$ is the minimal prefix of $key(C_m)$ that includes $r$ non-zero numbers. Then, $key(C_k)=0^{|u|}v$.
+\end{corrolary}
+
+\begin{proof}
+	By $r$ invocations of the first item of the previous lemma.
+\end{proof}
+
+\begin{lemma}
+	\label{first-ordering}
+	For every $m\in\N$, $first(C_m)<first (C_{m+1})$.
+\end{lemma}
+
+\begin{proof}
+	TBD
+\end{proof}
+
+\begin{theorem}
+	For any word $\tau w$, $\tau w<(\tau+1)w$.
+\end{theorem}
+
+\begin{proof}
+	Fix an arbitrary cycle $C_m$. We show that if $(\tau+1)w\in C_m$. Then, $\tau w<(\tau+1)w$. We start by showing this fact for $last(C_m)$. Write $key(C_m)=0^l(\sigma+1)w'$ and hence, $last(C_m)=(\sigma+1)w'0^l$ and $first(C_m)=w'0^l(\sigma+1)$. Write $pre=nxt^{-1}$ and note that $pre(w'0^l(\sigma+1))=\sigma w'0^l$. Hence, we get that 
+	$$\sigma w' 0^l<(\sigma+1)w'0^l.$$
+	
+	Now we deal with the general case in which $(\tau+1)w\neq last(C_m)$. We write 
+	$key(C_m)=0^l(\sigma+1)w_1(\tau+1)w_2$, where $$(\tau+1)w=(\tau+1)w_20^l(\sigma+1)w_1.$$ Let $C_k$ be the cycle of $\tau w$. Since every rotation of $\tau w$ is lexicographically smaller than some rotation of $(\tau+1)w$, we have $key(C_k)<_{lex}key(C_m)$. Hence, $k<m$ and by Lemma \ref{first-ordering}, we get 
+	$$first(C_k)<first(C_m).$$
+	
+	Now, if $last(C_k)<first(C_m)$ then every element of $C_k$ precedes every element of $C_m$ and we are done. Otherwise, by the parentheses property, $C_m$ is embedded in $C_k$. Note that $|(\tau+1)w|_0-|\tau w|_0\in\{0,1\}$. Use corollary \ref{embedding-deletes-zeroes} to conclude that $|(\tau+1)w|_0-|\tau w|_0=1$ and that $C_m$ is immediately embedded in $C_k$. Moreover, note that as $|(\tau+1)w|_0-|\tau w|_0=1$, we have $\tau=0$.
+	
+	According to our conclusions, we can write: $key(C_m)=0^l(\sigma+1)w_11w_2$. We write $w_1=0^jw_1'0^i$ and $w_2=0^rw_2'$ where $w_1'$ and $w_2'$ do not start or end with zero. We have,
+	$$key(C_m)=0^l(\sigma+1)0^jw_1'0^i10^rw_2'.$$
+	Assume for a contradiction that $(\tau+1)w<\tau w$. Recall that $\tau w\in C_k$ and that $C_m$ is immediately embedded in $C_k$, and conclude that $last(C_m)<\tau w\leq last(C_k)$. Therefore, by Lemma \ref{embedding-properties}, $\tau w=0^{j_2}w_1'0^i10^rw_2'0^{l+1+j_1}.$ Thus, we have:
+	\begin{equation}
+	\label{1}
+	0^{j_2}w_1'0^i10^rw_2'0^{l+1+j_1}=0^{r+1}w_2'0^l(\sigma+1)0^jw_1'0^i.
+	\end{equation}
+	Since also $|0^{j_2}w_1'0^i10^rw_2'0^{l+1+j_1+1}|_1 = |0^{r+1}w_2'0^l(\sigma+1)0^jw_1'0^i|_1$ we get $\sigma+1=1$. Hence,
+	
+	\begin{equation}
+	\label{2}
+	key(C_m)=0^l10^jw_1'0^i10^rw_2'
+	\end{equation}
+	
+	and Equation \ref{1} can be rewritten as follows:
+	
+	\begin{equation}
+	\label{3}
+	0^{j_2}w_1'0^i10^rw_2'0^{l+1+j_1}=0^{r+1}w_2'0^l10^jw_1'0^i.
+	\end{equation}
+	
+	For the rest of the proof we assume that $w_1'\neq\varepsilon$ and $w_2'\neq \varepsilon$. The other cases are dealt similarly\footnote{really! I checked !}.
+	By deleting the initial and final segments of zeroes, we get from Equation \ref{3},
+	\begin{equation}
+	\label{4}
+	j_2=r+1, \ \ w_1'0^i10^rw_2'=w_2'0^l10^jw_1'.
+	\end{equation}
+	Now, by Equation \ref{2}, 
+	\begin{equation}
+	\label{5}
+	0^l10^jw_1'0^i10^rw_2'\geq_{lex} 0^i10^rw_2'0^l10^{j}w_1'.
+	\end{equation}
+	By combining equations \ref{4} and \ref{5}, we get 
+	\begin{equation}
+	0^l10^j\geq_{lex}0^i10^r.
+	\end{equation}
+	Hence, $j\leq r$ and in particular, $j_2\leq r$ in contradiction to Equation \ref{4}.
+\end{proof}
+
+
+		
 
 
 

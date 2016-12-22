@@ -456,12 +456,12 @@ represents the mapping of a word $w$ to the letter that follows the (one and onl
 
 \section{Constructing an Infinite de Bruijn Cycle}
 
-A key word is a word of length $n$ that is maximal in right-to-left (Arabic) lexicographic order among its cyclic rotations. Let $kw_0,kw_1,kw_2,\dots$ be an enumeration of all key-words, ordered in right-to-left (Arabic) lexicographic order. Let $C_m=\{R^i(kw_m): i=1,\dots,n\}$ be the cycle of $kw_m$. We order the elements of $C_m$ as follows:  if $kw_m=0^l(\sigma+1)w$, then $w0^l(\sigma+1)$ is the first word in $C_m$, and each word $w'$ is followed by $R(w')$. The last word in $C_m$ is $(\sigma+1)w0^l$.\\
+A key word is a word of length $n$ that is maximal in right-to-left (Arabic) lexicographic order among its cyclic rotations. Let $kw_0,kw_1,kw_2,\dots$ be an enumeration of all key-words, ordered in right-to-left (Arabic) lexicographic order. Let $C_m=\{R^i(kw_m): i=1,\dots,n\}$ be the necklace of $kw_m$. We order the elements of $C_m$ as follows:  if $kw_m=0^l(\sigma+1)w$, then $w0^l(\sigma+1)$ is the first word in $C_m$, and each word $w'$ is followed by $R(w')$. The last word in $C_m$ is $(\sigma+1)w0^l$.\\
 
-For each $m<n$ we define a de Bruijn sequence $D_m$, over the words $\bigcup_{i=0}^m C_i$ as follows: 
+For each $m \in \N$ we define a de Bruijn sequence $D_m$, over the words $\bigcup_{i=0}^m C_i$ recursively by:
 \begin{itemize}
 	\item $D_0=0^n$.
-	\item If $kw_{m+1}=0^l(\sigma+1)w$, then $D_{m+1}$ is obtained by inserting the sequence $C_{m+1}$ after the word $\sigma w 0^l\in C_m$.
+	\item If $kw_{m+1}=0^l(\sigma+1)w$, then $D_{m+1}$ is obtained by injecting the sequence $C_{m+1}$ between the word $\sigma w 0^l$ and its follower in $C_m$.
 \end{itemize}
 
 %\begin{lemma}
@@ -469,7 +469,7 @@ For each $m<n$ we define a de Bruijn sequence $D_m$, over the words $\bigcup_{i=
 %\end{lemma}
 
 \begin{definition}
-	For $w,w\in \N^n$ and $m\in \N$, write $w<_m w'$ if $w$ appears before $w'$ in $D_m$. Write $<=\bigcup_{i=0}^\infty$.
+	For $w,w\in \N^n$ and $m\in \N$, write $w<_m w'$ if $w$ appears before $w'$ in $D_m$. Let $<$ be the union $\bigcup_{i=0}^\infty <_i$.
 \end{definition}
 
 For a word $w$, $max(w)$ is the maximal number in $w$.

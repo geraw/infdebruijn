@@ -456,12 +456,12 @@ represents the mapping of a word $w$ to the letter that follows the (one and onl
 
 \section{Constructing an Infinite de Bruijn Cycle}
 
-A key word is a word of length $n$ that is maximal in right-to-left (Arabic) lexicographic order among its cyclic rotations. Let $kw_0,kw_1,kw_2,\dots$ be an enumeration of all key-words, ordered in right-to-left (Arabic) lexicographic order. Let $C_m=\{R^i(kw_m): i=1,\dots,n\}$ be the necklace of $kw_m$. We order the elements of $C_m$ as follows:  if $kw_m=0^l(\sigma+1)w$, then $w0^l(\sigma+1)$ is the first word in $C_m$, and each word $w'$ is followed by $R(w')$. The last word in $C_m$ is $(\sigma+1)w0^l$.\\
+A key word is an $n$-length word that is (arabic) maximal among its rotations. Let $kw_0,kw_1,kw_2,\dots$ be an enumeration of all key-words, ordered lexicographically. Let $C_m$ be the cycle of $kw_m$. We order the elements of $C_m$ as follows:  if $kw_m=0^l(\sigma+1)w$, then $w0^l(\sigma+1)$ is the first sequence in $C_m$, and each word $w'$ is followed by $R(w')$. The last word in $C_m$ is $(\sigma+1)w0^l$.\\
 
-For each $m \in \N$ we define a de Bruijn sequence $D_m$, over the words $\bigcup_{i=0}^m C_i$ recursively by:
+For each $m<n$ we define a de Bruijn sequence $D_m$, over the words $\bigcup_{i=0}^m C_i$ as follows: 
 \begin{itemize}
 	\item $D_0=0^n$.
-	\item If $kw_{m+1}=0^l(\sigma+1)w$, then $D_{m+1}$ is obtained by injecting the sequence $C_{m+1}$ between the word $\sigma w 0^l$ and its follower in $C_m$.
+	\item If $kw_{m+1}=0^l(\sigma+1)w$, then $D_{m+1}$ is obtained by inserting the sequence $C_{m+1}$ after the word $\sigma w 0^l\in C_m$.
 \end{itemize}
 
 %\begin{lemma}
@@ -469,7 +469,7 @@ For each $m \in \N$ we define a de Bruijn sequence $D_m$, over the words $\bigcu
 %\end{lemma}
 
 \begin{definition}
-	For $w,w\in \N^n$ and $m\in \N$, write $w<_m w'$ if $w$ appears before $w'$ in $D_m$. Let $<$ be the union $\bigcup_{i=0}^\infty <_i$.
+	For $w,w\in \N^n$ and $m\in \N$, write $w<_m w'$ if $w$ appears before $w'$ in $D_m$. Write $<=\bigcup_{i=0}^\infty$.
 \end{definition}
 
 For a word $w$, $max(w)$ is the maximal number in $w$.
@@ -490,10 +490,10 @@ Let $D$ be the infinite de Bruijn sequence defined by $<$.
 
 \begin{theorem}
 	For a  word $\sigma w$ in $D$, let $nxt(\sigma w)$ be the successor of $\sigma w$ in $D$. Then,
-	$$nxt(\sigma w)=\left\{ \begin{array}{lr}
-	w(\sigma+1), & last((\sigma+1)w)\\
-	w0, & last(\sigma w)\\
-	w\sigma, & otherwise
+	$$nxt(\sigma w)=\left\{ \begin{array}{ll}
+	w(\sigma+1) & \text{if }last((\sigma+1)w);\\
+	w0          & \text{if } last(\sigma w);\\
+	w\sigma     & \text{otherwise}
 	\end{array}\right.$$
 \end{theorem}
 
@@ -540,11 +540,11 @@ Let $D$ be the infinite de Bruijn sequence defined by $<$.
 \end{proof}
 
 \begin{definition}
-	We say that $C_m$ is embedded in $C_k$ if $first(C_k)<first(C_m)\leq last(C_m)<last(C_k)$.\\ 
+	We say that $C_m$ is embedded in $C_k$, if $C_m=C_k$ or $first(C_k)<first(C_m)\leq last(C_m)<last(C_k)$.\\ 
 	In addition, $C_m$ is said to be immediately embedded in $C_k$ if there is no $C_l$ such that $C_m$ is embedded in $C_l$ and $C_l$ is embedded in $C_k$.\\ 
 	We define by inductively the statement: ``$C_m$ is $r$-embedded in $C_k$":
 	\begin{itemize}
-		\item $C_m$ is $1$-embedded in $C_k$ if it is immediately embedded in $C_k$.
+		\item $C_m$ is $0$-embedded in $C_k$ if $C_m=C_k$.
 		\item $C_m$ is $r$-embedded in $C_k$ if there is a cycle $C_l$ such that $C_m$ is $r-1$-embedded in $C_l$ and $C_l$ is immediately embedded in $C_k$. 
 	\end{itemize} 
 \end{definition}
@@ -565,7 +565,7 @@ Let $D$ be the infinite de Bruijn sequence defined by $<$.
 	Take a maximal sequence of cycles that begins in $C_m$ and let $C_{m+r}$ be the last cycle in this sequence. By lemma \ref{sequence}, $key(C_{m+r})=0^i(\sigma+1+r)0^jw$. By the parentheses property, $C_{m+r}$ is immediately embedded in $C_k$. And finally, by the maximality of the sequence of cycles, $nxt(last(C_{m+r}))\in C_k$.
 	
 	As a result, we have:
-	$$nxt(last(C_{m+r}))=nxt((\sigma+1+r)0^jw0^i)\in\{\ 0^jw0^i0, 0^jw0^i(\sigma+2+r)\}.$$ If $nxt((\sigma+1+r)0^jw0^i)= 0^jw0^i(\sigma+2+r)$, then $last((\sigma+2+r)0^jw0^i)$ which implies $first(0^jw0^i(\sigma+2+r))$. But $first(last(C_{m+r}))$ contradicts the maximality of our sequence of cycles. Hence, $nxt((\sigma+1+r)0^jw0^i)= 0^jw0^i0\in C_k$. Now, $0^{i+1+j}w$ is a rotation of $0^jw0^i0$ thus $0^{i+1+j}w\in C_k$ as required.
+	$$nxt(last(C_{m+r}))=nxt((\sigma+1+r)0^jw0^i)\in\{\ 0^jw0^i0, 0^jw0^i(\sigma+2+r)\}.$$ If $nxt((\sigma+1+r)0^jw0^i)= 0^jw0^i(\sigma+2+r)$, then $last((\sigma+2+r)0^jw0^i)$ which implies $first(0^jw0^i(\sigma+2+r))$. But $first(nxt(last(C_{m+r})))$ contradicts the maximality of our sequence of cycles. Hence, $nxt((\sigma+1+r)0^jw0^i)= 0^jw0^i0\in C_k$. Now, $0^{i+1+j}w$ is a rotation of $0^jw0^i0$ thus $0^{i+1+j}w\in C_k$ as required.
 	
 	For proving the second item, we note that $last(C_k)=w0^{i+1+j}$. As we have seen, the first element in $C_k$ that follows $C_m$ (and follows $C_{m+r}$) is $nxt(last(C_{m+r}))= 0^jw0^i0$. As a result, if $u\in C_k$ and $last(C_m)<u$, then 
 	$$0^jw0^i0\leq u \leq w0^{i+1+j}$$
@@ -581,14 +581,78 @@ Let $D$ be the infinite de Bruijn sequence defined by $<$.
 	By $r$ invocations of the first item of the previous lemma.
 \end{proof}
 
+
+
+\begin{lemma}
+	\label{both-embedded}
+	Assume that $last(C_k)<first(C_m)$ and $C_k,C_m$ are both immediately embedded in a cycle $C$. Write $key(C_k)=0^lw$ where $w$ starts with a non-zero letter. Then, $key(C_m)=0^lw'$ where $w<_{lex}w'$.
+\end{lemma}
+\begin{proof}
+	First, if there is a sequence of cycles from $C_k$ and $C_m$, the claim follows from Lemma \ref{sequence}. Otherwise, there is some $u\in C$ such that
+	$$last(C_k)<u<first(C_m).$$
+	Consider a  maximal sequence of cycles that starts with $C_k$. This sequence ends in some cycle $C_{k'}$. Similarly, consider a maximal sequence of cycles that ends in $C_m$ and let $C_{m'}$ be the first element in this sequence. Therefore,
+	$$last(C_{k'}) <v<first(C_{m'})\Longrightarrow v\in C.$$
+	
+	Write $key(C_k)=0^l(\sigma+1)w_1$ (namely, $w=(\sigma+1)w_1$) and write  $w_1=0^jw_2$ where $w_2$ starts with non-zero letter. Hence, 
+	\begin{equation}
+	\label{ck}
+	key(C_k)=0^l(\sigma+1)0^jw_2.
+	\end{equation}
+	By Lemma \ref{sequence}, $key(C_{k'})=0^l(\sigma+1+r)0^jw_2$, and hence $last(C_{k'})=(\sigma+1+r)0^jw_20^l$. Let $u_1$ be the successor of $last(C_{k'})$. Thus,
+	$$u_1=0^jw_20^{l+1}.$$
+	Now, let $u_2$ be the predecessor of $first(C_{m'})$. Thus,
+	$$u_2=0^{j_2}w_20^{l+1+j_1}, \text{ where } j_1+j_2=j.$$
+	In addition, since $C_{m'}$ is embedded in $C$, $u_2\neq last(C)$ thus $j_2>0$. As a result, $$first(C_{m'})=0^{j_2-1}w_20^{l+1+j_1}1.$$
+	We get that $key(C_{m'})=0^{l+1+j_1}10^{j_2-1}w_2$. Hence, by Lemma \ref{sequence}, 
+	\begin{equation}
+	\label{cm}
+	key(C_m)=0^{l+1+j_1}(1+t)0^{j_2-1}w_2.
+	\end{equation}
+	By Equation \ref{ck}, $w=(\sigma+1)0^{j}w_2$. By Equation \ref{cm}, $w'=0^{1+j_1}(1+t)0^{j_2-1}w_2$. We see that indeed $w<_{lex}w'$.
+\end{proof}
+
 \begin{lemma}
 	\label{first-ordering}
-	For every $m\in\N$, $first(C_m)<first (C_{m+1})$.
+	If $k<m$, then $first(C_k)<first (C_m)$.
 \end{lemma}
 
 \begin{proof}
-	TBD
+	Since $<$ is a linear ordering, we can prove an equivalent statement: $$first(C_k)<first(C_m) \Longrightarrow k<m.$$ We take such cycles $C_k$ and $C_m$. By the parentheses property, either $C_m$ is embedded in $C_k$, or $C_m$ is entirely after $C_k$. If $C_m$ is embedded in $C_k$, by Corollary \ref{embedding-deletes-zeroes} we get that $k<m$. It is left to deal with the case that $last(C_k)<first(C_m)$. We consider two cases.
+	\begin{description}
+		\item[Case 1.] $C_k$ and $C_m$ are both embedded in some cycle $C$.
+		
+		In this case, we can find cycles $C_{k'}$ and $C_{m'}$ such that
+		\begin{enumerate}
+			\item $C_k$ is embedded in $C_{k'}$ and $C_{m}$ is embedded in $C_{m'}$
+			
+			\item $C_{k'}$ and $C_{m'}$ are immediately embedded in $C$.
+			
+		\end{enumerate}
+		
+		By item 1 and Lemma~\ref{embedding-deletes-zeroes}, we can write $key(C_k)=uv$ and $key(C_{k'})=0^{|u|}v$. Write 
+		$$v=0^lv_1$$ 
+		where $v_1$ starts with a non-zero letter thus $key(C_{k'})=0^{|u|+l}v_1$. By item~2 and Lemma~\ref{both-embedded}, $key(C_{m'})=0^{|u|+l}v_2$ where 
+		$$v_1<_{lex}v_2.$$
+		
+		Write $v_2=0^r v_2'$ where $v_2'$ starts with a non zero letter. Hence, $$v_1=xv_1'$$ 
+		where $|x|=r$, $|v_1'|=|v_2'|$, and 
+		$$v_1'<_{lex} v_2'.$$
+		Since $key(C_{m'})=0^{|u|+l}v_2 =0^{|u|+l+r}v_2'$, by item~2 and Lemma \ref{embedding-deletes-zeroes}, $key(C_m)=u'v_2'$. Recall that $key(C_k)=uv=u0^lv_1=u0^lxv_1'$. Since $v_1'<_{lex}v_2'$, $key(C_k)<_{lex}key(C_m)$ thus $k<m$ as required.
+		
+		\item[case 2.] There is no cycle $C$ such that $C_k$ and $C_m$ are embedded in $C$.
+		
+		Take a cycle $C_{k'}$ such that $C_k$ is $r_1$-embedded in $C_{k'}$ and $r_1$ is maximal with respect to this property. Similarly, take a cycle $C_{m'}$ such that $C_{m}$ is $r_2$-embedded in $C_{m'}$ and $r_2$ is maximal as possible. By the parentheses property, $C_{k'}$ is entirely before $C_{m'}$. $C_{k'}$ and $C_{m'}$ are not embedded in any cycle so there is a sequence of cycles from $C_{k'}$ to $C_{m'}$. Write $key(C_k)=u(\sigma+1)v$ such that $key(C_{k'})=0^{|u|}(\sigma+1)v$ (by Lemma \ref{embedding-deletes-zeroes}). Hence, $key(C_{m'})=0^{|u|}(\sigma+1+r)v$ where $r>1$ (by Lemma \ref{sequence}). Finally, by Lemma \ref{embedding-deletes-zeroes} we get $key(C_m)=u'(\sigma+1+r)v$. We see that $key(C_k)=u(\sigma+1)v<_{lex}u'(\sigma+1+r)v=key(C_m)$. Therefore, $k<m$.
+		
+		
+	\end{description}
 \end{proof}
+
+
+
+
+
+
+
 
 \begin{theorem}
 	For any word $\tau w$, $\tau w<(\tau+1)w$.
@@ -642,10 +706,6 @@ Let $D$ be the infinite de Bruijn sequence defined by $<$.
 	\end{equation}
 	Hence, $j\leq r$ and in particular, $j_2\leq r$ in contradiction to Equation \ref{4}.
 \end{proof}
-
-
-		
-
 
 
 \end{document}

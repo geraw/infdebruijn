@@ -106,7 +106,7 @@ Note that this sequence begins with a prefix (the first $19$ symbols) that conta
 
 This observation lead us to look at the reverse of the prefer-max sequence. Specifically, the structure identified in Theorem~\ref{thm:onion} means that if we somehow manage to construct the sequence backwards, we do not have to specify $k$ ahead of time because we can go on indefenitiley while $k$ grows in layers: we first write $0^n$, then a word whose substrings of length $n$ are $\{0,1\}^n$, then extend to $\{0,1,2\}^n$, and so on.
 
-The second contribution of this work is then an efficient construction of this reversed sequence. This is formulated in Algorithm~\ref{inf-construction}. Note that each step of this construction can be computed in $O(n^2)$ operations by enumerating all the $n$ rotations of $\sigma w$ and by comparing them lexicographically (reading each word from right to left).
+The second contribution of this work is then an efficient construction of this reversed sequence. This is formulated in Algorithm~\ref{inf-construction}. We say that this construction is efficient because each step can be computed in $O(n^2)$ operations by enumerating all the $n$ rotations of $\sigma w$ and by comparing them lexicographically (reading each word from right to left).
 
 
 \begin{algorithm}[!h]

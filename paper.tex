@@ -69,6 +69,13 @@
 \usepackage{algpseudocode,algorithm}
 \usepackage{subfigure}
 
+\newcommand{\nega}   [1]{\overline{#1}}
+\newcommand{\companion}{comp}
+\newcommand{\shlsame}[1]{shl\text{-}same(#1)}
+\newcommand{\shlopp} [1]{shl\text{-}opp(#1)}
+\newcommand{\shlone} [1]{shl\text{-}one(#1)}
+\newcommand{\shlzero}[1]{shl\text{-}zero(#1)}
+\newcommand{\idx}    [1]{idx(#1)}
 
 
 %\pagestyle{plain}
@@ -140,7 +147,23 @@ The fact that this is indeed the prefer-max sequence is stated in the following 
 \end{theorem}
 	
 
-The main tool that brought us to the above results is a formulation of an alternative description of the infinite sequence. For this, we need to introduce some language.
+The main tool that brought us to the above results is a formulation of an alternative description of the infinite sequence. For this, we need to introduce some language, as follows.
+
+The $n$ dimensional infinite de Bruijn graph is the graph $G_{n}=\T{V,E}$ where $V=\N^n$ and $E=\{ \T{\sigma_1 w, w \sigma_2} \colon \sigma_1,\sigma_2\in\N, w \in \N^{n-1}\}$. The de Bruijn sequences we discussed before are in one-to-one correspondence with the Hamiltonian cycles in the de Bruijn graph, as follows: (1) Concatenating the leftmost bit of the vertices in a cycle produces a de Bruijn sequence of order $n$; and (2) A cycle can be constructed from a de Bruijn sequence $\T{\sigma_1,\dots,\sigma_{2^n}}$ of order $n$ by visiting the vertex $\sigma_1\cdots\sigma_n$, then $\sigma_2\cdots\sigma_{n+1}$ and so on.
+
+A Necklace in the de Bruijn graph $G_n$ is the cycle:
+
+
+\begin{algorithm}[!h]
+	Start with the cycle $\T{0^n}$. The $i$th cycle is constructed by extending the $(i-1)$th cycle as follows: Let $w_i$ be the $i$th smallest key word in right-to-left lexicographic order. Let $l$ be the number of leading zeros in $w_i$, i.e., assume that $w_i=0^l\sigma_1 \cdots\sigma_{n-l}$ where $\sigma_1$ is not zero. Add the sequence $\sigma_2\cdots\sigma_{l-n}0^l\sigma_1, \sigma_3\cdots\sigma_{l-n}0^l\sigma_1\sigma_2,\dots, \sigma_1\cdots\sigma_{l-n}0^l$ between the word $(\sigma_1-1)\cdots\sigma_{l-n}0^l$ and its follower in the $(i-1)$th cycle.
+
+	\caption{A cycle joining construction.}
+	\label{cycle-joining}
+\end{algorithm}
+
+
+
+
 
 
 	

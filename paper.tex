@@ -93,7 +93,7 @@
 \section{Introduction}
 
 A $k$-ary de Bruijn sequence of span $n$ is a cyclic sequence of length $k^n$ in which each $k$-ary string of length $n$ appears exactly once as
-a substring. A well known construction of such a sequence was proposed by Ford ~\cite{Ford57} as follows:
+a substring. A well known construction of such a sequence was first proposed by Ford~\cite{Ford1957} as follows:
 
 \begin{algorithm}
 Repeatedly append the symbol $k-1$ if the word formed by the $n$ most recent symbols (padded with zeros on the left, if not enough symbols exist) is new, otherwise append $k-2$, otherwise $k-3$, etc. Stop after appending $n$ consecutive zeros. 
@@ -174,7 +174,7 @@ Let $S=\T{w_i}_{i=0}^\infty$ be the infinite sequence all whose prefixes agree w
 	If we take the first letter of each word in $S$ we get the sequence described in Algorithm~\ref{inf-construction}.
 \end{theorem}
 
-This result allows for another construction of the reversed prefer-max sequence, as follows. By the definition of the necklace joining construction, shown in Algorithm~\ref{necklace-joining}, one can infer that key words appear in lexicographic order and that the distance between one key words to the next is the size of the necklace of the latter. For a word $w\in\N^n$, let the \emph{primitive root} of $w$ be the  unique primitive (non-periodic) word $\rho(w)$ such that $w = \rho(w)^l$ for some $l \geq 1$. Since the length of the primitive root of a ket word is the length of its cycle, we get the following construction:
+This result allows for another construction of the reversed prefer-max sequence, as follows. By the definition of the necklace joining construction, shown in Algorithm~\ref{necklace-joining}, one can infer that key words appear in lexicographic order and that the distance between one key words to the next is the size of the necklace of the latter. For a word $w\in\N^n$, the \emph{primitive root} of $w$ is the  unique primitive (non-periodic) word $\rho(w)$ such that $w = \rho(w)^l$ for some $l \geq 1$. Since the length of the primitive root of a ket word is the length of its cycle, we get the following construction:
 
 
 \begin{algorithm}[!h]
@@ -190,7 +190,7 @@ As the reader may expect, our result is this sequence is also the reverse of the
 \end{theorem}
 
 The last result is similar in nature to the theorem of Fredricksen and Maiorana in~\cite{Fredricksen1978} (see also~\cite{Moreno2004} and~\cite{Moreno2015}).	
-These paper contain proofs that the concatenation of Lyndon words (words that are minimal in lexicographic among their rotations) of length dividing $n$ in lexicographic order produces a de Bruijn sequence of span $n$, and they state that this word is lexicographically minimal among all de Bruijn sequences of span $n$. 
+These papers show that the concatenation in lexicographic order of the Lyndon words (words that are minimal in lexicographic among their rotations) of length dividing $n$ produces a de Bruijn sequence of span $n$, and that this word is lexicographically minimal among all de Bruijn sequences of span $n$. In another paper~\cite{Fredricksen1970}, Fredricksen proves that (in the binary case) the prefer-max (there called Ford) sequence is the lexicographically least sequence. With appropriate mapping (changing the order of the letters and the direction of reading words when considering lexicographic order) our last result can be regarded as an alternative proof of the result identified by Fredricksen and Maiorana.
 
 
 \bibliography{library}{}

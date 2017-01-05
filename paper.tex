@@ -111,6 +111,7 @@ Note that the $(n,k)$-prefer-max sequence begins with a prefix (the first $19$ s
 
 \begin{theorem}[Onion]
 	The last $(k-1)^n+1$ symbols of the $(k,n)$-prefer-max sequence form the $(k-1,n)$-prefer-max sequence.
+\label{thm:onion}
 \end{theorem}
 \begin{proof}
 	Denote the symbols of the $(n-k$)-prefer-max sequence by $s_1,s_2,\dots,s_{k^n+1}$ and let, for notational convenience, $s_i=0$ for all $i<1$. Let ${i_0} = \min\bigl\{i\colon (k-1) \notin \{s_{i-n+1},\dots,s_{i}\}\bigr\}$. 
@@ -122,45 +123,19 @@ Note that the $(n,k)$-prefer-max sequence begins with a prefix (the first $19$ s
 	$$\underbrace{s_1,\dots,s_{i_0-n-1},k-1,{0,\dots,0}}_{\parbox{10 em}{\scriptsize \centering{all substrings of length $n$ contain $k-1$}}},\underbrace{k-2}_{s_{i_0}},s_{i_0+1},\dots,s_{k^n+1}$$
 	To complete the proof, we need to show that all substrings of length $n$ that contain $k-1$ appear before $s_{i_0}$.
 	
-	For $w \in \{0,\dots,k-1\}^n$ and $1 \leq m \leq n$, let $j_m$ be such that $s_{j_m-n+1}\cdots s_{j_m} = w[m..n]0^{m-1}$, where $w[m..n]$ is the $n-m$ letters suffix of $w$. 
+	For $w \in \{0,\dots,k-1\}^n$ and $1 \leq m \leq n$, let $j_m$ be such that $s_{j_m-n+1}\cdots s_{j_m} = w[m..n]0^{m-1}$, where $w[m..n]$ is the $n-m+1$ letters suffix of $w$. 
 	Because $0$ is the smallest symbol in our alphabet, we get that it is added only if all the other symbols cannot be added, i.e., when adding other symbols would generate a substring that has already being seen before. 
 	%In particular, we get that $w[2..m]0$ appears as a substring in the $(n,k)$-prefer-max sequence before $w$, 
-	Since $w$ comes right before some $w[2..m]\tau$ as a window, since $\tau \geq 0$,  $w[2..m]0$ comes after (or is equal to) $w[2..m]\tau$ which is after $w$. Similarly we can see that $w[2..m]0$ appears before $w[3..m]0^2$ and so on.
+	Since $w$ comes right before some $w[2..m]\tau$ as a window $w[2..m]0$ comes after (or is equal to) $w[2..m]\tau$ which is after $w$. Similarly we can see that $w[2..m]0$ appears before $w[3..m]0^2$ and so on.
 	This gives us that $j_1 < j_2 < \cdots < j_n$. Note that $s_{j_1-n+1}\cdots s_{j_1}=w$, i.e, that $w$ appears as a substring at the $j_1$'s symbol of the sequence.
+	 
+	We will now show that if $w$ contains the symbol $k-1$ it must appear as a substring before the $i_0$'s symbol in the sequence. Consider first the case where the last (right-most) symbol of $w$ is $k-1$. In this case, $j_n=i_{0}-1$ so we have, because $j_1 < j_n$, that $w$ appears as a substring before the $i_0$'th symbol in the sequence. The second case is when the last (right-most) symbol in $w$ is not $k-1$ but there is another letter in $w$ which is $k-1$. In this case we have that $w$ appears less than $n$ steps after a window that ends with $k-1$ and the window $s_{i_0-n}\cdots s_{i_0-1}=(k-1)0^{n-1}$ does not appear in the windows between them because they all contain $k-1$ at a letter that is not  their first. Thus, also in this case, the window $w$ appears before the index $i_0$.
 	
-	We will now show that if $w$ contains the symbol $k-1$ it must appear as a substring before the $i_0$'s symbol in the sequence. First consider the case where the last (right-most) symbol of $w$ is $k-1$. In this case, $j_n=i_{0}-1$ so we have, because $j_1 < j_n$, that $w$ appears as a substring before the $i_0$'th symbol in the sequence. The second case is when the last (right-most) symbol in $w$ is not $k-1$ but there is another letter in $w$ which is $k-1$.  
-	
-	
-*************	
+	To conclude the proof we note that we established that the windows up to the index $i_0$ contain all and only the words in $\{0,\dots,k-1\}^n \setminus \{0,\dots,k-1\}^n$ and that this part of the sequence ends with $n-1$ zeros and then the next part begins with the symbol $k-2$. This means that from this point on the prefer-max construction acts exactly as it does when the sequence begins with $k-2$, so it constructs the $(k-1,n)$-prefer-max sequence.
+\end{proof}  
+ 
 
-%	$i^*$ %=\idx{\{0,\dots,k-2\}^n, 1}$ 
-%	be the first index such that $$of the first tuple in the $(k,n)$-prefer-max sequence that does not contains $k-1$. 
-	
-	Clearly, $s_{i^*}=\T{\xi_1,\dots,\xi_{n-1},k-2}$ and $s_{i^*-1}=\T{k-1,\xi_1,\dots,\xi_{n-1}}$ for some $\T{\xi_1,\dots,\xi_{n-1}}\in\{0,\dots,k-2\}^{n-1}$. By Observation~\ref{claim:x0 is last}, there is some $i<i^*$ such that $s_i=\T{\xi_1,\dots,\xi_{n-1},k-1}$. If $\T{\xi_1,\dots,\xi_{n-1}} \neq 0$ then $i \neq 1$ so we can examine the tuple $s_{i-1}$. By the minimality of $i^*$, the tuple $s_{i-1}$ must contain $k-1$ therefor, because $\T{\xi_1,\dots,\xi_{n-1}}\in\{0,\dots,k-2\}^{n-1}$, we must have $s_{i-1}=\T{k-1,\xi_1,\dots,\xi_{n-1}}$ which is a contradiction because it means that $s_{i-1} = s_{i^*-1}$ for some $i<i^*$. To avoid this contradiction we must have that  $s_i*=\T{0,\dots,0,k-2}$ and that $s_{i*-1}=\T{k-1,0,\dots,0}$
-	
-	We are left to show that all the tuples that contain $k-1$ appear before $s_{i*-1}=\T{k-1,0,\dots,0}$.
-	By Observation~\ref{claim:0 follower comes after}, for all $\T{\xi_1,\dots,\xi_{n-1}}$ we have that
-	\begin{eqnarray*}
-		\idx(\T{k-1,\overbrace{0,\dots ,0}^{n-1 \text{ times}}}) 
-		& > & \idx(\T{\xi_{n-1},k-1,\overbrace{0,\dots ,0}^{n-2 \text{ times}}}) \\
-		& > & \idx(\T{\xi_{n-2},x_{n-1},\xi,\overbrace{0,\dots ,0}^{n-3 \text{ times}}}) \\    
-		& \vdots \\
-		& > &  \idx(\T{\xi_1,\dots,\xi_{n-1},k-1})
-	\end{eqnarray*}
-	This establishes that every tuple that ends with a $k-1$ at the right comes before $\T{k-1,0,\dots ,0}$. To see that this is also true for any tuple that contain $k-1$ at any of its coordinates, note that for such a tuple there is a tuple that comes at most $n$ indexes before it that has $k-1$ on the right. To complete the proof note also that all the tuples between these two tuples have $k-1$ at some coordinate that is not first from the left so we know that $\T{k-1,0,\dots ,0}$ does not come between them. 
-\end{proof}
-
-
-%\begin{theorem}[Onion]
-%	For any $k,n \in \N$, the prefix of length $k^n-(k-1)^n$ of the sequence generated by the prefer-max construction is such that its $n$-length substrings are exactly $\{0,\dots,k\}^n \setminus \{0,\dots,k-1\}^n$, i.e., all the words of length $n$ that contain the symbol $k$. Furthermore, the suffix that begins with the 
-%	$(k^n-(k-1)^n+1)$th symbols is exactly the sequence generated by the prefer-max construction with the parameters $k-1$ and $n$.
-%	\label{thm:onion}
-%\end{theorem}
-%\begin{proof}
-%	
-%\end{proof}
-
-This observation lead us to examine the reverse of the prefer-max sequence. Specifically, the structure identified in Theorem~\ref{thm:onion} means that if we somehow manage to construct the sequence backwards, we do not have to specify $k$ ahead of time. We can add symbols forever while $k$ grows in layers: we first write $0^n$, then a word whose substrings of length $n$ are $\{0,1\}^n$, then extend with other words in $\{0,1,2\}^n$, and so on.
+The observation made in the last theorem directed us to examine the reverse of the prefer-max sequence. Specifically, the structure identified in Theorem~\ref{thm:onion} means that if we somehow manage to construct the sequence backwards, we do not have to specify $k$ ahead of time. We can add symbols forever while $k$ grows in layers: we first write $0^n$, then a word whose substrings of length $n$ are $\{0,1\}^n$, then extend with other words in $\{0,1,2\}^n$, and so on.
 
 The second contribution of this work is then an efficient construction of this reversed sequence. This is formulated in Algorithm~\ref{inf-construction}. We say that this construction is efficient because each step can be computed in $O(n^2)$ operations by enumerating all the $n$ rotations of $\sigma w$ and by comparing them lexicographically (reading each word from right to left).
 

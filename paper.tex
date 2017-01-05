@@ -27,6 +27,7 @@
 %\usepackage{balance}
 \usepackage{scrextend}
 \addtokomafont{labelinglabel}{\sffamily}
+\usepackage{refcount}
 
 
 % Theorem like env.
@@ -34,6 +35,7 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{claim}[theorem]{Claim}
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{reptheorem}{Theorem}
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}     
@@ -98,6 +100,7 @@ a substring. A well known construction of such a sequence, first proposed by For
 \begin{algorithm}
 Repeatedly append the maximal symbol over the alphabet $0,\dots,k-1$ such that the word formed by the $n$ most recent symbols is new (in the first $n$ steps, act as if thee are $n$ invisible zeros before the sequence). Stop after appending $n$ consecutive zeros. 
 \caption{The $(k,n)$-prefer-max sequence.}
+\label{pref-max}
 \end{algorithm}
 
 
@@ -107,35 +110,14 @@ $$\langle2,2,2,1,2,2,0,2,1,1,2,1,0,2,0,1,2,0,0,1,1,1,0,1,0,0,0\rangle.$$
 
 An obvious limitation of the above construction is, of course, that, when $n$ and $k$ grow, the amount of time and memory needed to produce the next symbol grows exponentially. Therefore, this construction is not practical for generating de Bruijn sequences of large alphabets and spans. It is used here as a mathematical definition of the sequence. An efficient algorithm for constructing this sequence is one of the contributions of this paper.
 
-Note that the $(n,k)$-prefer-max sequence begins with a prefix (the first $19$ symbols) that contains all the words in $\{0,1,2\}^n \setminus \{0,1\}^n$  (the words that contain the symbol $2$) as substrings. Note also that the rest of the sequence, after this prefix, is exactly the sequence that we would have obtained if we ran the construction with the alphabet $k=2$ (and the same $n$). The first result of this paper, that we call the Onion lemma, is that this is not a coincidence:
+Note that the $(n,k)$-prefer-max sequence begins with a prefix (the first $19$ symbols) that contains all the words in $\{0,1,2\}^n \setminus \{0,1\}^n$  (the words that contain the symbol $2$) as substrings. Note also that the rest of the sequence, after this prefix, is exactly the sequence that we would have obtained if we ran the construction with the alphabet $k=2$ (and the same $n$). The first result of this paper, that we call the Onion theorem, is that this is not a coincidence:
 
 \begin{theorem}[Onion]
 	The last $(k-1)^n+1$ symbols of the $(k,n)$-prefer-max sequence form the $(k-1,n)$-prefer-max sequence.
 \label{thm:onion}
-\end{theorem}
-\begin{proof}
-	Denote the symbols of the $(n-k$)-prefer-max sequence by $s_1,s_2,\dots,s_{k^n+1}$ and let, for notational convenience, $s_i=0$ for all $i<1$. Let ${i_0} = \min\bigl\{i\colon (k-1) \notin \{s_{i-n+1},\dots,s_{i}\}\bigr\}$. 
-	By minimality we have that $s_{{i_0}-n}=k-1$. Since $s_{i_0} \neq k-1$ and because $s_{{i_0}-n+1}\cdots s_{{i_0}-1} (k-2)$ did not appear as a substring before ${i_0}$ we get, by construction, that $s_{{i_0}}=k-2$. This means that the exists some ${i_1}<{i_0}$ such that $s_{{i_1}-n+1}\cdots s_{{i_1}} = s_{{i_0}-n+1}\cdots s_{{i_0}-1}(k-1)$.
-	
-	Assume, towards contradiction, that $s_{{i_0}-n+1}\cdots s_{{i_0}-1} \neq 0^{n-1}$. In particular $s_{{i_1}-n+1}\cdots s_{{i_1}} \neq 0^{n-1}(k-1)$ which means that ${i_1} > 1$. Therefore, $k-1  \in \{s_{{i_1}-n},\dots,s_{{i_1}-1}\}=\{s_{{i_1}-n}\} \cup \{s_{{i_0}-n+1},\dots,s_{{i_0}-1}\}$. Since the second set in this union does not contain $k-1$, we get that $s_{{i_1}-n}=k-1$. This leads to a contradiction because it means that $s_{{i_1}-n}\cdots s_{{i_1}-1} = s_{{i_0}-n}\cdots s_{{i_0}-1}$ which cannot happen in a de Bruijn sequence. This contradiction gives us that $s_{{i_0}-n+1}\cdots s_{{i_0}-1} = 0^{n-1}$.
-	
-	The sequence is therefore as follows:
-	$$\underbrace{s_1,\dots,s_{i_0-n-1},k-1,{0,\dots,0}}_{\parbox{10 em}{\scriptsize \centering{all substrings of length $n$ contain $k-1$}}},\underbrace{k-2}_{s_{i_0}},s_{i_0+1},\dots,s_{k^n+1}$$
-	To complete the proof, we need to show that all substrings of length $n$ that contain $k-1$ appear before $s_{i_0}$.
-	
-	For $w \in \{0,\dots,k-1\}^n$ and $1 \leq m \leq n$, let $j_m$ be such that $s_{j_m-n+1}\cdots s_{j_m} = w[m..n]0^{m-1}$, where $w[m..n]$ is the $n-m+1$ letters suffix of $w$. 
-	Because $0$ is the smallest symbol in our alphabet, we get that it is added only if all the other symbols cannot be added, i.e., when adding other symbols would generate a substring that has already being seen before. 
-	%In particular, we get that $w[2..m]0$ appears as a substring in the $(n,k)$-prefer-max sequence before $w$, 
-	Since $w$ comes right before some $w[2..m]\tau$ as a window $w[2..m]0$ comes after (or is equal to) $w[2..m]\tau$ which is after $w$. Similarly we can see that $w[2..m]0$ appears before $w[3..m]0^2$ and so on.
-	This gives us that $j_1 < j_2 < \cdots < j_n$. Note that $s_{j_1-n+1}\cdots s_{j_1}=w$, i.e, that $w$ appears as a substring at the $j_1$'s symbol of the sequence.
-	 
-	We will now show that if $w$ contains the symbol $k-1$ it must appear as a substring before the $i_0$'s symbol in the sequence. Consider first the case where the last (right-most) symbol of $w$ is $k-1$. In this case, $j_n=i_{0}-1$ so we have, because $j_1 < j_n$, that $w$ appears as a substring before the $i_0$'th symbol in the sequence. The second case is when the last (right-most) symbol in $w$ is not $k-1$ but there is another letter in $w$ which is $k-1$. In this case we have that $w$ appears less than $n$ steps after a window that ends with $k-1$ and the window $s_{i_0-n}\cdots s_{i_0-1}=(k-1)0^{n-1}$ does not appear in the windows between them because they all contain $k-1$ at a letter that is not  their first. Thus, also in this case, the window $w$ appears before the index $i_0$.
-	
-	To conclude the proof we note that we established that the windows up to the index $i_0$ contain all and only the words in $\{0,\dots,k-1\}^n \setminus \{0,\dots,k-1\}^n$ and that this part of the sequence ends with $n-1$ zeros and then the next part begins with the symbol $k-2$. This means that from this point on the prefer-max construction acts exactly as it does when the sequence begins with $k-2$, so it constructs the $(k-1,n)$-prefer-max sequence.
-\end{proof}  
- 
+\end{theorem} 
 
-The observation made in the last theorem directed us to examine the reverse of the prefer-max sequence. Specifically, the structure identified in Theorem~\ref{thm:onion} means that if we somehow manage to construct the sequence backwards, we do not have to specify $k$ ahead of time. We can add symbols forever while $k$ grows in layers: we first write $0^n$, then a word whose substrings of length $n$ are $\{0,1\}^n$, then extend with other words in $\{0,1,2\}^n$, and so on.
+The observation made in the last theorem directed us to examine the reverse of the prefer-max sequence. Specifically, the structure identified in Theorem~\ref{thm:onion} means that if we manage to construct the sequence backwards, we do not have to specify $k$ ahead of time. We can add symbols forever while $k$ grows in layers: we first write $0^n$, then a word whose substrings of length $n$ are $\{0,1\}^n$, then extend with other words in $\{0,1,2\}^n$, and so on.
 
 The second contribution of this work is then an efficient construction of this reversed sequence. This is formulated in Algorithm~\ref{inf-construction}. We say that this construction is efficient because each step can be computed in $O(n^2)$ operations by enumerating all the $n$ rotations of $\sigma w$ and by comparing them lexicographically (reading each word from right to left).
 
@@ -171,7 +153,7 @@ The fact that this is indeed the prefer-max sequence is stated in the following 
 \end{theorem}
 	
 
-A central tool to our analysis of the sequences descibed above is an alternative formulation of the prefer-max sequence. For this, we need to introduce some language, as follows.
+A central tool to our analysis of the sequences described above is an alternative formulation of the prefer-max sequence. For this, we need to introduce some language, as follows.
 
 The $n$ dimensional infinite de Bruijn graph is the graph $G_{n}=\T{V,E}$ where $V=\N^n$ and $E=\{ \T{\sigma_1 w, w \sigma_2} \colon \sigma_1,\sigma_2\in\N, w \in \N^{n-1}\}$. The de Bruijn sequences, defined in the beginning of this paper, are in one-to-one correspondence with the Hamiltonian cycles in the de Bruijn graph, as follows: (1) Concatenating the first letter of each vertex in a cycle produces a de Bruijn sequence of order $n$; and (2) A cycle can be constructed from a de Bruijn sequence $\T{\sigma_1,\dots,\sigma_{2^n}}$ of order $n$ by visiting the vertex $\sigma_1\cdots\sigma_n$, then $\sigma_2\cdots\sigma_{n+1}$ and so on.
 
@@ -210,11 +192,43 @@ This result allows for another construction of the reversed prefer-max sequence,
 As the reader may expect, our result is this sequence is also the reverse of the prefer-max sequence:
 
 \begin{theorem}
-	The sequence described in Algoithm~\ref{word-concatenation} is the same sequence described in Algorithm~\ref{inf-construction}.
+	The sequence described in Algorithm~\ref{word-concatenation} is the same sequence described in Algorithm~\ref{inf-construction}.
 \end{theorem}
 
 The last result is similar in nature to the theorem of Fredricksen and Maiorana in~\cite{Fredricksen1978} (see also~\cite{Moreno2004} and~\cite{Moreno2015}).	
 These papers show that the concatenation in lexicographic order of the Lyndon words (words that are minimal in lexicographic among their rotations) of length dividing $n$ produces a de Bruijn sequence of span $n$, and that this word is lexicographically minimal among all de Bruijn sequences of span $n$. In another paper~\cite{Fredricksen1970}, Fredricksen proves that (in the binary case) the prefer-max (there called Ford) sequence is the lexicographically least sequence. With some mapping (changing the order of the letters and the direction of reading words when considering lexicographic order) our last result can be regarded as an alternative proof of the result identified by Fredricksen and Maiorana.
+
+
+\section{A direct proof of the Onion theorem}
+
+While Theorem~\ref{thm:onion} can be proved indirectly using the fact that the necklace joining construction, described in Algorithm~\ref{necklace-joining}, gives the reverse of the pref-max construction, described in Algorithm~\ref{pref-max}, we bring here a direct proof that uses only the definition of the prefer-max sequence as the sequence generated by Algorithm~\ref{pref-max}. The main reason for this choice is because we view this observation as the starting point of our exploration so we do not want its proof to depend on the other results.
+
+\setcounterref{reptheorem}{thm:onion}
+\addtocounter{reptheorem}{-1}
+\begin{reptheorem}[Onion]
+	The last $(k-1)^n+1$ symbols of the $(k,n)$-prefer-max sequence form the $(k-1,n)$-prefer-max sequence.
+\end{reptheorem}
+\begin{proof}
+	Denote the symbols of the $(n-k$)-prefer-max sequence by $s_1,s_2,\dots,s_{k^n+1}$ and let, for notational convenience, $s_i=0$ for all $i<1$. Let ${i_0} = \min\bigl\{i\colon (k-1) \notin \{s_{i-n+1},\dots,s_{i}\}\bigr\}$. 
+	By minimality we have that $s_{{i_0}-n}=k-1$. Since $s_{i_0} \neq k-1$ and because $s_{{i_0}-n+1}\cdots s_{{i_0}-1} (k-2)$ did not appear as a substring before ${i_0}$ (it does not contain the symbol $k-1$) we get, by construction, that $s_{{i_0}}=k-2$. This means that there exists some ${i_1}<{i_0}$ such that $s_{{i_1}-n+1}\cdots s_{{i_1}} = s_{{i_0}-n+1}\cdots s_{{i_0}-1}(k-1)$.
+	
+	Assume, towards contradiction, that $s_{{i_0}-n+1}\cdots s_{{i_0}-1} \neq 0^{n-1}$. In particular $s_{{i_1}-n+1}\cdots s_{{i_1}} \neq 0^{n-1}(k-1)$ which means that ${i_1} > 1$. Therefore, $k-1  \in \{s_{{i_1}-n},\dots,s_{{i_1}-1}\}=\{s_{{i_1}-n}\} \cup \{s_{{i_0}-n+1},\dots,s_{{i_0}-1}\}$. Since the second set in this union does not contain $k-1$, we get that $s_{{i_1}-n}=k-1$. This leads to a contradiction because it means that $s_{{i_1}-n}\cdots s_{{i_1}-1} = s_{{i_0}-n}\cdots s_{{i_0}-1}$ which cannot happen in a de Bruijn sequence. This contradiction gives us that $s_{{i_0}-n+1}\cdots s_{{i_0}-1} = 0^{n-1}$.
+	
+	The sequence is therefore as follows:
+	$$\underbrace{s_1,\dots,s_{i_0-n-1},k-1,{0,\dots,0}}_{\parbox{10 em}{\scriptsize \centering{all substrings of length $n$ contain $k-1$}}},\underbrace{k-2}_{s_{i_0}},s_{i_0+1},\dots,s_{k^n+1}$$
+	To complete the proof, we need to show that all substrings of length $n$ that contain $k-1$ appear before $s_{i_0}$.
+	
+	For $w \in \{0,\dots,k-1\}^n$ and $1 \leq m \leq n$, let $j_m$ be such that $s_{j_m-n+1}\cdots s_{j_m} = w[m..n]0^{m-1}$, where $w[m..n]$ is the $n-m+1$ letters suffix of $w$. 
+	Because $0$ is the smallest symbol in our alphabet, we get that it is added only if all the other symbols cannot be added, i.e., when adding other symbols would generate a substring that has already being seen before. 
+	Since $w$ comes, as a window, right before some $w[2..m]\tau$,
+	we have that $w[2..m]0$ comes after (or is equal to) $w[2..m]\tau$ which is after $w$. Similarly we can see that $w[2..m]0$ appears before $w[3..m]0^2$ and so on.
+	This gives us that $j_1 < j_2 < \cdots < j_n$. Note that $s_{j_1-n+1}\cdots s_{j_1}=w$, i.e, that $w$ appears as a substring at the $j_1$'s symbol of the sequence.
+	
+	We will now show that if $w$ contains the symbol $k-1$ it must appear as a substring before the $i_0$'s symbol in the sequence. Consider first the case where the last (right-most) symbol of $w$ is $k-1$. In this case, $j_n=i_{0}-1$ so we have, because $j_1 < j_n$, that $w$ appears as a substring before the $i_0$'th symbol in the sequence. The second case is when the last (right-most) symbol in $w$ is not $k-1$ but there is another letter in $w$ which is $k-1$. In this case we have that $w$ appears less than $n$ steps after a window that ends with $k-1$ and the window $s_{i_0-n}\cdots s_{i_0-1}=(k-1)0^{n-1}$ does not appear in the windows between them because they all contain $k-1$ at a letter that is not  their first. Thus, also in this case, the window $w$ appears before the index $i_0$.
+	
+	To conclude the proof we note that we established that the windows up to the index $i_0$ contain all and only the words in $\{0,\dots,k-1\}^n \setminus \{0,\dots,k-1\}^n$ and that this part of the sequence ends with $n-1$ zeros and then the next part begins with the symbol $k-2$. This means that from this point on the prefer-max construction acts exactly as it does when the sequence begins with $k-2$ so it must constructs the $(k-1,n)$-prefer-max sequence.
+\end{proof}  
+
 
 
 \bibliography{library}{}

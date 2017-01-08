@@ -250,18 +250,18 @@ While Theorem~\ref{thm:onion} can be proved indirectly using the fact that the n
 	For $w \in \{0,\dots,k-1\}^n$ and $1 \leq m \leq n$, let $j_m$ be such that
 	$w_{j_m} = w[m..n]0^{m-1}$, where $w[m..n]$ is the $n-m+1$
 	letters suffix of $w$. 
-	Because $0$ is the smallest symbol in our alphabet, we get that it is added
+	Because zero is the smallest symbol in our alphabet, we get that it is added by the prefer-max rule
 	only if all the other symbols cannot be added, i.e., when adding other symbols
 	would generate a substring that has already being seen before. 
-	Since $w$ comes, as a window, right before some $w[2..m]\tau$,
+	Since $w$ comes, as a window, right before a word of the form $w[2..m]\tau$ for some $\tau \geq 0$,
 	we have that $w[2..m]0$ comes after (or is equal to) $w[2..m]\tau$ which is
-	after $w$. Similar arguments give us that $w[2..m]0$ appears before $w[3..m]0^2$ and
+	after $w$. Similar arguments give us that $w[2..m]0$ appears before $w[3..m]0^2$ which appears before $w[4..m]0^3$ and
 	so on. Together we get that $j_1 < j_2 < \cdots < j_n$. Note that $w_{j_1}=w$, 
 	i.e, that $w$ appears as a substring at the $j_1$'s symbol of the
 	sequence.
 	
 	We will now show that if $w$ contains the symbol $k-1$ it must appear as a
-	substring before the $i_0$'s symbol in the sequence. Consider first the case
+	substring before the $i_0$'s symbol in the sequence, i.e., that $j_1 < i_0$. Consider first the case
 	where the last (right-most) symbol of $w$ is $k-1$. In this case, $j_n=i_{0}-1$
 	so we have, because $j_1 < j_n$, that $w$ appears as a substring before the
 	$i_0$'th symbol in the sequence. The second case is when the last (right-most)

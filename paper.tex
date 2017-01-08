@@ -108,7 +108,7 @@ A $k$-ary de Bruijn sequence of span $n$ is a cyclic sequence of length $k^n$ in
 a substring. A well known construction of such a sequence, first proposed by Ford~\cite{Ford1957}, can be described as follows:
 
 \begin{algorithm}
-Repeatedly append the maximal symbol over the alphabet $0,\dots,k-1$ such that the word formed by the $n$ most recent symbols is new (in the first $n$ steps, act as if thee are $n$ invisible zeros before the sequence). Stop after appending $n$ consecutive zeros. 
+Repeatedly append the maximal symbol over the alphabet $0,\dots,k-1$ such that the word formed by the $n$ most recent symbols is new. In the first $n$ steps, act as if thee are $n$ invisible zeros before the sequence. Stop after appending $n$ consecutive zeros. 
 \caption{The $(k,n)$-prefer-max sequence.}
 \label{pref-max}
 \end{algorithm}

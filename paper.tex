@@ -128,7 +128,7 @@ Note that the $(n,k)$-prefer-max sequence begins with a prefix (the first $19$ s
 \end{theorem} 
 
 The observation made in the last theorem directed us to examine the reverse of the prefer-max sequence. Specifically, the structure identified in Theorem~\ref{thm:onion} means that, if we manage to construct the sequence backwards, we do not have to specify $k$ ahead of time. Instead, we can add symbols forever while $k$ grows in layers: we first write $0^n$, then a word whose substrings of length $n$ are $\{0,1\}^n$, then extend with other words in $\{0,1,2\}^n$, and so on.
-
+1
 The second contribution of this work is then an efficient construction of this reversed sequence. This is formulated in Algorithm~\ref{inf-construction}. We say that this construction is efficient because each step can be computed in $O(n^2)$ operations by enumerating all the $n$ rotations of $\sigma w$ and comparing them lexicographically (reading each word from right to left).
 
 
@@ -215,10 +215,10 @@ While Theorem~\ref{thm:onion} can be proved indirectly using the fact that the n
 
 
 \begin{repeatedtheorem}{thm:onion}[Onion]
-	{The last $(k-1)^n+1$ symbols of the $(k,n)$-prefer-max sequence form the $(k-1,n)$-prefer-max sequence.}
+	{The last $(k-1)^n$ symbols of the $(k,n)$-prefer-max sequence form the $(k-1,n)$-prefer-max sequence.}
 \end{repeatedtheorem}
 \begin{proof}
-	Denote the symbols of the $(n-k$)-prefer-max sequence by
+	Denote the symbols of the $(n,k$)-prefer-max sequence by
 	$s_1,s_2,\dots,s_{k^n+1}$ and let, for notational convenience, $s_i=0$ for all
 	$i<1$.  For each $i\geq 1$ let $w_i=s_{i-n+1}\cdots s_i$ be the ``sliding window''
 	observed at the $i$th symbol of the sequence. 

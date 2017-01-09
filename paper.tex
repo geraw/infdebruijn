@@ -1,8 +1,10 @@
-\documentclass{article}
-%\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  
+\documentclass{article} %\documentclass[letterpaper, 10 pt,
+% conference]{ieeeconf}
 
-%\IEEEoverridecommandlockouts        % This command is only needed if you want to use the \thanks command
-%\overrideIEEEmargins                        % See the \addtolength command later in the file to balance the column lengths
+%\IEEEoverridecommandlockouts        % This command is only needed if you want
+%to use the \thanks command
+%\overrideIEEEmargins                        % See the \addtolength command
+%later in the file to balance the column lengths
 
 
 % Name clashes workaround
@@ -16,43 +18,26 @@
 
 
 
-\usepackage{epsfig} 
-\usepackage{amsmath} 
-\usepackage{amssymb} 
-\usepackage{amsthm}  
-\usepackage{hyperref}
-\usepackage{tikz}
-\usetikzlibrary{automata,arrows,decorations.pathmorphing,decorations.markings,positioning}
-\usetikzlibrary{shapes}
-%\usepackage{balance}
-\usepackage{scrextend}
-\addtokomafont{labelinglabel}{\sffamily}
+\usepackage{epsfig} \usepackage{amsmath} \usepackage{amssymb}
+\usepackage{amsthm} \usepackage{hyperref} \usepackage{tikz}
+\usetikzlibrary{automata,arrows,decorations.pathmorphing,decorations.markings,positioning} \usetikzlibrary{shapes} %\usepackage{balance}
+\usepackage{scrextend} \addtokomafont{labelinglabel}{\sffamily}
 \usepackage{refcount}
 
 
 % Theorem like env.
-\newtheorem{theorem}{Theorem}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{claim}[theorem]{Claim}
-\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{theorem}{Theorem} \newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim} \newtheorem{lemma}[theorem]{Lemma}
 
-\newtheorem{reptheorem}{Theorem}
-\newenvironment{repeatedtheorem}[1]
-{
-	\setcounterref{reptheorem}{#1}
-	\addtocounter{reptheorem}{-1}
-	\begin{reptheorem}
-	}{			
-	\end{reptheorem}
-}
+\newtheorem{reptheorem}{Theorem} \newenvironment{repeatedtheorem}[1] {
+	\setcounterref{reptheorem}{#1} \addtocounter{reptheorem}{-1} \begin{reptheorem}
+	}{ \end{reptheorem} }
 
 
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}     
+\theoremstyle{definition} \newtheorem{definition}[theorem]{Definition}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{observation}[theorem]{Observation}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example} \newtheorem{remark}[theorem]{Remark}
 \newtheorem{corrolary}[theorem]{Corrolary}
 
 
@@ -62,231 +47,332 @@
 
 
 
-%------------------------------------------- preamble ---------------------------
+%------------------------------------------- preamble
+%---------------------------
 
-\newcommand{\R}{{\mathbb{R}}}
-\newcommand{\N}{{\mathbb{N}}}
+\newcommand{\R}{{\mathbb{R}}} \newcommand{\N}{{\mathbb{N}}}
 \newcommand{\Z}{{\mathbb{Z}}}
 
 \newcommand{\REF}[2]{#1~\ref{#2}}
 
-\newcommand{\T}[1]{\langle{#1}\rangle}
-\newcommand{\rr}[2]{R^{#2}({#1})}
+\newcommand{\T}[1]{\langle{#1}\rangle} \newcommand{\rr}[2]{R^{#2}({#1})}
 \newcommand{\rl}[2]{R^{-{#2}}({#1})}
 
 
 \newcommand{\AorB}[2]{\bigl(#2\text{?}A(#1)\text{:}B(#1)\bigr)}
 
-\usepackage{amssymb} 
-\usepackage{algpseudocode,algorithm}
-\usepackage{subfigure}
+\usepackage{amssymb} \usepackage{algpseudocode,algorithm} \usepackage{subfigure}
 
-\newcommand{\nega}   [1]{\overline{#1}}
-\newcommand{\companion}{comp}
-\newcommand{\shlsame}[1]{shl\text{-}same(#1)}
-\newcommand{\shlopp} [1]{shl\text{-}opp(#1)}
-\newcommand{\shlone} [1]{shl\text{-}one(#1)}
-\newcommand{\shlzero}[1]{shl\text{-}zero(#1)}
-\newcommand{\idx}    [1]{idx(#1)}
+\newcommand{\nega}   [1]{\overline{#1}} \newcommand{\companion}{comp}
+\newcommand{\shlsame}[1]{shl\text{-}same(#1)} \newcommand{\shlopp}
+[1]{shl\text{-}opp(#1)} \newcommand{\shlone} [1]{shl\text{-}one(#1)}
+\newcommand{\shlzero}[1]{shl\text{-}zero(#1)} \newcommand{\idx}    [1]{idx(#1)}
 
 
 %\pagestyle{plain}
 
 
-\title{Efficient Constructions of Prefer-Max Sequences and of Infinite de Bruijn Sequences}
+\title{Efficient Constructions of Prefer-Max Sequences and of Infinite de Bruijn
+	Sequences}
 
 \author{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{document}
-\maketitle
-
-\section{Introduction}
-
-A $k$-ary de Bruijn sequence of span $n$ is a cyclic sequence of length $k^n$ in which each $k$-ary string of length $n$ appears exactly once as
-a substring. A well known construction of such a sequence, first proposed by Ford~\cite{Ford1957}, can be described as follows:
-
-\begin{algorithm}
-Repeatedly append the maximal symbol over the alphabet $0,\dots,k-1$ such that the word formed by the $n$ most recent symbols is new. In the first $n$ steps, act as if thee are $n$ invisible zeros before the sequence. Stop after appending $n$ consecutive zeros. 
-\caption{The $(k,n)$-prefer-max sequence.}
-\label{pref-max}
-\end{algorithm}
-
-
-For example, if we choose $k=3$ and $n=3$ we get the sequence:
-$$\langle2,2,2,1,2,2,0,2,1,1,2,1,0,2,0,1,2,0,0,1,1,1,0,1,0,0,0\rangle.$$
-
-
-An obvious limitation of the above construction is, of course, that, when $n$ and $k$ grow, the amount of time and memory needed to produce the next symbol grows exponentially. Therefore, this construction is not practical for generating de Bruijn sequences of large alphabets and spans. It is used here as a mathematical definition of the sequence. An efficient algorithm for constructing this sequence is one of the contributions of this paper.
-
-Note that the $(n,k)$-prefer-max sequence begins with a prefix (the first $19$ symbols) that contains all the words in $\{0,1,2\}^n \setminus \{0,1\}^n$  (the words that contain the symbol $2$) as substrings. Note also that the rest of the sequence, after this prefix, is exactly the sequence that we would have obtained if we ran the construction with the alphabet $k=2$ (and the same $n$). The first result of this paper, that we call the Onion theorem, is that this is not a coincidence:
-
-\begin{theorem}[Onion]
-	The last $(k-1)^n+1$ symbols of the $(k,n)$-prefer-max sequence form the $(k-1,n)$-prefer-max sequence.
-\label{thm:onion}
-\end{theorem} 
-
-The observation made in the last theorem directed us to examine the reverse of the prefer-max sequence. Specifically, the structure identified in Theorem~\ref{thm:onion} means that, if we manage to construct the sequence backwards, we do not have to specify $k$ ahead of time. Instead, we can add symbols forever while $k$ grows in layers: we first write $0^n$, then a word whose substrings of length $n$ are $\{0,1\}^n$, then extend with other words in $\{0,1,2\}^n$, and so on.
-1
-The second contribution of this work is then an efficient construction of this reversed sequence. This is formulated in Algorithm~\ref{inf-construction}. We say that this construction is efficient because each step can be computed in $O(n^2)$ operations by enumerating all the $n$ rotations of $\sigma w$ and comparing them lexicographically (reading each word from right to left).
-
-
-\begin{algorithm}[!h]
-	Append $n$ zeros. Then, repeatedly, let $\sigma w$ be the word formed by the $n$ most recent symbols. Append $\sigma+1$ if $(\sigma+1)w$ is of the form $u0^l$ where $0^lu$ is maximal in right-to-left lexicographic order among all of its rotations. If $(\sigma+1)w$ is not of that form and $\sigma w$ is, append the symbol $0$. Otherwise, if neither $(\sigma+1)w$ nor $(\sigma)w$ are of that form, append $\sigma$.
-	\caption{An infinite de Bruijn sequence.}
-	\label{inf-construction}
-\end{algorithm}
-
-The fact that this generates the reverse of the prefer-max sequence is formulated in the following theorem:
- 
-\begin{theorem} 
-The first $k^n$ symbols generated by Algorithm~\ref{inf-construction} form the reverse of the sequence generated by the prefer-max construction with the parameters $k$ and $n$.	
-\end{theorem} 
-
-In particular, the above theorem says that the sequence generated by Algorithm~\ref{inf-construction} is a de Bruijn sequence, i.e., that each word in $\N^n$ appears exactly once as a substring.
-
-While our main focus is on analyzing the reversed sequence, we also have a result about the prefer-max sequence itself. Our result gives the first (to the best of our knowledge) efficient construction of that sequence:
-
-\begin{algorithm}
-	Append $n-1$ zeros and then the symbol $k$. Then, repeatedly, let $\sigma w$ be the word formed by the $n$ most recent symbols. Append the symbol $\sigma-1$  if $\sigma w$  is of the form specified in Algorithm~\ref{inf-construction}. Otherwise, if there is a  $\sigma'$ such that $\sigma'w$ is of that form, append the maximal such $\sigma'$. Otherwise, if there is no such $\sigma'$, append the symbol $\sigma$.
+\begin{document} \maketitle
+	
+	\section{Introduction}
+	
+	A $k$-ary de Bruijn sequence of span $n$ is a cyclic sequence of length $k^n$
+	in which each $k$-ary string of length $n$ appears exactly once as a substring.
+	A well known construction of such a sequence, first proposed by
+	Ford~\cite{Ford1957}, can be described as follows:
+	
+	\begin{algorithm}
+		Repeatedly append the maximal symbol over the alphabet
+		$0,\dots,k-1$ such that the word formed by the $n$ most recent symbols is new.
+		In the first $n$ steps, act as if there are $n$ invisible zeros before the
+		sequence. Stop after appending $n$ consecutive zeros. 
+		\caption{The $(k,n)$-prefer-max sequence.} 
+		\label{pref-max} 
+	\end{algorithm}
+	
+	
+	For example, if we choose $k=3$ and $n=3$ we get the sequence:
+	$$\langle2,2,2,1,2,2,0,2,1,1,2,1,0,2,0,1,2,0,0,1,1,1,0,1,0,0,0\rangle.$$
+	
+	
+	An obvious limitation of the above construction is, of course, that, when $n$
+	and $k$ grow, the amount of time and memory needed to produce the next symbol
+	grows exponentially. Therefore, this construction is not practical for
+	generating de Bruijn sequences of large alphabets and spans. It is used here as
+	a mathematical definition of the sequence. More formally, a shift rule for a de
+	Bruijn sequence of order $n$ is a function that maps each word of length $n$ to
+	the symbol that follows that word as a substring in sequence. The above is an
+	inefficient shift rule for the prefer-max sequence. The first (to the best of
+	our knowledge) efficiently computable shift rule for the prefer-max sequence is
+	one of the contributions of this paper.
+	
+	Note that the $(n,k)$-prefer-max sequence begins with a prefix (the first $19$
+	symbols) that contains all the words in $\{0,1,2\}^n \setminus \{0,1\}^n$  (the
+	words that contain the symbol $2$) as substrings. Note also that the rest of
+	the sequence, after this prefix, is exactly the sequence that we would have
+	obtained if we ran the construction with the alphabet $k=2$ (and the same $n$).
+	The first result of this paper, that we call the Onion theorem, is that this is
+	not a coincidence:
+	
+	\begin{theorem}[Onion] 
+		The $(k-1,n)$-prefer-max sequence is a suffix of the
+		$(k,n)$-prefer-max sequence. 
+		\label{thm:onion}
+	\end{theorem}
+	
+	The observation made in the last theorem directed us to examine the reverse of
+	the prefer-max sequence. Specifically, the structure identified in
+	Theorem~\ref{thm:onion} means that, if we manage to construct the sequence
+	backwards, we do not have to specify $k$ ahead of time. Instead, we can add
+	symbols forever while $k$ grows in layers: we first write $0^n$, then a word
+	whose substrings of length $n$ are $\{0,1\}^n$, then extend with other words in
+	$\{0,1,2\}^n$, and so on. The second contribution of this work is then an
+	efficient construction of this reversed sequence. This is formulated in
+	Algorithm~\ref{inf-construction}. We say that this construction is efficient
+	because each step can be computed in $O(n^2)$ operations by enumerating all the
+	$n$ rotations of $\sigma w$ and comparing them lexicographically (reading each
+	word from right to left).
+	
+	
+	\begin{algorithm}[!h] 
+		Append $n$ zeros. Then, repeatedly, let $\sigma w$ be the
+		word formed by the $n$ most recent symbols. Append $\sigma+1$ if $(\sigma+1)w$
+		is of the form $u0^l$ where $0^lu$ is maximal in right-to-left lexicographic
+		order among all of its rotations. If $(\sigma+1)w$ is not of that form and
+		$\sigma w$ is, append the symbol $0$. Otherwise, if neither $(\sigma+1)w$ nor
+		$(\sigma)w$ are of that form, append $\sigma$. \caption{An infinite de Bruijn
+			sequence.} \label{inf-construction} 
+	\end{algorithm}
+	
+	The fact that this generates the reverse of the prefer-max sequence is
+	formulated in the following theorem:
+	
+	\begin{theorem} 
+		The first $k^n$ symbols generated by
+		Algorithm~\ref{inf-construction} form the reverse of the sequence generated by
+		the prefer-max construction with the parameters $k$ and $n$. 
+	\end{theorem}
+	
+	In particular, the above theorem says that the sequence generated by
+	Algorithm~\ref{inf-construction} is a de Bruijn sequence, i.e., that each word
+	in $\N^n$ appears exactly once as a substring.
+	
+	While our main focus is on analyzing the reversed sequence, we also have a
+	result about the prefer-max sequence itself. Our result gives the first (to the
+	best of our knowledge) efficiently computable shift rule for that sequence:
+	
+	\begin{algorithm} Append $n-1$ zeros and then the symbol $k$. Then, repeatedly,
+		let $\sigma w$ be the word formed by the $n$ most recent symbols. Append the
+		symbol $\sigma-1$ if $\sigma w$  is of the form specified in
+		Algorithm~\ref{inf-construction}. Otherwise, if there is a  $\sigma'$ such that
+		$\sigma'w$ is of that form, append the maximal such $\sigma'$. Otherwise, if
+		there is no such $\sigma'$, append the symbol $\sigma$.
 		
-	\caption{An efficient construction of the prefer-max sequence.}
-	\label{efficient-pref-max}
-\end{algorithm}
-
-Each step of Algorithm~\ref{efficient-pref-max} can be computed in $O(n^2)$ time because it suffices to examine for $\sigma'$ only symbols that are in $\sigma w$ or are smaller by one than a symbol in $\sigma w$, as we will establish later in the paper.
-The fact that this is indeed the prefer-max sequence is stated in the following theorem:
-
-\begin{theorem}
-	The sequence generated by Algorithm~\ref{efficient-pref-max} is the prefer-max sequence with parameters $k$ and $n$.
-\end{theorem}
+		\caption{An efficient construction of the prefer-max sequence.}
+		\label{efficient-pref-max} 
+	\end{algorithm}
 	
-
-A central tool to our analysis of the sequences described above is an alternative formulation of the prefer-max sequence. For this, we need to introduce some language, as follows.
-
-The $n$ dimensional infinite de Bruijn graph is the graph $G_{n}=\T{V,E}$ where $V=\N^n$ and $E=\{ \T{\sigma_1 w, w \sigma_2} \colon \sigma_1,\sigma_2\in\N, w \in \N^{n-1}\}$. The de Bruijn sequences, defined in the beginning of this paper, are in one-to-one correspondence with the Hamiltonian cycles in the de Bruijn graph, as follows: (1) Concatenating the first letter of each vertex in a cycle produces a de Bruijn sequence of order $n$; and (2) A cycle can be constructed from a de Bruijn sequence $\T{\sigma_1,\dots,\sigma_{2^n}}$ of order $n$ by visiting the vertex $\sigma_1\cdots\sigma_n$, then $\sigma_2\cdots\sigma_{n+1}$ and so on.
-
-Let $rtl(\sigma_1\sigma_2\dots\sigma_n) = \sigma_2\dots\sigma_n\sigma_1$ denote the rotation of a word to the left and let $rtl^i(w)$ denote a rotation of $i$ letters to the left. A \emph{necklace} in the de Bruijn graph $G_n$ is the set $\{rtl^i(w)\}_{i=1}^n$ where $w \in \N^n$, i.e., it is an equivalence class of $n$-character strings over $\N$ when strings that are rotations of each other are considered equivalent. A $w\in\N^n$ is called a \emph{key word} if it is larger in right-to-left lexicographic order than all of its rotations (all the words in its necklace).  Note the resemblance of this to the notion of Lyndon words~\cite{Lyndon1954}, on which we will elaborate later.
-
-We are now ready to introduce another construction:
-
-
-\begin{algorithm}[!h]
-	Start with the one element sequence $\T{0^n}$. The sequence at the $i$th step is constructed by adding words to the previous sequence as follows: Let $k_i$ be the $i$th key word in right-to-left lexicographic order. Let $l$ be the number of leading zeros in $k_i$ ($l$ may be zero) and let $\sigma \in \N$ and $w\in\N^{n-l-1}$ be such that $k_i=0^l(\sigma+1)w$. Now, add the sub-sequence $\T{rtl^i(w0^l(\sigma+1))}_{i=0}^{n-1}$ between the word $\sigma w 0^l$ and its follower in the previously constructed sequence.
-	\caption{A necklace joining construction.}
-	\label{necklace-joining}
-\end{algorithm}
-
-To following proposition establishes that the above construction describes an infinite sequence of words:
-
-\begin{proposition}
-	For every $l>0$ there is $m>0$ such that for every $i>m$ the insertions of words at the $i$th step of Algorithm~\ref{necklace-joining} are all after the $l$th element of the sequence.
-\end{proposition}
-
-Let $S=\T{w_i}_{i=0}^\infty$ be the infinite sequence all whose prefixes agree with infinitely many prefixes of the finite sequences generated at the steps of Algorithm~\ref{necklace-joining}. Since every word is a rotation of some key word, we have that this sequence contains all the words in $\N^n$. Since there is a directed edge in $G_n$ from each word in this sequence to its follower, the sequence corresponds to an Hamiltonian path in $G_n$. The following theorem states that this path maps, by the standard correspondence described above, to the reverse of the prefer-map sequence:
-
-\begin{theorem}
-	If we take the first letter of each word in $S$ we get the sequence described in Algorithm~\ref{inf-construction}.
-\end{theorem}
-
-This result allows for another construction of the reversed prefer-max sequence, as follows. By the definition of the necklace joining construction, shown in Algorithm~\ref{necklace-joining}, one can infer that key words appear in lexicographic order and that the distance between one key words to the next is the size of the necklace of the latter. For a word $w\in\N^n$, the \emph{primitive root} of $w$ is the  unique primitive (non-periodic) word $\rho(w)$ such that $w = \rho(w)^l$ for some $l \geq 1$. Since the length of the primitive root of a ket word is the length of its cycle, we get the following construction:
-
-
-\begin{algorithm}[!h]
-	Construct an infinite sequence of symbols by concatenating the primitive roots  of the key words of length $n$ in left-to-right lexicographic order.
-	\caption{Word concatenation construction.}
-	\label{word-concatenation}
-\end{algorithm}
-
-As the reader may expect, our result is this sequence is also the reverse of the prefer-max sequence:
-
-\begin{theorem}
-	The sequence described in Algorithm~\ref{word-concatenation} is the same sequence described in Algorithm~\ref{inf-construction}.
-\end{theorem}
-
-The last result is similar in nature to the theorem of Fredricksen and Maiorana in~\cite{Fredricksen1978} (see also~\cite{Moreno2004} and~\cite{Moreno2015}).	
-These papers show that the concatenation in lexicographic order of the Lyndon words (words that are minimal in lexicographic among their rotations) of length dividing $n$ produces a de Bruijn sequence of span $n$, and that this word is lexicographically minimal among all de Bruijn sequences of span $n$. In another paper~\cite{Fredricksen1970}, Fredricksen proves that (in the binary case) the prefer-max (there called Ford) sequence is the lexicographically least sequence. With some mapping (changing the order of the letters and the direction of reading words when considering lexicographic order) our last result can be regarded as an alternative proof of the result identified by Fredricksen and Maiorana.
-
-
-\section{A direct proof of the Onion theorem}
-
-While Theorem~\ref{thm:onion} can be proved indirectly using the fact that the necklace joining construction, described in Algorithm~\ref{necklace-joining}, gives the reverse of the pref-max construction, described in Algorithm~\ref{pref-max}, we bring here a direct proof that uses only the definition of the prefer-max sequence as the sequence generated by Algorithm~\ref{pref-max}. The main reason for this choice is because we view this observation as the starting point of our exploration so we do not want its proof to depend on the other results.
-
-
-\begin{repeatedtheorem}{thm:onion}[Onion]
-	{The last $(k-1)^n$ symbols of the $(k,n)$-prefer-max sequence form the $(k-1,n)$-prefer-max sequence.}
-\end{repeatedtheorem}
-\begin{proof}
-	Denote the symbols of the $(n,k$)-prefer-max sequence by
-	$s_1,s_2,\dots,s_{k^n+1}$ and let, for notational convenience, $s_i=0$ for all
-	$i<1$.  For each $i\geq 1$ let $w_i=s_{i-n+1}\cdots s_i$ be the ``sliding window''
-	observed at the $i$th symbol of the sequence. 
-	The proof goes by showing that $\{w_1,\dots,w_{k^n-(k-1)^n}\} = \{0,\dots,k-1\}^n \setminus \{0,\dots,k-2\}^n$.
+	Each step of Algorithm~\ref{efficient-pref-max} can be computed in $O(n^2)$
+	time because it suffices to examine, as candidates for $\sigma'$, only symbols
+	that are in $\sigma w$ or are smaller by one than a symbol in $\sigma w$, as we
+	will establish later in the paper. The fact that this is indeed the prefer-max
+	sequence is stated in the following theorem:
 	
-	Let ${i_0} = \min\{i\colon k-1 \notin w_i\}$. 
-	By minimality, because  $s_{{i_0}-n}$ is the only symbol that is in $w_{i_0-1}$ and is not in $w_{i_0}$, 
-	we have that $s_{{i_0}-n}=k-1$. Since $s_{i_0} \neq k-1$ and
-	because $s_{{i_0}-n+1}\cdots s_{{i_0}-1} (k-2) \notin \{w_1,\dots,w_{i_0-1}\}$ because it does not contain the symbol $k-1$, 
-	we get, by the construction of the prefer-max sequence,
-	that $s_{{i_0}}=k-2$. This means that there exists some ${i_1}<{i_0}$ such that
-	$w_{i_1} = s_{{i_0}-n+1}\cdots s_{{i_0}-1}(k-1)$.
+	\begin{theorem} The sequence generated by Algorithm~\ref{efficient-pref-max} is
+		the prefer-max sequence with parameters $k$ and $n$. \end{theorem}
 	
-	Assume, towards contradiction, that $s_{{i_0}-n+1}\cdots s_{{i_0}-1} \neq
-	0^{n-1}$. In particular $w_{i_1} \neq 0^{n-1}(k-1)$ which
-	means that ${i_1} > 1$. Therefore, $k-1  \in w_{i_1-1}=
-	\{s_{{i_1}-n},\dots,s_{{i_1}-1}\}=\{s_{{i_1}-n}\} \cup
-	\{s_{{i_0}-n+1},\dots,s_{{i_0}-1}\}$. Since the second set in this union does
-	not contain $k-1$, we get that $s_{{i_1}-n}=k-1$. This leads to a contradiction
-	because it means that $w_{{i_1}-1} = w_{{i_0}-1}$ which cannot happen in a de Bruijn sequence. This contradiction
-	gives us that $s_{{i_0}-n+1}\cdots s_{{i_0}-1} = 0^{n-1}$.
 	
-	The sequence is therefore as follows:
-	$$\underbrace{s_1,\dots,s_{i_0-n-1},k-1,\overbrace{0,\dots,0}^\text{$n\text{-}1$ times}}_{\text{all the $w_i$s here contain
-				$k-1$}},\underbrace{k-2}_{s_{i_0}},s_{i_0+1},\dots,s_{k^n+1}$$
-	To complete the argument, we need to show that all substrings of length $n$ that
-	contain $k-1$ appear before $s_{i_0}$.
+	A central tool to our analysis of the sequences described above is an
+	alternative formulation of the prefer-max sequence. For this, we need to
+	introduce some language, as follows.
 	
-	For $w \in \{0,\dots,k-1\}^n$ and $1 \leq m \leq n$, let $j_m$ be such that
-	$w_{j_m} = w[m..n]0^{m-1}$, where $w[m..n]$ is the $n-m+1$
-	letters suffix of $w$. 
-	Because zero is the smallest symbol in our alphabet, we get that it is added by the prefer-max rule
-	only if all the other symbols cannot be added, i.e., when adding other symbols
-	would generate a substring that has already being seen before. 
-	Since $w$ comes, as a window, right before a word of the form $w[2..m]\tau$ for some $\tau \geq 0$,
-	we have that $w[2..m]0$ comes after (or is equal to) $w[2..m]\tau$ which is
-	after $w$. Similar arguments give us that $w[2..m]0$ appears before $w[3..m]0^2$ which appears before $w[4..m]0^3$ and
-	so on. Together we get that $j_1 < j_2 < \cdots < j_n$. Note that $w_{j_1}=w$, 
-	i.e, that $w$ appears as a substring at the $j_1$'s symbol of the
-	sequence.
+	The $n$ dimensional infinite de Bruijn graph is the graph $G_{n}=\T{V,E}$ where
+	$V=\N^n$ and $E=\{ \T{\sigma_1 w, w \sigma_2} \colon \sigma_1,\sigma_2\in\N, w
+	\in \N^{n-1}\}$. The de Bruijn sequences, defined in the beginning of this
+	paper, are in one-to-one correspondence with the Hamiltonian cycles in the de
+	Bruijn graph, as follows: (1) Concatenating the first letter of each vertex in
+	a cycle produces a de Bruijn sequence of order $n$; and (2) A cycle can be
+	constructed from a de Bruijn sequence $\T{\sigma_1,\dots,\sigma_{2^n}}$ of
+	order $n$ by visiting the vertex $\sigma_1\cdots\sigma_n$, then
+	$\sigma_2\cdots\sigma_{n+1}$ and so on.
 	
-	We will now show that if $w$ contains the symbol $k-1$ it must appear as a
-	substring before the $i_0$'s symbol in the sequence, i.e., that $j_1 < i_0$. Consider first the case
-	where the last (right-most) symbol of $w$ is $k-1$. In this case, $j_n=i_{0}-1$
-	so we have, because $j_1 < j_n$, that $w$ appears as a substring before the
-	$i_0$'th symbol in the sequence. The second case is when the last (right-most)
-	symbol in $w$ is not $k-1$ but there is another letter in $w$ which is $k-1$. In
-	this case we have that $w$ appears less than $n$ steps after a window that ends
-	with $k-1$ and the window $w_{i_0-1}=(k-1)0^{n-1}$ does not
-	appear in the windows between them because they all contain $k-1$ at a letter
-	that is not  their first. 
-	Formally, we have that there is some $m<n$ such that 
-	$j_1-m < i_0$,  $w \in \{w_{{j_1}-m},\dots,w_{j_1-1}\}$ and 
-	$w_{i_0-1} \notin \{w_{{j_1}-m},\dots,w_{j_1-1}\}$. This gives us that, also in this 
-	case, the window $w$ appears before	the index $i_0$.
+	Let $rtl(\sigma_1\sigma_2\dots\sigma_n) = \sigma_2\dots\sigma_n\sigma_1$ denote
+	the rotation of a word to the left and let $rtl^i(w)$ denote a rotation of $i$
+	letters to the left. A \emph{necklace} in the de Bruijn graph $G_n$ is the set
+	$\{rtl^i(w)\}_{i=1}^n$ where $w \in \N^n$, i.e., it is an equivalence class of
+	$n$-character strings over $\N$ when strings that are rotations of each other
+	are considered equivalent. A $w\in\N^n$ is called a \emph{key word} if it is
+	larger in right-to-left lexicographic order than all of its rotations (all the
+	words in its necklace).  Note the resemblance of this to the notion of Lyndon
+	words~\cite{Lyndon1954}, on which we will elaborate later.
 	
-	To conclude the proof we note that we established that the windows up to the
-	index $i_0$ contain all and only the words in $\{0,\dots,k-1\}^n \setminus
-	\{0,\dots,k-2\}^n$ and that this part of the sequence ends with $n-1$ zeros and
-	then the next part begins with the symbol $k-2$. This means that from this point
-	on the prefer-max construction acts exactly as it does when the sequence begins
-	with $k-2$ so it must constructs the $(k-1,n)$-prefer-max sequence.
-\end{proof}  
-
-
-
-\bibliography{library}{}
-\bibliographystyle{plain}
-
+	We are now ready to introduce another construction:
+	
+	
+	\begin{algorithm}[!h] 
+		Start with the one element sequence $\T{0^n}$. The
+		sequence at the $i$th step is constructed by adding words to the previous
+		sequence as follows: Let $k_i$ be the $i$th key word in right-to-left
+		lexicographic order. Let $l$ be the number of leading zeros in $k_i$ ($l$ may
+		be zero) and let $\sigma \in \N$ and $w\in\N^{n-l-1}$ be such that
+		$k_i=0^l(\sigma+1)w$. Now, add the sub-sequence
+		$\T{rtl^i(w0^l(\sigma+1))}_{i=0}^{n-1}$ between the word $\sigma w 0^l$ and its
+		follower in the previously constructed sequence. 
+		\caption{A necklace joining construction.} \label{necklace-joining} 
+	\end{algorithm}
+	
+	To following proposition establishes that the above construction describes an
+	infinite sequence of words:
+	
+	\begin{proposition} 
+		For every $l>0$ there is $m>0$ such that for every $i>m$
+		the insertions of words at the $i$th step of Algorithm~\ref{necklace-joining}
+		are all after the $l$th element of the sequence. 
+	\end{proposition}
+	
+	Let $S=\T{w_i}_{i=0}^\infty$ be the infinite sequence all whose prefixes agree
+	with infinitely many prefixes of the finite sequences generated at the steps of
+	Algorithm~\ref{necklace-joining}. Since every word is a rotation of some key
+	word, we have that this sequence contains all the words in $\N^n$. Since there
+	is a directed edge in $G_n$ from each word in this sequence to its follower,
+	the sequence corresponds to an Hamiltonian path in $G_n$. The following theorem
+	states that this path maps, by the standard correspondence described above, to
+	the reverse of the prefer-map sequence:
+	
+	\begin{theorem} 
+		If we take the first letter of each word in $S$ we get the
+		sequence described in Algorithm~\ref{inf-construction}. 
+	\end{theorem}
+	
+	This result allows for another construction of the reversed prefer-max
+	sequence, as follows. By the definition of the necklace joining construction,
+	shown in Algorithm~\ref{necklace-joining}, one can infer that key words appear
+	in lexicographic order and that the distance between one key words to the next
+	is the size of the necklace of the latter. For a word $w\in\N^n$, the
+	\emph{primitive root} of $w$ is the  unique primitive (non-periodic) word
+	$\rho(w)$ such that $w = \rho(w)^l$ for some $l \geq 1$. Since the length of
+	the primitive root of a ket word is the length of its cycle, we get the
+	following construction:
+	
+	
+	\begin{algorithm}[!h]
+		Construct an infinite sequence of symbols by
+		concatenating the primitive roots of the key words of length $n$ in left-to-right lexicographic order.
+		\caption{Word concatenation construction.} \label{word-concatenation}
+	\end{algorithm}
+	
+	As the reader may expect, our result is this sequence is also the reverse of
+	the prefer-max sequence:
+	
+	\begin{theorem}
+		The sequence described in Algorithm~\ref{word-concatenation} is
+		the same sequence described in Algorithm~\ref{inf-construction}. 
+	\end{theorem}
+	
+	The last result is similar in nature to the theorem of Fredricksen and Maiorana
+	in~\cite{Fredricksen1978} (see also~\cite{Moreno2004} and~\cite{Moreno2015}).
+	These papers show that the concatenation in lexicographic order of the Lyndon
+	words (words that are minimal in lexicographic among their rotations) of length
+	dividing $n$ produces a de Bruijn sequence of span $n$, and that this word is
+	lexicographically minimal among all de Bruijn sequences of span $n$. In another
+	paper~\cite{Fredricksen1970}, Fredricksen proves that (in the binary case) the
+	prefer-max (there called Ford) sequence is the lexicographically least
+	sequence. With some mapping (changing the order of the letters and the
+	direction of reading words when considering lexicographic order) our last
+	result can be regarded as an alternative proof of the result identified by
+	Fredricksen and Maiorana.
+	
+	
+	\section{Proofs}
+	
+	While Theorem~\ref{thm:onion} can be proved indirectly using the fact that the
+	necklace joining construction, described in Algorithm~\ref{necklace-joining},
+	gives the reverse of the pref-max construction, described in
+	Algorithm~\ref{pref-max}, we bring here a direct proof that uses only the
+	definition of the prefer-max sequence as the sequence generated by
+	Algorithm~\ref{pref-max}. The main reason for this choice is because we view
+	this observation as the starting point of our exploration so we do not want its
+	proof to depend on the other results.
+	
+	
+	\begin{repeatedtheorem}{thm:onion}[Onion] 
+		The $(k-1,n)$-prefer-max sequence is a suffix of the $(k,n)$-prefer-max sequence. 
+	\end{repeatedtheorem}
+	\begin{proof} Denote the symbols of the $(n,k$)-prefer-max sequence by
+		$s_1,s_2,\dots,s_{k^n+1}$ and let, for notational convenience, $s_i=0$ for all
+		$i<1$.  For each $i\geq 1$ let $w_i=s_{i-n+1}\cdots s_i$ be the ``sliding
+		window'' observed at the $i$th symbol of the sequence. The proof goes by
+		showing that $\{w_1,\dots,w_{k^n-(k-1)^n}\} = \{0,\dots,k-1\}^n \setminus
+		\{0,\dots,k-2\}^n$.
+		
+		Let ${i_0} = \min\{i\colon k-1 \notin w_i\}$. By minimality, because
+		$s_{{i_0}-n}$ is the only symbol that is in $w_{i_0-1}$ and is not in
+		$w_{i_0}$, we have that $s_{{i_0}-n}=k-1$. Since $s_{i_0} \neq k-1$ and
+		because $s_{{i_0}-n+1}\cdots s_{{i_0}-1} (k-2) \notin \{w_1,\dots,w_{i_0-1}\}$
+		because it does not contain the symbol $k-1$, we get, by the construction of
+		the prefer-max sequence, that $s_{{i_0}}=k-2$. This means that there exists
+		some ${i_1}<{i_0}$ such that $w_{i_1} = s_{{i_0}-n+1}\cdots s_{{i_0}-1}(k-1)$.
+		
+		Assume, towards contradiction, that $s_{{i_0}-n+1}\cdots s_{{i_0}-1} \neq
+		0^{n-1}$. In particular $w_{i_1} \neq 0^{n-1}(k-1)$ which means that ${i_1} >
+		1$. Therefore, $k-1  \in w_{i_1-1}=
+		\{s_{{i_1}-n},\dots,s_{{i_1}-1}\}=\{s_{{i_1}-n}\} \cup
+		\{s_{{i_0}-n+1},\dots,s_{{i_0}-1}\}$. Since the second set in this union does
+		not contain $k-1$, we get that $s_{{i_1}-n}=k-1$. This leads to a
+		contradiction because it means that $w_{{i_1}-1} = w_{{i_0}-1}$ which cannot
+		happen in a de Bruijn sequence. This contradiction gives us that
+		$s_{{i_0}-n+1}\cdots s_{{i_0}-1} = 0^{n-1}$.
+		
+		The sequence is therefore as follows:
+				
+		$$\underbrace{s_1,\dots,s_{i_0-n-1},k-1,\overbrace{0,\dots,0}^\text{$n\text{-}1$ times}}_{\text{all the $w_i$s here contain $k-1$}},\underbrace{k-2}_{s_{i_0}},s_{i_0+1},\dots,s_{k^n+1}$$ To complete the argument, we need to show that all substrings of length $n$ that contain $k-1$ appear before $s_{i_0}$.
+		
+		For $w \in \{0,\dots,k-1\}^n$ and $1 \leq m \leq n$, let $j_m$ be such that
+		$w_{j_m} = w[m..n]0^{m-1}$, where $w[m..n]$ is the $n-m+1$ letters suffix of
+		$w$. Because zero is the smallest symbol in our alphabet, we get that it is
+		added by the prefer-max rule only if all the other symbols cannot be added,
+		i.e., when adding other symbols would generate a substring that has already
+		being seen before. Since $w$ comes, as a window, right before a word of the
+		form $w[2..m]\tau$ for some $\tau \geq 0$, we have that $w[2..m]0$ comes after
+		(or is equal to) $w[2..m]\tau$ which is after $w$. Similar arguments give us
+		that $w[2..m]0$ appears before $w[3..m]0^2$ which appears before $w[4..m]0^3$
+		and so on. Together we get that $j_1 < j_2 < \cdots < j_n$. Note that
+		$w_{j_1}=w$, i.e, that $w$ appears as a substring at the $j_1$'s symbol of the
+		sequence.
+		
+		We will now show that if $w$ contains the symbol $k-1$ it must appear as a
+		substring before the $i_0$'s symbol in the sequence, i.e., that $j_1 < i_0$.
+		Consider first the case where the last (right-most) symbol of $w$ is $k-1$. In
+		this case, $j_n=i_{0}-1$ so we have, because $j_1 < j_n$, that $w$ appears as
+		a substring before the $i_0$'th symbol in the sequence. The second case is
+		when the last (right-most) symbol in $w$ is not $k-1$ but there is another
+		letter in $w$ which is $k-1$. In this case we have that $w$ appears less than
+		$n$ steps after a window that ends with $k-1$ and the window
+		$w_{i_0-1}=(k-1)0^{n-1}$ does not appear in the windows between them because
+		they all contain $k-1$ at a letter that is not  their first. Formally, we have
+		that there is some $m<n$ such that $j_1-m < i_0$,  $w \in
+		\{w_{{j_1}-m},\dots,w_{j_1-1}\}$ and $w_{i_0-1} \notin
+		\{w_{{j_1}-m},\dots,w_{j_1-1}\}$. This gives us that, also in this case, the
+		window $w$ appears before	the index $i_0$.
+		
+		To conclude the proof we note that we established that the windows up to the
+		index $i_0$ contain all and only the words in $\{0,\dots,k-1\}^n \setminus
+		\{0,\dots,k-2\}^n$ and that this part of the sequence ends with $n-1$ zeros
+		and then the next part begins with the symbol $k-2$. This means that from this
+		point on the prefer-max construction acts exactly as it does when the sequence
+		begins with $k-2$ so it must constructs the $(k-1,n)$-prefer-max sequence.
+	\end{proof}
+	
+	
+	
+	\bibliography{library}{} 
+	\bibliographystyle{plain}
+	
 \end{document}
-

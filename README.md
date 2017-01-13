@@ -2,6 +2,7 @@
 
 This repository contains some preliminary results on de Bruijn sequences that we are working on.
 
+See the paper we are working on at: [Link to Overleaf](https://www.overleaf.com/7713786xdzhvrnqpbvn
 
 ## Outline of the proposed results
 In essence, we are trying to establish the following results
